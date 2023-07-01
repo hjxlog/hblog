@@ -1,13 +1,46 @@
 package com.hjxlog.service;
 
-import com.hjxlog.domain.Tag;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hjxlog.api.dto.TagDto;
+import com.hjxlog.domain.Tag;
 
 /**
-* @author hjx
-* @description 针对表【tag】的数据库操作Service
-* @createDate 2023-06-30 23:33:41
-*/
+ * @author hjx
+ * @description 针对表【tag】的数据库操作Service
+ * @createDate 2023-06-30 23:33:41
+ */
 public interface TagService extends IService<Tag> {
+
+    /**
+     * 查询标签列表
+     *
+     * @param dto
+     * @return
+     */
+    Page<Tag> getList(TagDto dto);
+
+    /**
+     * 新增标签
+     *
+     * @param dto
+     * @return
+     */
+    Tag addTag(TagDto dto);
+
+    /**
+     * 修改标签
+     *
+     * @param dto
+     * @return
+     */
+    Tag updateTag(TagDto dto);
+
+    /**
+     * 删除标签
+     *
+     * @param dto
+     */
+    int deleteTag(TagDto dto);
 
 }
