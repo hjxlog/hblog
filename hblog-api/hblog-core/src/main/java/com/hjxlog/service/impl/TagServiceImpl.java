@@ -66,8 +66,7 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
     }
 
     @Override
-    public int deleteTag(TagDto dto) {
-        Integer id = dto.getId();
+    public int deleteTag(Integer id) {
         if (id == null) {
             throw new SystemException("标签id为空。");
         }

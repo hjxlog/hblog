@@ -1,5 +1,6 @@
 package com.hjxlog.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hjxlog.api.dto.TagDto;
 import com.hjxlog.domain.Tag;
@@ -54,10 +55,9 @@ public class TagServiceTests {
         TagDto dto = new TagDto();
         dto.setName("标签测试名称");
         Page<Tag> list = tagService.getList(dto);
-        for (Tag record : list.getRecords()) {
-            TagDto deleteDto = new TagDto();
-            deleteDto.setId(record.getId());
-            int i = tagService.deleteTag(deleteDto);
+        List<Tag> records = list.getRecords();
+        if (CollectionUtil.isNotEmpty(records)) {
+            int i = tagService.deleteTag(records.get(0).getId());
             System.out.println("i = " + i);
         }
     }

@@ -39,8 +39,8 @@ public interface TagService extends IService<Tag> {
     /**
      * 删除标签
      *
-     * @param dto
+     * @param id
      */
-    int deleteTag(TagDto dto);
+    int deleteTag(Integer id);
 
 }

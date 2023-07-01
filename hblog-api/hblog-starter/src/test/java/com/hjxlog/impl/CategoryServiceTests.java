@@ -1,5 +1,6 @@
 package com.hjxlog.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hjxlog.api.dto.CategoryDto;
 import com.hjxlog.domain.Category;
@@ -54,10 +55,9 @@ public class CategoryServiceTests {
         CategoryDto dto = new CategoryDto();
         dto.setName("分类测试名称");
         Page<Category> list = categoryService.getList(dto);
-        for (Category record : list.getRecords()) {
-            CategoryDto deleteDto = new CategoryDto();
-            deleteDto.setId(record.getId());
-            int i = categoryService.deleteCategory(deleteDto);
+        List<Category> records = list.getRecords();
+        if (CollectionUtil.isNotEmpty(records)) {
+            int i = categoryService.deleteCategory(records.get(0).getId());
             System.out.println("i = " + i);
         }
     }

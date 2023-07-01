@@ -74,8 +74,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     }
 
     @Override
-    public int deleteCategory(CategoryDto dto) {
-        Integer id = dto.getId();
+    public int deleteCategory(Integer id) {
         if (id == null) {
             throw new SystemException("分类id为空。");
         }
