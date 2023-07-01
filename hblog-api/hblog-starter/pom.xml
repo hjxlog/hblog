@@ -10,6 +10,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>hblog-system</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.hjxlog</groupId>
+            <artifactId>hblog-core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 
 </project>

@@ -1,7 +1,6 @@
 package com.hjxlog.domain;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -17,13 +16,11 @@ public class BlogTag implements Serializable {
     /**
      * 博客id
      */
-    @TableId
     private Integer blogId;
 
     /**
      * 标签id
      */
-    @TableId
     private Integer tagId;
 
     @TableField(exist = false)
