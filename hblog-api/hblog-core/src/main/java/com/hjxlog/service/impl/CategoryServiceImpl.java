@@ -3,6 +3,7 @@ package com.hjxlog.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hjxlog.api.dto.CategoryDto;
@@ -35,8 +36,8 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     public Page<Category> getList(CategoryDto dto) {
         Page<Category> page = Page.of(dto.getPageNum(), dto.getPageSize());
         LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(dto.getName() != null, Category::getName, dto.getName());
-        queryWrapper.eq(dto.getStatus() != null, Category::getStatus, dto.getStatus());
+        queryWrapper.like(StringUtils.isNotBlank(dto.getName()), Category::getName, dto.getName());
+        queryWrapper.eq(StringUtils.isNotBlank(dto.getStatus()), Category::getStatus, dto.getStatus());
         queryWrapper.orderByDesc(Category::getUpdateTime);
         Page<Category> categoryPage = categoryMapper.selectPage(page, queryWrapper);
         return categoryPage;

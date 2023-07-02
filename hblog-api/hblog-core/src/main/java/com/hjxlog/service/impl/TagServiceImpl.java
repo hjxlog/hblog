@@ -2,6 +2,7 @@ package com.hjxlog.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hjxlog.api.dto.TagDto;
@@ -28,7 +29,7 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
     public Page<Tag> getList(TagDto dto) {
         Page<Tag> page = Page.of(dto.getPageNum(), dto.getPageSize());
         LambdaQueryWrapper<Tag> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(dto.getName() != null, Tag::getName, dto.getName());
+        queryWrapper.like(StringUtils.isNotBlank(dto.getName()), Tag::getName, dto.getName());
         queryWrapper.orderByDesc(Tag::getUpdateTime);
         Page<Tag> tagPage = tagMapper.selectPage(page, queryWrapper);
         return tagPage;
