@@ -8,7 +8,9 @@
         <el-header class="header">
           <HeaderBar/>
         </el-header>
-        <el-main>Main</el-main>
+        <el-main>
+          <Main/>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -17,6 +19,7 @@
 <script lang="ts" setup>
 import SideBar from "./components/SideBar.vue"
 import HeaderBar from "./components/HeaderBar.vue"
+import Main from "./components/Main.vue"
 </script>
 
 <style scoped>
