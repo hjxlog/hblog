@@ -85,7 +85,7 @@ const rules = reactive<FormRules>({
 // 查询表单
 const queryForm = ref<CategoryDto>({
   name: '',
-  status: '1',
+  status: '',
   pageNum: 1,
   pageSize: 10
 })
@@ -118,7 +118,7 @@ const handleCurrentChange = (pageNum: number) => {
 const dialogVisible = ref(false)
 const form = reactive<CategoryDto>({
   name: '',
-  status: '1'
+  status: ''
 })
 const dialogTitle = computed(() => form.id === undefined ? '新增分类' : '编辑分类');
 const formRef = toRefs(form)
