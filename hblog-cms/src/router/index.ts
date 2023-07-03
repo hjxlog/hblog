@@ -23,6 +23,14 @@ const routes: Array<RouteRecordRaw> = [
                 },
                 component: () => import("../views/category/CategoryList.vue"),
             },
+            {
+                path: "tag",
+                name: "tag",
+                meta: {
+                    title: "标签管理"
+                },
+                component: () => import("../views/tag/TagList.vue"),
+            },
         ]
     },
 ]
