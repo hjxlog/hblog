@@ -20,7 +20,7 @@
     <el-col :span="24">
       <el-table :data="tableData">
         <el-table-column fixed type="index" :index="indexMethod" label="#" width="50"/>
-        <el-table-column prop="title" label="标题" show-overflow-tooltip/>
+        <el-table-column prop="title" label="标题" show-overflow-tooltip width="260"/>
         <el-table-column prop="status" label="状态" width="100">
           <template #default="scope">
             {{ scope.row.status === '1' ? '已发布' : '未发布' }}
