@@ -31,6 +31,30 @@ const routes: Array<RouteRecordRaw> = [
                 },
                 component: () => import("../views/tag/TagList.vue"),
             },
+            {
+                path: "blog",
+                name: "blog",
+                meta: {
+                    title: "博客管理"
+                },
+                component: () => import("../views/blog/BlogList.vue"),
+            },
+            {
+                path: "blog/editor",
+                name: "",
+                meta: {
+                    title: "写博客"
+                },
+                component: () => import("../views/blog/WriteBlog.vue"),
+            },
+            {
+                path: "blog/editor/:id",
+                name: 'editBlog',
+                component: () => import("../views/blog/WriteBlog.vue"),
+                meta: {
+                    title: '写博客'
+                }
+            },
         ]
     },
 ]

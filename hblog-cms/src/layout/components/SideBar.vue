@@ -10,7 +10,7 @@
             </el-icon>
             <span>内容管理</span>
           </template>
-          <el-menu-item index="1-1">博客管理</el-menu-item>
+          <el-menu-item index="1-1" @click="this.$router.push('/content/blog')">博客管理</el-menu-item>
           <el-menu-item index="1-2" @click="this.$router.push('/content/category')">分类管理</el-menu-item>
           <el-menu-item index="1-3" @click="this.$router.push('/content/tag')">标签管理</el-menu-item>
         </el-sub-menu>
