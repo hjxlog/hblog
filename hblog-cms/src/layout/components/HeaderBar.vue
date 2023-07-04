@@ -2,6 +2,7 @@
   <el-row>
     <el-col :span="24">
       <el-menu mode="horizontal" :ellipsis="false">
+        <BreadCrumb class="breadcrumb"/>
         <div class="flex-grow"/>
         <el-sub-menu index="1">
           <template #title>管理员</template>
@@ -14,10 +15,16 @@
 </template>
 
 <script lang="ts" setup>
+import BreadCrumb from '../components/BreadCrumb'
 </script>
 
 <style scoped>
 .flex-grow {
   flex-grow: 1;
+}
+
+.breadcrumb {
+  line-height: 60px;
+  padding-left: 20px;
 }
 </style>
