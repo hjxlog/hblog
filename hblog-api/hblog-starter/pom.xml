@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>hblog-starter</artifactId>
+
     <dependencies>
         <dependency>
             <groupId>com.hjxlog</groupId>
@@ -21,7 +22,11 @@
             <artifactId>hblog-admin</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
 
 </project>
