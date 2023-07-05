@@ -10,6 +10,12 @@ spring:
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
+  redis:
+    host: localhost
+    password:
+    port: 6379
+    database: 0
+    timeout: 10000ms
 
 mybatis-plus:
   configuration:
