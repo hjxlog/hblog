@@ -60,6 +60,8 @@ public class SecurityConfig {
                 .authenticationEntryPoint(authenticationEntryPoint)
                 .accessDeniedHandler(accessDeniedHandler)
                 .and()
+                .cors()
+                .and()
                 .build();
     }
 
