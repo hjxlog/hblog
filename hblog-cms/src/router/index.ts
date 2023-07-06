@@ -1,4 +1,5 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
+import {ElMessage} from "element-plus";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -78,6 +79,18 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes
+})
+
+// 路由守卫
+router.beforeEach((to, from, next) => {
+    if (to.path !== '/login') {
+        const token = localStorage.getItem('token')
+        if (!token) {
+            ElMessage.info("请先登录。")
+            return next("/login")
+        }
+    }
+    next()
 })
 
 export default router

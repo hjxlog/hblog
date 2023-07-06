@@ -1,7 +1,6 @@
 import service from "@/utils/request";
 
 const login = (user: User) => {
-    console.log("login.ts")
     return service({
         url: "/login",
         method: "post",
@@ -9,4 +8,11 @@ const login = (user: User) => {
     })
 }
 
-export {login}
+const logout = () => {
+    return service({
+        url: "/logout",
+        method: "post"
+    })
+}
+
+export {login, logout}
