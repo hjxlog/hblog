@@ -7,6 +7,7 @@ import com.hjxlog.domain.User;
 import com.hjxlog.protocol.Result;
 import com.hjxlog.service.LoginService;
 import com.hjxlog.util.JWTUtils;
+import com.hjxlog.util.RequestContext;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -45,6 +46,13 @@ public class LoginServiceImpl implements LoginService {
         map.put("token", jwt);
         map.put("username", loginUser.getUsername());
         return Result.success(map);
+    }
+
+    @Override
+    public Result logout() {
+        LoginUser currentUser = RequestContext.getCurrentUser();
+        stringRedisTemplate.delete(AdminConstants.REDIS_SIGN_LOGIN_USER + currentUser.getUsername());
+        return Result.success();
     }
 
 }

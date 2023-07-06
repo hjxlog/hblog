@@ -53,6 +53,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 // 对于登录接口 允许匿名访问，已登录的不能访问
                 .antMatchers("/login").anonymous()
+                .antMatchers("/logout").authenticated()
                 .antMatchers("/admin/**").authenticated()
                 .and()
                 .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
@@ -62,6 +63,7 @@ public class SecurityConfig {
                 .and()
                 .cors()
                 .and()
+                .logout().disable()
                 .build();
     }
 
