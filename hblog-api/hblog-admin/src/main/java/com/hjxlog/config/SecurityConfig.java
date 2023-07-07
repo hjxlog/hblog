@@ -1,4 +1,4 @@
-package com.hjxlog.admin.config;
+package com.hjxlog.config;
 
 import com.hjxlog.filter.JwtAuthenticationTokenFilter;
 import org.springframework.context.annotation.Bean;

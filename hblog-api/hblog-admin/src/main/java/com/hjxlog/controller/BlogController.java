@@ -1,4 +1,4 @@
-package com.hjxlog.admin.controller;
+package com.hjxlog.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hjxlog.api.dto.BlogQueryDto;

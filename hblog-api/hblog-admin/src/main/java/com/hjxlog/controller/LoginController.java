@@ -1,4 +1,4 @@
-package com.hjxlog.admin.controller;
+package com.hjxlog.controller;
 
 import com.hjxlog.domain.User;
 import com.hjxlog.protocol.Result;
