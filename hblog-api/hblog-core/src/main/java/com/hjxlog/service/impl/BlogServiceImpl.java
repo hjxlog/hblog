@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hjxlog.api.dto.BlogQueryDto;
+import com.hjxlog.api.dto.BlogQueryServeDto;
 import com.hjxlog.api.dto.BlogSaveDto;
 import com.hjxlog.api.vo.BlogVo;
 import com.hjxlog.domain.Blog;
@@ -107,6 +108,33 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
         queryWrapper.in(Blog::getCategoryId, publishedCategoryIds);
         List<Blog> list = list(queryWrapper);
         return list;
+    }
+
+    @Override
+    public Page<BlogVo> getPublishedBlogs(BlogQueryServeDto dto) {
+        // 校验
+        Integer categoryId = dto.getCategoryId();
+        if (categoryId != null) {
+            List<Integer> categoryIds = categoryService.selectPublishedCategory()
+                    .stream()
+                    .map(Category::getId)
+                    .collect(Collectors.toList());
+            if (!categoryIds.contains(categoryId)) {
+                throw new SystemException("该分类不存在，请检查。");
+            }
+        }
+        Integer tagId = dto.getTagId();
+        if (tagId != null) {
+            List<Integer> tagIds = tagService.selectPublishedTag()
+                    .stream()
+                    .map(Tag::getId)
+                    .collect(Collectors.toList());
+            if (!tagIds.contains(tagId)) {
+                throw new SystemException("该标签不存在，请检查。");
+            }
+        }
+        BlogQueryDto blogQueryDto = BeanUtil.copyProperties(dto, BlogQueryDto.class);
+        return getList(blogQueryDto);
     }
 
     /**

@@ -7,7 +7,7 @@ import lombok.Data;
  * @date: 2023/7/8
  */
 @Data
-public class CategoryVo {
+public class CategoryServeVo {
 
     /**
      * 主键

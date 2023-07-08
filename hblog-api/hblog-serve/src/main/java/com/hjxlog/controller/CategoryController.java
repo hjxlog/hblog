@@ -3,7 +3,7 @@ package com.hjxlog.controller;
 import com.hjxlog.domain.Category;
 import com.hjxlog.protocol.Result;
 import com.hjxlog.service.CategoryService;
-import com.hjxlog.vo.CategoryVo;
+import com.hjxlog.vo.CategoryServeVo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +25,7 @@ public class CategoryController {
     @GetMapping("/list")
     public Result getList() {
         List<Category> list = categoryService.selectPublishedCategory();
-        return Result.success(list, CategoryVo.class);
+        return Result.success(list, CategoryServeVo.class);
     }
 
 }

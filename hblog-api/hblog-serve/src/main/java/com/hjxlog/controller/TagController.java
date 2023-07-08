@@ -3,7 +3,7 @@ package com.hjxlog.controller;
 import com.hjxlog.domain.Tag;
 import com.hjxlog.protocol.Result;
 import com.hjxlog.service.TagService;
-import com.hjxlog.vo.TagVo;
+import com.hjxlog.vo.TagServeVo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +25,7 @@ public class TagController {
     @GetMapping("/list")
     public Result getList() {
         List<Tag> list = tagService.selectPublishedTag();
-        return Result.success(list, TagVo.class);
+        return Result.success(list, TagServeVo.class);
     }
 
 }

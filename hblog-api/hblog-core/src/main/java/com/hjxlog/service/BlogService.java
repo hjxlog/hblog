@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hjxlog.api.dto.BlogQueryDto;
+import com.hjxlog.api.dto.BlogQueryServeDto;
 import com.hjxlog.api.dto.BlogSaveDto;
 import com.hjxlog.api.vo.BlogVo;
 import com.hjxlog.domain.Blog;
@@ -65,5 +66,13 @@ public interface BlogService extends IService<Blog> {
      * @return
      */
     List<Blog> selectColumnsByPublished(SFunction<Blog, ?>... columns);
+
+    /**
+     * 分页查询已发布博客
+     *
+     * @param dto
+     * @return
+     */
+    Page<BlogVo> getPublishedBlogs(BlogQueryServeDto dto);
 
 }

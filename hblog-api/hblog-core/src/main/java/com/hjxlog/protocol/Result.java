@@ -41,6 +41,10 @@ public class Result<T> {
         return new Result(body);
     }
 
+    public static <T> Result<T> success(T body, Class clazz) {
+        return new Result(BeanUtil.copyProperties(body, clazz));
+    }
+
     public static <T> Result<T> success(Collection<T> body, Class clazz) {
         return new Result(BeanUtil.copyToList(body, clazz));
     }
