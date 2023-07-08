@@ -1,7 +1,10 @@
 package com.hjxlog.protocol;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.Data;
+
+import java.util.Collection;
 
 /**
  * @author: Huang JX
@@ -36,6 +39,10 @@ public class Result<T> {
 
     public static <T> Result<T> success(T body) {
         return new Result(body);
+    }
+
+    public static <T> Result<T> success(Collection<T> body, Class clazz) {
+        return new Result(BeanUtil.copyToList(body, clazz));
     }
 
     public static <T> Result<T> fail(String code, String message) {

@@ -1,6 +1,8 @@
 package com.hjxlog.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hjxlog.api.dto.BlogQueryDto;
@@ -10,6 +12,7 @@ import com.hjxlog.domain.Blog;
 import com.hjxlog.domain.BlogTag;
 import com.hjxlog.domain.Category;
 import com.hjxlog.domain.Tag;
+import com.hjxlog.enums.BlogStatusEnum;
 import com.hjxlog.exception.SystemException;
 import com.hjxlog.mapper.BlogMapper;
 import com.hjxlog.service.BlogService;
@@ -87,6 +90,15 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
         }
         blogTagService.deleteByBlogId(id);
         return blogMapper.deleteById(id);
+    }
+
+    @Override
+    public List<Blog> selectColumnsByPublished(SFunction<Blog, ?>... columns) {
+        LambdaQueryWrapper<Blog> queryWrapper = new LambdaQueryWrapper();
+        queryWrapper.select(columns);
+        queryWrapper.eq(Blog::getStatus, BlogStatusEnum.PUBLISHED.getCode());
+        List<Blog> list = list(queryWrapper);
+        return list;
     }
 
     /**

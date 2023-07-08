@@ -1,9 +1,12 @@
 package com.hjxlog.service;
 
+import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.hjxlog.api.dto.CategoryDto;
 import com.hjxlog.domain.Category;
-import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * @author hjx
@@ -42,5 +45,22 @@ public interface CategoryService extends IService<Category> {
      * @param id
      */
     int deleteCategory(Integer id);
+
+    /**
+     * 查询已发布的数据
+     *
+     * @param columns
+     * @return
+     */
+    List<Category> selectColumnsByPublished(SFunction<Category, ?>... columns);
+
+    /**
+     * 查询已发布的分类集合，条件：
+     * 1. 分类状态为已发布
+     * 2. 该分类下有已发布的博客数据
+     *
+     * @return
+     */
+    List<Category> selectPublishedCategory();
 
 }

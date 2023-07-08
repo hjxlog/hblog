@@ -1,11 +1,14 @@
 package com.hjxlog.service;
 
+import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hjxlog.api.dto.BlogQueryDto;
 import com.hjxlog.api.dto.BlogSaveDto;
 import com.hjxlog.api.vo.BlogVo;
 import com.hjxlog.domain.Blog;
+
+import java.util.List;
 
 /**
  * @author hjx
@@ -52,5 +55,13 @@ public interface BlogService extends IService<Blog> {
      * @param id
      */
     int deleteBlog(Integer id);
+
+    /**
+     * 查询已发布的数据
+     *
+     * @param columns
+     * @return
+     */
+    List<Blog> selectColumnsByPublished(SFunction<Blog, ?>... columns);
 
 }
