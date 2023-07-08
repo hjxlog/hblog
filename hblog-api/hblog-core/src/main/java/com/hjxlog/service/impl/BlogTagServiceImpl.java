@@ -1,5 +1,6 @@
 package com.hjxlog.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hjxlog.domain.BlogTag;
@@ -8,6 +9,8 @@ import com.hjxlog.service.BlogTagService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author hjx
@@ -25,6 +28,18 @@ public class BlogTagServiceImpl extends ServiceImpl<BlogTagMapper, BlogTag> impl
         LambdaQueryWrapper<BlogTag> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(BlogTag::getBlogId, blogId);
         return blogTagMapper.delete(queryWrapper);
+    }
+
+    @Override
+    public List<BlogTag> selectByBlogIds(List<Integer> blogIds) {
+        List<BlogTag> result = new ArrayList<>();
+        if (CollectionUtil.isEmpty(blogIds)) {
+            return result;
+        }
+        LambdaQueryWrapper<BlogTag> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(BlogTag::getBlogId, blogIds);
+        result = list(queryWrapper);
+        return result;
     }
 }
 

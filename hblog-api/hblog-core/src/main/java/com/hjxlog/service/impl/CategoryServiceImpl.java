@@ -106,28 +106,18 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     @Override
     public List<Category> selectPublishedCategory() {
         List<Category> result = new ArrayList<>();
-        // 查询状态为已发布的分类id集合
-        List<Integer> publishedCategoryIds = selectColumnsByPublished(Category::getId)
-                .stream()
-                .map(Category::getId)
-                .collect(Collectors.toList());
-        // 查询状态为已发布的博客的分类id集合，去重
-        List<Integer> publishedBlogCategoryIds = blogService.selectColumnsByPublished(Blog::getCategoryId)
+        // 查询已发布的博客数据
+        List<Integer> publishedCategoryIds = blogService.selectColumnsByPublished(Blog::getCategoryId)
                 .stream()
                 .map(Blog::getCategoryId)
                 .distinct()
                 .collect(Collectors.toList());
-        // 查找交集
-        List<Integer> categoryIds = publishedCategoryIds
-                .stream()
-                .filter(publishedBlogCategoryIds::contains)
-                .collect(Collectors.toList());
-        if (CollectionUtil.isEmpty(categoryIds)) {
+        if (CollectionUtil.isEmpty(publishedCategoryIds)) {
             return result;
         }
         // 根据id查找分类集合
         LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper();
-        queryWrapper.in(Category::getId, categoryIds);
+        queryWrapper.in(Category::getId, publishedCategoryIds);
         result = categoryMapper.selectList(queryWrapper);
         return result;
     }

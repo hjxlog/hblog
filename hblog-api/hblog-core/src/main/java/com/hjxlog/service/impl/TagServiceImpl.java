@@ -6,13 +6,20 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hjxlog.api.dto.TagDto;
+import com.hjxlog.domain.Blog;
+import com.hjxlog.domain.BlogTag;
 import com.hjxlog.domain.Tag;
 import com.hjxlog.exception.SystemException;
 import com.hjxlog.mapper.TagMapper;
+import com.hjxlog.service.BlogService;
+import com.hjxlog.service.BlogTagService;
 import com.hjxlog.service.TagService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author hjx
@@ -24,6 +31,13 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
 
     @Resource
     private TagMapper tagMapper;
+
+    @Lazy
+    @Resource
+    private BlogService blogService;
+
+    @Resource
+    private BlogTagService blogTagService;
 
     @Override
     public Page<Tag> getList(TagDto dto) {
@@ -72,6 +86,22 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
             throw new SystemException("标签id为空。");
         }
         return tagMapper.deleteById(id);
+    }
+
+    @Override
+    public List<Tag> selectPublishedTag() {
+        // 已发布的博客ids
+        List<Integer> publishedBlogIds = blogService.selectColumnsByPublished(Blog::getId)
+                .stream()
+                .map(Blog::getId)
+                .collect(Collectors.toList());
+        List<Integer> publishedTagIds = blogTagService.selectByBlogIds(publishedBlogIds)
+                .stream()
+                .map(BlogTag::getTagId)
+                .distinct()
+                .collect(Collectors.toList());
+        List<Tag> tags = listByIds(publishedTagIds);
+        return tags;
     }
 }
 

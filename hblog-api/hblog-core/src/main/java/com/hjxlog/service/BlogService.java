@@ -57,7 +57,9 @@ public interface BlogService extends IService<Blog> {
     int deleteBlog(Integer id);
 
     /**
-     * 查询已发布的数据
+     * 查询已发布的博客数据
+     * 1. 博客状态为已发布
+     * 2. 分类状态为已发布
      *
      * @param columns
      * @return

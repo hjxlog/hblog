@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.hjxlog.api.dto.TagDto;
 import com.hjxlog.domain.Tag;
 
+import java.util.List;
+
 /**
  * @author hjx
  * @description 针对表【tag】的数据库操作Service
@@ -43,4 +45,10 @@ public interface TagService extends IService<Tag> {
      */
     int deleteTag(Integer id);
 
+    /**
+     * 查询已发布的博客集合的标签集合
+     *
+     * @return
+     */
+    List<Tag> selectPublishedTag();
 }

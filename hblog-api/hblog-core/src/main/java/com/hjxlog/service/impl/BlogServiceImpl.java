@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author hjx
@@ -94,9 +95,16 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
 
     @Override
     public List<Blog> selectColumnsByPublished(SFunction<Blog, ?>... columns) {
+        // 查询状态为已发布的分类id集合
+        List<Integer> publishedCategoryIds = categoryService.selectColumnsByPublished(Category::getId)
+                .stream()
+                .map(Category::getId)
+                .collect(Collectors.toList());
+        // 查询已发布的博客：博客状态为已发布，分类状态为已发布
         LambdaQueryWrapper<Blog> queryWrapper = new LambdaQueryWrapper();
         queryWrapper.select(columns);
         queryWrapper.eq(Blog::getStatus, BlogStatusEnum.PUBLISHED.getCode());
+        queryWrapper.in(Blog::getCategoryId, publishedCategoryIds);
         List<Blog> list = list(queryWrapper);
         return list;
     }
