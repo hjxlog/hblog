@@ -5,6 +5,7 @@ import com.hjxlog.protocol.Result;
 import com.hjxlog.service.CategoryService;
 import com.hjxlog.vo.CategoryServeVo;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,16 @@ public class CategoryController {
     public Result getList() {
         List<Category> list = categoryService.selectPublishedCategory();
         return Result.success(list, CategoryServeVo.class);
+    }
+
+    @GetMapping("/getDetail/{id}")
+    public Result getDetail(@PathVariable Integer id) {
+        List<Category> list = categoryService.selectPublishedCategory();
+        Category category = list.stream()
+                .filter(p -> p.getId().equals(id))
+                .findFirst()
+                .get();
+        return Result.success(category, CategoryServeVo.class);
     }
 
 }

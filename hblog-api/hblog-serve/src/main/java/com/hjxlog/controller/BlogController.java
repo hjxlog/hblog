@@ -6,6 +6,7 @@ import com.hjxlog.api.vo.BlogVo;
 import com.hjxlog.protocol.PageResult;
 import com.hjxlog.protocol.Result;
 import com.hjxlog.service.BlogService;
+import com.hjxlog.vo.BlogServeListVo;
 import com.hjxlog.vo.BlogServeVo;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +33,14 @@ public class BlogController {
     public Result getBlogDetail(@PathVariable Integer id) {
         BlogVo blogVo = blogService.getDetail(id);
         return Result.success(blogVo, BlogServeVo.class);
+    }
+
+    @GetMapping("/getByCategoryId/{categoryId}")
+    public Result getListByCategoryId(@PathVariable Integer categoryId) {
+        BlogQueryServeDto dto = new BlogQueryServeDto();
+        dto.setCategoryId(categoryId);
+        Page<BlogVo> blogVos = blogService.getPublishedBlogs(dto);
+        return Result.success(new PageResult<>(blogVos, BlogServeListVo.class));
     }
 
 }
