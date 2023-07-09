@@ -9,7 +9,7 @@
       <el-icon style=" margin-right: 5px">
         <FolderOpened/>
       </el-icon>
-      <el-link :underline="false">{{ Object.assign({}, blog.category).name }}</el-link>
+      <el-link :underline="false" @click="this.$router.push('/category/'+blog.category.id)">{{ Object.assign({}, blog.category).name }}</el-link>
     </div>
     <div class="content">
       <el-text style=" margin-right: 8px">{{ blog.content }}</el-text>

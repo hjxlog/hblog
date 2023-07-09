@@ -1,7 +1,7 @@
 <template>
   <!--  博客卡片-->
   <el-card shadow="hover" v-for="blog in blogList" :key="blog.id" class="card">
-    <el-link class="title">{{ blog.title }}</el-link>
+    <el-link class="title" @click="this.$router.push('/blog/'+blog.id)">{{ blog.title }}</el-link>
     <div class="info">
       <el-icon style=" margin-right: 5px">
         <Calendar/>
@@ -10,7 +10,7 @@
       <el-icon style=" margin-right: 5px">
         <FolderOpened/>
       </el-icon>
-      <el-link :underline="false">{{ blog.category.name }}</el-link>
+      <el-link :underline="false" @click="this.$router.push('/category/'+blog.category.id)">{{ blog.category.name }}</el-link>
     </div>
     <div class="summary">
       <el-text style=" margin-right: 8px">{{ blog.summary }}</el-text>
