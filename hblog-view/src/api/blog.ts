@@ -21,3 +21,10 @@ export const getBlogListByCategoryId = (categoryId: number) => {
         method: "get"
     })
 }
+
+export const getBlogListByTagId = (tagId: number) => {
+    return service({
+        url: "/blog/getByTagId/" + tagId,
+        method: "get"
+    })
+}
