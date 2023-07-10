@@ -43,4 +43,12 @@ public class BlogController {
         return Result.success(new PageResult<>(blogVos, BlogServeListVo.class));
     }
 
+    @GetMapping("/getByTagId/{tagId}")
+    public Result getListByTagId(@PathVariable Integer tagId) {
+        BlogQueryServeDto dto = new BlogQueryServeDto();
+        dto.setTagId(tagId);
+        Page<BlogVo> blogVos = blogService.getPublishedBlogs(dto);
+        return Result.success(new PageResult<>(blogVos, BlogServeListVo.class));
+    }
+
 }
