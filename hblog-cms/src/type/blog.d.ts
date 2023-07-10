@@ -4,6 +4,7 @@ declare global {
         title: string;
         summary: string;
         content: string;
+        mdContent: string;
         status: string;
         isRecommend: boolean;
         categoryId: number | null;

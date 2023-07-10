@@ -37,8 +37,8 @@
         <el-button type="info" :style="'float:right;margin-right:5px;'" @click="handleCancel">取消</el-button>
       </el-col>
     </el-row>
-    <el-form-item prop="content" style="height: 100%">
-      <v-md-editor :disabled-menus="[]" v-model="form.content" height="100%"></v-md-editor>
+    <el-form-item prop="mdContent" style="height: 100%">
+      <v-md-editor :disabled-menus="[]" v-model="form.mdContent" height="100%"></v-md-editor>
     </el-form-item>
   </el-form>
 </template>
@@ -50,6 +50,7 @@ import {getTagList} from "@/api/tag";
 import {addBlog, getBlogDetail, updateBlog} from "@/api/blog";
 import {ElMessage} from "element-plus";
 import {useRouter} from 'vue-router';
+import VueMarkdownEditor, {xss} from '@kangc/v-md-editor';
 
 // 表单数据
 const form = reactive<BlogDto>({
@@ -57,6 +58,7 @@ const form = reactive<BlogDto>({
   title: '',
   summary: '',
   content: '',
+  mdContent: '',
   status: '',
   isRecommend: false,
   categoryId: null,
@@ -74,7 +76,7 @@ const getEditBlogData = async () => {
     form.id = data.id
     form.title = data.title
     form.summary = data.summary
-    form.content = data.content
+    form.mdContent = data.mdContent
     form.status = data.status
     form.isRecommend = data.isRecommend
     form.categoryId = data.category.id
@@ -106,6 +108,7 @@ const loadTagList = async () => {
 // 保存文章
 const saveBlog = async () => {
   try {
+    form.content = xss.process(VueMarkdownEditor.vMdParser.themeConfig.markdownParser.render(form.mdContent))
     const res = form.id === undefined ? await addBlog(form) : await updateBlog(form)
     ElMessage.success(res.msg);
   } catch (error) {
