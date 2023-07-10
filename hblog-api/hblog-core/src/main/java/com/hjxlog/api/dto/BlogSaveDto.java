@@ -38,6 +38,12 @@ public class BlogSaveDto {
     private String content;
 
     /**
+     * 内容
+     */
+    @NotEmpty(message = "markdown内容不得为空。")
+    private String mdContent;
+
+    /**
      * 状态
      */
     private String status = BlogStatusEnum.UNPUBLISHED.getCode();

@@ -35,6 +35,11 @@ public class BlogVo {
     private String content;
 
     /**
+     * markdown内容
+     */
+    private String mdContent;
+
+    /**
      * 状态
      */
     private String status;

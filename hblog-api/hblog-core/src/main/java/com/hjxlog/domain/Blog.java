@@ -7,10 +7,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 
  * @TableName blog
  */
-@TableName(value ="blog")
+@TableName(value = "blog")
 @Data
 public class Blog implements Serializable {
     /**
@@ -33,6 +32,11 @@ public class Blog implements Serializable {
      * 内容
      */
     private String content;
+
+    /**
+     * markdown内容
+     */
+    private String mdContent;
 
     /**
      * 状态
