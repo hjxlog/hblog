@@ -16,7 +16,11 @@
       <el-text style=" margin-right: 8px">{{ blog.summary }}</el-text>
     </div>
     <el-divider style="margin: 10px 0px"/>
-    <el-link :underline="false" v-for="tag in blog.tags" :key="tag.id" :style="'margin-right:8px;'">
+    <el-link :underline="false"
+             v-for="tag in blog.tags"
+             :key="tag.id"
+             :style="'margin-right:8px;'"
+             @click="this.$router.push('/tag/'+tag.id)">
       # {{ tag.name }}
     </el-link>
   </el-card>

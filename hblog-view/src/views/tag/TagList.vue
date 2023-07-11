@@ -11,7 +11,7 @@
       :key="tag.id"
       :style="'margin-right:16px;'">
     <el-icon style=" margin-right: 5px">
-      <FolderOpened/>
+      <PriceTag/>
     </el-icon>
     {{ tag.name }}
   </el-link>
