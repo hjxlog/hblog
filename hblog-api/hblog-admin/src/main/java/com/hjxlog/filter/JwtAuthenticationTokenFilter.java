@@ -5,6 +5,8 @@ import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
 import com.hjxlog.constant.AdminConstants;
 import com.hjxlog.domain.LoginUser;
+import com.hjxlog.protocol.Result;
+import com.hjxlog.util.WebUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -47,8 +49,10 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
         // 从redis中获取用户信息
         LoginUser loginUser = JSONUtil.toBean(stringRedisTemplate.opsForValue().get(AdminConstants.REDIS_SIGN_LOGIN_USER + username), LoginUser.class);
-        if (Objects.isNull(loginUser)) {
-            throw new RuntimeException("用户未登录");
+        if (Objects.isNull(loginUser.getUser())) {
+            Result result = Result.fail("401", "请登录后操作");
+            WebUtils.renderString(response, JSONUtil.toJsonStr(result));
+            return;
         }
         // 将封装的authentication放到SecurityContext中
         Authentication authentication = new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());

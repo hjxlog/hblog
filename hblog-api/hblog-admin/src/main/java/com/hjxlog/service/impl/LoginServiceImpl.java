@@ -7,11 +7,11 @@ import com.hjxlog.domain.User;
 import com.hjxlog.protocol.Result;
 import com.hjxlog.service.LoginService;
 import com.hjxlog.util.JWTUtils;
+import com.hjxlog.util.SecurityUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -50,7 +50,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public Result logout() {
-        LoginUser currentUser = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        LoginUser currentUser = SecurityUtils.getCurrentUser();
         stringRedisTemplate.delete(AdminConstants.REDIS_SIGN_LOGIN_USER + currentUser.getUsername());
         return Result.success();
     }
