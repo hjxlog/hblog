@@ -8,7 +8,7 @@
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="module" column="module" jdbcType="VARCHAR"/>
         <result property="behavior" column="behavior" jdbcType="VARCHAR"/>
-        <result property="desc" column="desc" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
         <result property="url" column="url" jdbcType="VARCHAR"/>
         <result property="method" column="method" jdbcType="VARCHAR"/>
         <result property="param" column="param" jdbcType="VARCHAR"/>
@@ -26,7 +26,7 @@
 
     <sql id="Base_Column_List">
         id,module,behavior,
-        desc,url,method,
+        description,url,method,
         param,ip,ip_address,
         os,browser,user_agent,
         error_msg,user_name,log_type,

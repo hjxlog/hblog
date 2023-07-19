@@ -34,7 +34,7 @@ public class AppLog implements Serializable {
     /**
      * 访问描述
      */
-    private String desc;
+    private String description;
 
     /**
      * 请求接口
