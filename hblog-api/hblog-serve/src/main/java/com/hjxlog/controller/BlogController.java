@@ -1,6 +1,7 @@
 package com.hjxlog.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hjxlog.annotation.AppLogger;
 import com.hjxlog.api.dto.BlogQueryServeDto;
 import com.hjxlog.api.vo.BlogVo;
 import com.hjxlog.protocol.PageResult;
@@ -23,6 +24,7 @@ public class BlogController {
     @Resource
     private BlogService blogService;
 
+    @AppLogger
     @PostMapping("/list")
     public Result getList(@RequestBody BlogQueryServeDto dto) {
         Page<BlogVo> blogVos = blogService.getPublishedBlogs(dto);

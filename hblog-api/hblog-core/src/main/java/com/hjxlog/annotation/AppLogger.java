@@ -14,20 +14,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface AppLogger {
-
-    /**
-     * 操作行为
-     *
-     * @return
-     */
-    String behavior() default "";
-
-    /**
-     * 操作说明
-     *
-     * @return
-     */
-    String desc() default "";
-
 }
 

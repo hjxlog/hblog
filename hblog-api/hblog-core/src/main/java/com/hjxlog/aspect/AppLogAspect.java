@@ -1,21 +1,25 @@
 package com.hjxlog.aspect;
 
+import cn.hutool.http.useragent.UserAgent;
+import cn.hutool.http.useragent.UserAgentUtil;
 import cn.hutool.json.JSONUtil;
-import com.hjxlog.annotation.AppLogger;
+import com.hjxlog.constant.RequestConstants;
 import com.hjxlog.domain.AppLog;
+import com.hjxlog.enums.RequestInfoEnum;
 import com.hjxlog.service.AppLogService;
+import com.hjxlog.util.IpAddressUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -55,14 +59,25 @@ public class AppLogAspect {
         appLog.setStartTime(new Date());
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
-        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        AppLogger appLogger = methodSignature.getMethod().getAnnotation(AppLogger.class);
-        appLog.setBehavior(appLogger.behavior());
-        appLog.setDescription(appLogger.desc());
-        appLog.setUrl(String.valueOf(request.getRequestURL()));
-        appLog.setMethod(request.getMethod());
+        appLog.setUri(requestAttributes.getRequest().getRequestURI());
         appLog.setParam(JSONUtil.toJsonStr(joinPoint.getArgs()));
         appLog.setIp(request.getRemoteHost());
+        String address = IpAddressUtils.getAddress(request.getRemoteHost());
+        appLog.setIpAddress(address);
+        String userAgentStr = request.getHeader(RequestConstants.USER_AGENT);
+        UserAgent userAgent = UserAgentUtil.parse(userAgentStr);
+        appLog.setUserAgent(userAgentStr);
+        appLog.setOs(userAgent.getOs().getName());
+        appLog.setBrowser(userAgent.getBrowser().getName() + "," + userAgent.getVersion());
+        RequestInfoEnum requestInfoEnum = Arrays.stream(RequestInfoEnum.values())
+                .filter(p -> p.getUri().equals(appLog.getUri()))
+                .findFirst().orElse(null);
+        if (requestInfoEnum != null) {
+            appLog.setLogType(requestInfoEnum.getLogType());
+            appLog.setModule(requestInfoEnum.getModule());
+            appLog.setUri(requestInfoEnum.getUri());
+            appLog.setBehavior(requestInfoEnum.getBehavior());
+        }
         return appLog;
     }
 

@@ -32,19 +32,9 @@ public class AppLog implements Serializable {
     private String behavior;
 
     /**
-     * 访问描述
-     */
-    private String description;
-
-    /**
      * 请求接口
      */
-    private String url;
-
-    /**
-     * 请求方式
-     */
-    private String method;
+    private String uri;
 
     /**
      * 请求参数
@@ -80,11 +70,6 @@ public class AppLog implements Serializable {
      * 错误信息
      */
     private String errorMsg;
-
-    /**
-     * 用户名
-     */
-    private String userName;
 
     /**
      * 日志类型
