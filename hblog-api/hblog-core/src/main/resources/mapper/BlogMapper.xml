@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hjxlog.mapper.BlogMapper">
+<mapper namespace="com.hjxlog.core.mapper.BlogMapper">
 
-    <resultMap id="BaseResultMap" type="com.hjxlog.domain.Blog">
+    <resultMap id="BaseResultMap" type="com.hjxlog.core.domain.Blog">
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="summary" column="summary" jdbcType="VARCHAR"/>
@@ -25,17 +25,17 @@
         category_id
     </sql>
 
-    <select id="queryTag" resultType="com.hjxlog.domain.Tag">
+    <select id="queryTag" resultType="com.hjxlog.core.domain.Tag">
         select t1.* from tag t1
         LEFT JOIN blog_tag t2 on t1.id = t2.tag_id
         where t2.blog_id = #{blogId}
     </select>
 
-    <select id="queryCategory" resultType="com.hjxlog.domain.Category">
+    <select id="queryCategory" resultType="com.hjxlog.core.domain.Category">
         select * from category where id = #{categoryId}
     </select>
 
-    <resultMap id="QueryBlogListResult" type="com.hjxlog.api.vo.BlogVo">
+    <resultMap id="QueryBlogListResult" type="com.hjxlog.core.api.vo.BlogVo">
         <id property="id" column="id"/>
         <result property="title" column="title"/>
         <result property="summary" column="summary"/>
@@ -47,16 +47,16 @@
         <result property="updateTime" column="update_time"/>
         <result property="views" column="views"/>
         <association property="category"
-                     javaType="com.hjxlog.domain.Category"
+                     javaType="com.hjxlog.core.domain.Category"
                      column="{categoryId = category_id}"
                      select="queryCategory"/>
         <collection property="tags"
-                    ofType="com.hjxlog.domain.Tag"
+                    ofType="com.hjxlog.core.domain.Tag"
                     column="{blogId = id}"
                     select="queryTag"/>
     </resultMap>
 
-    <select id="getList" resultMap="QueryBlogListResult" parameterType="com.hjxlog.api.dto.BlogQueryDto">
+    <select id="getList" resultMap="QueryBlogListResult" parameterType="com.hjxlog.core.api.dto.BlogQueryDto">
         select distinct
         t1.id,t1.title,t1.summary,t1.status,t1.is_recommend,t1.create_time,t1.update_time,t1.views,t1.category_id
         from blog t1

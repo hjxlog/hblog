@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hjxlog.mapper.AppLogMapper">
+<mapper namespace="com.hjxlog.core.mapper.AppLogMapper">
 
-    <resultMap id="BaseResultMap" type="com.hjxlog.domain.AppLog">
+    <resultMap id="BaseResultMap" type="com.hjxlog.core.domain.AppLog">
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="module" column="module" jdbcType="VARCHAR"/>
         <result property="behavior" column="behavior" jdbcType="VARCHAR"/>
