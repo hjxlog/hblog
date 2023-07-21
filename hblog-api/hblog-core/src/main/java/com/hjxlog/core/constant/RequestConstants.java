@@ -37,8 +37,43 @@ public class RequestConstants {
     public static final String MODULE_TAG = "tag";
 
     /**
+     * 登陆模块
+     */
+    public static final String MODULE_LOGIN = "login";
+
+    /**
      * 查询列表
      */
     public static final String BEHAVIOR_QUERY_LIST = "query_list";
+
+    /**
+     * 查询单个
+     */
+    public static final String BEHAVIOR_QUERY_ONE = "query_one";
+
+    /**
+     * 添加
+     */
+    public static final String BEHAVIOR_ADD = "add";
+
+    /**
+     * 更新
+     */
+    public static final String BEHAVIOR_UPDATE = "update";
+
+    /**
+     * 删除
+     */
+    public static final String BEHAVIOR_DELETE = "delete";
+
+    /**
+     * 登陆
+     */
+    public static final String BEHAVIOR_LOGIN = "login";
+
+    /**
+     * 登出
+     */
+    public static final String BEHAVIOR_LOGOUT = "logout";
 
 }

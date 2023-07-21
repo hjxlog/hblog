@@ -24,7 +24,6 @@ public class BlogController {
     @Resource
     private BlogService blogService;
 
-    @AppLogger
     @PostMapping("/list")
     public Result getList(@RequestBody BlogQueryServeDto dto) {
         Page<BlogVo> blogVos = blogService.getPublishedBlogs(dto);

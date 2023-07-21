@@ -34,11 +34,15 @@ public class AppLogAspect {
     @Resource
     private AppLogService appLogService;
 
-    @Pointcut("@annotation(com.hjxlog.annotation.AppLogger)")
-    public void pointcut() {
+    @Pointcut("@annotation(com.hjxlog.core.annotation.AppLogger)")
+    public void appLoggerPointcut() {
     }
 
-    @Around("pointcut()")
+    @Pointcut("execution(* com.hjxlog.serve.controller..*(..))")
+    public void serveControllerPointcut() {
+    }
+
+    @Around("appLoggerPointcut() || serveControllerPointcut()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         Object result;
         AppLog appLog = generateAppLog(joinPoint);
@@ -70,7 +74,7 @@ public class AppLogAspect {
         appLog.setOs(userAgent.getOs().getName());
         appLog.setBrowser(userAgent.getBrowser().getName() + "," + userAgent.getVersion());
         RequestInfoEnum requestInfoEnum = Arrays.stream(RequestInfoEnum.values())
-                .filter(p -> p.getUri().equals(appLog.getUri()))
+                .filter(p -> appLog.getUri().startsWith(p.getUri()))
                 .findFirst().orElse(null);
         if (requestInfoEnum != null) {
             appLog.setLogType(requestInfoEnum.getLogType());

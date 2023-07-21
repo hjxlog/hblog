@@ -8,7 +8,33 @@ import com.hjxlog.core.constant.RequestConstants;
  */
 public enum RequestInfoEnum {
 
-    SERVE_BLOG_LIST(RequestConstants.TYPE_SERVE, RequestConstants.MODULE_BLOG, "/blog/list", RequestConstants.BEHAVIOR_QUERY_LIST);
+    // serve blog module
+    SERVE_BLOG_LIST(RequestConstants.TYPE_SERVE, RequestConstants.MODULE_BLOG, "/blog/list", RequestConstants.BEHAVIOR_QUERY_LIST),
+    SERVE_BLOG_GET(RequestConstants.TYPE_SERVE, RequestConstants.MODULE_BLOG, "/blog/get/", RequestConstants.BEHAVIOR_QUERY_ONE),
+    SERVE_BLOG_GET_BY_CATEGORY_ID(RequestConstants.TYPE_SERVE, RequestConstants.MODULE_BLOG, "/blog/getByCategoryId/", RequestConstants.BEHAVIOR_QUERY_LIST),
+    SERVE_BLOG_GET_BY_TAG_ID(RequestConstants.TYPE_SERVE, RequestConstants.MODULE_BLOG, "/blog/getByTagId/", RequestConstants.BEHAVIOR_QUERY_LIST),
+    // serve category module
+    SERVE_CATEGORY_LIST(RequestConstants.TYPE_SERVE, RequestConstants.MODULE_CATEGORY, "/category/list", RequestConstants.BEHAVIOR_QUERY_LIST),
+    SERVE_CATEGORY_GET_DETAIL(RequestConstants.TYPE_SERVE, RequestConstants.MODULE_CATEGORY, "/category/getDetail/", RequestConstants.BEHAVIOR_QUERY_ONE),
+    // serve tag module
+    SERVE_TAG_LIST(RequestConstants.TYPE_SERVE, RequestConstants.MODULE_TAG, "/tag/list", RequestConstants.BEHAVIOR_QUERY_LIST),
+    SERVE_TAG_GET_DETAIL(RequestConstants.TYPE_SERVE, RequestConstants.MODULE_TAG, "/tag/getDetail/", RequestConstants.BEHAVIOR_QUERY_ONE),
+    // admin blog module
+    ADMIN_BLOG_ADD(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_BLOG, "/admin/blog/add", RequestConstants.BEHAVIOR_ADD),
+    ADMIN_BLOG_UPDATE(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_BLOG, "/admin/blog/update", RequestConstants.BEHAVIOR_UPDATE),
+    ADMIN_BLOG_DELETE(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_BLOG, "/admin/blog/delete/", RequestConstants.BEHAVIOR_DELETE),
+    // admin category module
+    ADMIN_CATEGORY_ADD(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_CATEGORY, "/admin/category/add", RequestConstants.BEHAVIOR_ADD),
+    ADMIN_CATEGORY_UPDATE(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_CATEGORY, "/admin/category/update", RequestConstants.BEHAVIOR_UPDATE),
+    ADMIN_CATEGORY_DELETE(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_CATEGORY, "/admin/category/delete/", RequestConstants.BEHAVIOR_DELETE),
+    // admin tag module
+    ADMIN_TAG_ADD(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_TAG, "/admin/tag/add", RequestConstants.BEHAVIOR_ADD),
+    ADMIN_TAG_UPDATE(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_TAG, "/admin/tag/update", RequestConstants.BEHAVIOR_UPDATE),
+    ADMIN_TAG_DELETE(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_TAG, "/admin/tag/delete/", RequestConstants.BEHAVIOR_DELETE),
+    // admin login module
+    ADMIN_LOGIN(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_LOGIN, "/login", RequestConstants.BEHAVIOR_LOGIN),
+    ADMIN_LOGOUT(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_LOGIN, "/logout", RequestConstants.BEHAVIOR_LOGOUT),
+    ;
 
     /**
      * 日志类型
