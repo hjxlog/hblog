@@ -1,6 +1,7 @@
 package com.hjxlog.admin.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hjxlog.core.annotation.AppLogger;
 import com.hjxlog.core.api.dto.CategoryDto;
 import com.hjxlog.core.domain.Category;
 import com.hjxlog.core.protocol.PageResult;
@@ -36,18 +37,21 @@ public class CategoryController {
         return Result.success(category);
     }
 
+    @AppLogger
     @PostMapping("/add")
     public Result addCategory(@Valid @RequestBody CategoryDto dto) {
         Category category = categoryService.addCategory(dto);
         return Result.success(category);
     }
 
+    @AppLogger
     @PostMapping("/update")
     public Result updateCategory(@Valid @RequestBody CategoryDto dto) {
         Category category = categoryService.updateCategory(dto);
         return Result.success(category);
     }
 
+    @AppLogger
     @PostMapping("/delete/{id}")
     public Result deleteCategory(@PathVariable Integer id) {
         categoryService.deleteCategory(id);

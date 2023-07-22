@@ -3,11 +3,11 @@ package com.hjxlog.admin.service.impl;
 import cn.hutool.json.JSONUtil;
 import com.hjxlog.admin.domain.LoginUser;
 import com.hjxlog.admin.service.LoginService;
+import com.hjxlog.admin.util.JWTUtils;
 import com.hjxlog.admin.util.SecurityUtils;
-import com.hjxlog.core.constant.AdminConstants;
+import com.hjxlog.core.constant.SystemConstants;
 import com.hjxlog.core.domain.User;
 import com.hjxlog.core.protocol.Result;
-import com.hjxlog.admin.util.JWTUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -40,7 +40,7 @@ public class LoginServiceImpl implements LoginService {
             throw new RuntimeException("用户名或密码错误!");
         }
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
-        stringRedisTemplate.opsForValue().set(AdminConstants.REDIS_SIGN_LOGIN_USER + loginUser.getUsername(), JSONUtil.toJsonStr(loginUser));
+        stringRedisTemplate.opsForValue().set(SystemConstants.REDIS_SIGN_LOGIN_USER + loginUser.getUsername(), JSONUtil.toJsonStr(loginUser));
         String jwt = JWTUtils.createToken(loginUser.getUsername());
         Map<String, Object> map = new HashMap<>();
         map.put("token", jwt);
@@ -51,7 +51,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Result logout() {
         LoginUser currentUser = SecurityUtils.getCurrentUser();
-        stringRedisTemplate.delete(AdminConstants.REDIS_SIGN_LOGIN_USER + currentUser.getUsername());
+        stringRedisTemplate.delete(SystemConstants.REDIS_SIGN_LOGIN_USER + currentUser.getUsername());
         return Result.success();
     }
 

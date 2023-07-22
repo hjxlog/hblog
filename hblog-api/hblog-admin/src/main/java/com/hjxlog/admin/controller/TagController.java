@@ -1,6 +1,7 @@
 package com.hjxlog.admin.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hjxlog.core.annotation.AppLogger;
 import com.hjxlog.core.api.dto.TagDto;
 import com.hjxlog.core.domain.Tag;
 import com.hjxlog.core.protocol.PageResult;
@@ -34,18 +35,21 @@ public class TagController {
         return Result.success(Tag);
     }
 
+    @AppLogger
     @PostMapping("/add")
     public Result addTag(@Valid @RequestBody TagDto dto) {
         Tag tag = tagService.addTag(dto);
         return Result.success(tag);
     }
 
+    @AppLogger
     @PostMapping("/update")
     public Result updateTag(@Valid @RequestBody TagDto dto) {
         Tag tag = tagService.updateTag(dto);
         return Result.success(tag);
     }
 
+    @AppLogger
     @PostMapping("/delete/{id}")
     public Result deleteTag(@PathVariable Integer id) {
         tagService.deleteTag(id);

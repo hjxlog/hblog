@@ -2,7 +2,7 @@ package com.hjxlog.core.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hjxlog.core.api.vo.UserVo;
-import com.hjxlog.core.constant.AdminConstants;
+import com.hjxlog.core.constant.SystemConstants;
 import com.hjxlog.core.domain.User;
 import com.hjxlog.core.exception.SystemException;
 import com.hjxlog.core.mapper.UserMapper;
@@ -36,7 +36,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             throw new SystemException("用户名不可修改。");
         }
         saveOrUpdate(updateUser);
-        stringRedisTemplate.delete(AdminConstants.REDIS_SIGN_LOGIN_USER + currentUser.getUsername());
+        stringRedisTemplate.delete(SystemConstants.REDIS_SIGN_LOGIN_USER + currentUser.getUsername());
         return Result.success(updateUser, UserVo.class);
     }
 

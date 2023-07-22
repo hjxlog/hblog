@@ -4,7 +4,7 @@ import cn.hutool.json.JSONUtil;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
 import com.hjxlog.admin.domain.LoginUser;
-import com.hjxlog.core.constant.AdminConstants;
+import com.hjxlog.core.constant.SystemConstants;
 import com.hjxlog.core.protocol.Result;
 import com.hjxlog.core.util.WebUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -48,7 +48,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             throw new RuntimeException("parseToken exception", e);
         }
         // 从redis中获取用户信息
-        LoginUser loginUser = JSONUtil.toBean(stringRedisTemplate.opsForValue().get(AdminConstants.REDIS_SIGN_LOGIN_USER + username), LoginUser.class);
+        LoginUser loginUser = JSONUtil.toBean(stringRedisTemplate.opsForValue().get(SystemConstants.REDIS_SIGN_LOGIN_USER + username), LoginUser.class);
         if (Objects.isNull(loginUser.getUser())) {
             Result result = Result.fail("401", "请登录后操作");
             WebUtils.renderString(response, JSONUtil.toJsonStr(result));

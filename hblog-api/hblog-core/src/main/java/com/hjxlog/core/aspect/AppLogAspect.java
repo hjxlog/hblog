@@ -4,10 +4,11 @@ import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
 import cn.hutool.json.JSONUtil;
 import com.hjxlog.core.constant.RequestConstants;
+import com.hjxlog.core.constant.SystemConstants;
 import com.hjxlog.core.domain.AppLog;
 import com.hjxlog.core.enums.RequestInfoEnum;
-import com.hjxlog.core.service.AppLogService;
 import com.hjxlog.core.util.IpAddressUtils;
+import com.hjxlog.core.util.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -32,7 +33,7 @@ import java.util.Date;
 public class AppLogAspect {
 
     @Resource
-    private AppLogService appLogService;
+    private RedisUtils redisUtils;
 
     @Pointcut("@annotation(com.hjxlog.core.annotation.AppLogger)")
     public void appLoggerPointcut() {
@@ -53,7 +54,7 @@ public class AppLogAspect {
             throw e;
         } finally {
             appLog.setEndTime(new Date());
-            appLogService.save(appLog);
+            redisUtils.saveList(SystemConstants.APP_LOG_LIST_KEY, appLog);
         }
         return result;
     }

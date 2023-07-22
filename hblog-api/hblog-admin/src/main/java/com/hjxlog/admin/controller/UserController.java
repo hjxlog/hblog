@@ -1,6 +1,7 @@
 package com.hjxlog.admin.controller;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.hjxlog.core.annotation.AppLogger;
 import com.hjxlog.core.api.dto.UserDto;
 import com.hjxlog.core.api.vo.UserVo;
 import com.hjxlog.admin.domain.LoginUser;
@@ -34,6 +35,7 @@ public class UserController {
         return Result.success(currentUser.getUser(), UserVo.class);
     }
 
+    @AppLogger
     @PostMapping("/update")
     public Result update(@Valid @RequestBody UserDto dto) {
         // 密码加密

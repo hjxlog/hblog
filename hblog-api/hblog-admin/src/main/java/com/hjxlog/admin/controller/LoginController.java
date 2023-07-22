@@ -1,8 +1,9 @@
 package com.hjxlog.admin.controller;
 
+import com.hjxlog.admin.service.LoginService;
+import com.hjxlog.core.annotation.AppLogger;
 import com.hjxlog.core.domain.User;
 import com.hjxlog.core.protocol.Result;
-import com.hjxlog.admin.service.LoginService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,11 +21,13 @@ public class LoginController {
     @Resource
     private LoginService loginService;
 
+    @AppLogger
     @PostMapping("/login")
     public Result login(@RequestBody User user) {
         return loginService.login(user);
     }
 
+    @AppLogger
     @RequestMapping("/logout")
     public Result logout() {
         return loginService.logout();

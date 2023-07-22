@@ -1,6 +1,7 @@
 package com.hjxlog.admin.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hjxlog.core.annotation.AppLogger;
 import com.hjxlog.core.api.dto.BlogQueryDto;
 import com.hjxlog.core.api.dto.BlogSaveDto;
 import com.hjxlog.core.api.vo.BlogVo;
@@ -35,18 +36,21 @@ public class BlogController {
         return Result.success(blogVo);
     }
 
+    @AppLogger
     @PostMapping("/add")
     public Result addBlog(@Valid @RequestBody BlogSaveDto dto) {
         BlogVo blogVo = blogService.addBlog(dto);
         return Result.success(blogVo);
     }
 
+    @AppLogger
     @PostMapping("/update")
     public Result updateBlog(@Valid @RequestBody BlogSaveDto dto) {
         BlogVo blogVo = blogService.updateBlog(dto);
         return Result.success(blogVo);
     }
 
+    @AppLogger
     @PostMapping("/delete/{id}")
     public Result deleteBlog(@PathVariable Integer id) {
         blogService.deleteBlog(id);

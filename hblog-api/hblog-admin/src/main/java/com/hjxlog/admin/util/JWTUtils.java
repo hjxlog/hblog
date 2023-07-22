@@ -4,7 +4,7 @@ import cn.hutool.core.date.DateField;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.jwt.JWTPayload;
 import cn.hutool.jwt.JWTUtil;
-import com.hjxlog.core.constant.AdminConstants;
+import com.hjxlog.core.constant.SystemConstants;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,9 +26,9 @@ public class JWTUtils {
         // 过期时间
         payload.put(JWTPayload.EXPIRES_AT, newTime);
         // 载荷
-        payload.put(AdminConstants.JWT_PAYLOAD_USERNAME, username);
+        payload.put(SystemConstants.JWT_PAYLOAD_USERNAME, username);
         // 秘钥
-        String key = AdminConstants.JWT_KEY;
+        String key = SystemConstants.JWT_KEY;
         String jwt = JWTUtil.createToken(payload, key.getBytes());
         return jwt;
     }
