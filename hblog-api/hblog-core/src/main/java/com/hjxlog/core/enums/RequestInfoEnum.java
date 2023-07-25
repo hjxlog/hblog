@@ -34,6 +34,10 @@ public enum RequestInfoEnum {
     // admin login module
     ADMIN_LOGIN(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_LOGIN, "/login", RequestConstants.BEHAVIOR_LOGIN),
     ADMIN_LOGOUT(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_LOGIN, "/logout", RequestConstants.BEHAVIOR_LOGOUT),
+    // admin user module
+    ADMIN_USER_GET_INFO(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_USER, "/admin/user/getInfo", RequestConstants.BEHAVIOR_QUERY_ONE),
+    ADMIN_USER_UPDATE_INFO(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_USER, "/admin/user/updateInfo", RequestConstants.BEHAVIOR_UPDATE),
+    ADMIN_USER_UPDATE_PASSWORD(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_USER, "/admin/user/updatePassword", RequestConstants.BEHAVIOR_UPDATE),
     ;
 
     /**

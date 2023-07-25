@@ -42,6 +42,11 @@ public class RequestConstants {
     public static final String MODULE_LOGIN = "login";
 
     /**
+     * 用户模块
+     */
+    public static final String MODULE_USER = "user";
+
+    /**
      * 查询列表
      */
     public static final String BEHAVIOR_QUERY_LIST = "query_list";

@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
  * @date: 2023/7/19
  */
 @Data
-public class UserDto {
+public class UserInfoDto {
 
     /**
      * 主键
@@ -17,21 +17,9 @@ public class UserDto {
     private Integer id;
 
     /**
-     * 用户名
-     */
-    @NotEmpty(message = "用户名不得为空。")
-    private String username;
-
-    /**
      * 昵称
      */
     @NotEmpty(message = "昵称不得为空。")
     private String nickname;
-
-    /**
-     * 密码
-     */
-    @NotEmpty(message = "密码不得为空。")
-    private String password;
 
 }

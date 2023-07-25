@@ -15,4 +15,9 @@ public class SecurityUtils {
         return (LoginUser) authentication.getPrincipal();
     }
 
+    public static boolean isCurrentUser(Integer userId) {
+        Integer curUserId = getCurrentUser().getUserId();
+        return curUserId.equals(userId);
+    }
+
 }

@@ -1,15 +1,13 @@
 package com.hjxlog.admin.controller;
 
-import cn.hutool.core.bean.BeanUtil;
-import com.hjxlog.core.annotation.AppLogger;
-import com.hjxlog.core.api.dto.UserDto;
-import com.hjxlog.core.api.vo.UserVo;
 import com.hjxlog.admin.domain.LoginUser;
-import com.hjxlog.core.domain.User;
-import com.hjxlog.core.protocol.Result;
-import com.hjxlog.core.service.UserService;
+import com.hjxlog.admin.service.AdminUserService;
 import com.hjxlog.admin.util.SecurityUtils;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import com.hjxlog.core.annotation.AppLogger;
+import com.hjxlog.core.api.dto.UserInfoDto;
+import com.hjxlog.core.api.dto.UserUpdatePasswordDto;
+import com.hjxlog.core.api.vo.UserVo;
+import com.hjxlog.core.protocol.Result;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -24,10 +22,7 @@ import javax.validation.Valid;
 public class UserController {
 
     @Resource
-    private UserService userService;
-
-    @Resource
-    private PasswordEncoder passwordEncoder;
+    private AdminUserService adminUserService;
 
     @GetMapping("/getInfo")
     public Result getInfo() {
@@ -36,14 +31,17 @@ public class UserController {
     }
 
     @AppLogger
-    @PostMapping("/update")
-    public Result update(@Valid @RequestBody UserDto dto) {
-        // 密码加密
-        dto.setPassword(passwordEncoder.encode(dto.getPassword()));
-        LoginUser currentUser = SecurityUtils.getCurrentUser();
-        User updateUser = new User();
-        BeanUtil.copyProperties(dto, updateUser);
-        return userService.updateUser(currentUser.getUser(), updateUser);
+    @PostMapping("/updateInfo")
+    public Result updateInfo(@Valid @RequestBody UserInfoDto dto) {
+        UserVo userVo = adminUserService.updateInfo(dto);
+        return Result.success(userVo);
+    }
+
+    @AppLogger
+    @PostMapping("/updatePassword")
+    public Result updatePassword(@Valid @RequestBody UserUpdatePasswordDto dto) {
+        UserVo userVo = adminUserService.updatePassword(dto);
+        return Result.success(userVo);
     }
 
 }

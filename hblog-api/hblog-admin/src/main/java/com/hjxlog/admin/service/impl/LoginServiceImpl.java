@@ -1,10 +1,12 @@
 package com.hjxlog.admin.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.json.JSONUtil;
 import com.hjxlog.admin.domain.LoginUser;
 import com.hjxlog.admin.service.LoginService;
 import com.hjxlog.admin.util.JWTUtils;
 import com.hjxlog.admin.util.SecurityUtils;
+import com.hjxlog.core.api.vo.UserVo;
 import com.hjxlog.core.constant.SystemConstants;
 import com.hjxlog.core.domain.User;
 import com.hjxlog.core.protocol.Result;
@@ -43,8 +45,11 @@ public class LoginServiceImpl implements LoginService {
         stringRedisTemplate.opsForValue().set(SystemConstants.REDIS_SIGN_LOGIN_USER + loginUser.getUsername(), JSONUtil.toJsonStr(loginUser));
         String jwt = JWTUtils.createToken(loginUser.getUsername());
         Map<String, Object> map = new HashMap<>();
+        UserVo userVo = new UserVo();
+        BeanUtil.copyProperties(loginUser.getUser(), userVo);
         map.put("token", jwt);
-        map.put("username", loginUser.getUsername());
+        map.put("user", userVo);
+        map.put("nickname", loginUser.getNickname());
         return Result.success(map);
     }
 
