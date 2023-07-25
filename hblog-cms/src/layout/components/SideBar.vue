@@ -15,6 +15,17 @@
           <el-menu-item index="1-3" @click="this.$router.push('/content/tag')">标签管理</el-menu-item>
         </el-sub-menu>
       </el-menu>
+      <el-menu default-active="2-1" class="menu">
+        <el-sub-menu index="1">
+          <template #title>
+            <el-icon>
+              <Setting/>
+            </el-icon>
+            <span>系统管理</span>
+          </template>
+          <el-menu-item index="1-1" @click="this.$router.push('/system/account')">账号管理</el-menu-item>
+        </el-sub-menu>
+      </el-menu>
     </el-col>
   </el-row>
 </template>

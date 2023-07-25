@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import {reactive, toRefs} from 'vue'
 import {login} from "@/api/login";
-import {setToken} from '../../utils/storage'
+import {setToken, setUser} from '../../utils/storage'
 import router from "@/router";
 import {ElMessage, FormInstance, FormRules} from "element-plus";
 
@@ -52,6 +52,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     if (!valid) return false;
     const res = await login(form);
     setToken(res.body.token);
+    setUser(JSON.stringify(res.body.user));
     ElMessage.success(res.msg);
     await router.push("/");
   } catch (error) {

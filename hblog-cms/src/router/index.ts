@@ -38,7 +38,7 @@ const routes: Array<RouteRecordRaw> = [
                 meta: {
                     title: "分类管理"
                 },
-                component: () => import("../views/category/CategoryList.vue"),
+                component: () => import("../views/content/category/CategoryList.vue"),
             },
             {
                 path: "tag",
@@ -46,7 +46,7 @@ const routes: Array<RouteRecordRaw> = [
                 meta: {
                     title: "标签管理"
                 },
-                component: () => import("../views/tag/TagList.vue"),
+                component: () => import("../views/content/tag/TagList.vue"),
             },
             {
                 path: "blog",
@@ -54,7 +54,7 @@ const routes: Array<RouteRecordRaw> = [
                 meta: {
                     title: "博客管理"
                 },
-                component: () => import("../views/blog/BlogList.vue"),
+                component: () => import("../views/content/blog/BlogList.vue"),
             },
             {
                 path: "blog/editor",
@@ -62,15 +62,33 @@ const routes: Array<RouteRecordRaw> = [
                 meta: {
                     title: "写博客"
                 },
-                component: () => import("../views/blog/WriteBlog.vue"),
+                component: () => import("../views/content/blog/WriteBlog.vue"),
             },
             {
                 path: "blog/editor/:id",
                 name: 'editBlog',
-                component: () => import("../views/blog/WriteBlog.vue"),
+                component: () => import("../views/content/blog/WriteBlog.vue"),
                 meta: {
                     title: '写博客'
                 }
+            },
+        ]
+    },
+    {
+        path: "/system",
+        name: "system",
+        meta: {
+            title: "系统管理"
+        },
+        component: () => import("../layout/Layout.vue"),
+        children: [
+            {
+                path: "account",
+                name: "account",
+                meta: {
+                    title: "账号管理"
+                },
+                component: () => import("../views/system/account/AccountManage.vue"),
             },
         ]
     },
