@@ -12,7 +12,7 @@
       <el-link :underline="false" @click="this.$router.push('/category/'+blog.category.id)">{{ Object.assign({}, blog.category).name }}</el-link>
     </div>
     <div class="content">
-      <div v-html="blog.content"></div>
+      <v-md-preview :text="blog.content"></v-md-preview>
     </div>
     <el-divider style="margin: 10px 0px"/>
     <el-link :underline="false"
