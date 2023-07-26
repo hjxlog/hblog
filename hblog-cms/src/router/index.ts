@@ -92,6 +92,40 @@ const routes: Array<RouteRecordRaw> = [
             },
         ]
     },
+    {
+        path: "/log",
+        name: "log",
+        meta: {
+            title: "日志管理"
+        },
+        component: () => import("../layout/Layout.vue"),
+        children: [
+            {
+                path: "operate",
+                name: "operate",
+                meta: {
+                    title: "操作日志"
+                },
+                component: () => import("../views/log/AdminLog.vue"),
+            },
+            {
+                path: "visit",
+                name: "visit",
+                meta: {
+                    title: "访问日志"
+                },
+                component: () => import("../views/log/ServeLog.vue"),
+            },
+            {
+                path: "error",
+                name: "error",
+                meta: {
+                    title: "异常日志"
+                },
+                component: () => import("../views/log/ErrorLog.vue"),
+            },
+        ]
+    },
 ]
 
 const router = createRouter({

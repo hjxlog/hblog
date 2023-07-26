@@ -2,7 +2,7 @@
   <el-row class="container">
     <el-col :span="24">
       <div class="logo">HBlog CMS</div>
-      <el-menu default-active="1-1" class="menu">
+      <el-menu class="menu">
         <el-sub-menu index="1">
           <template #title>
             <el-icon>
@@ -16,6 +16,19 @@
         </el-sub-menu>
       </el-menu>
       <el-menu default-active="2-1" class="menu">
+        <el-sub-menu index="1">
+          <template #title>
+            <el-icon>
+              <Document/>
+            </el-icon>
+            <span>日志管理</span>
+          </template>
+          <el-menu-item index="1-1" @click="this.$router.push('/log/operate')">操作日志</el-menu-item>
+          <el-menu-item index="1-2" @click="this.$router.push('/log/visit')">访问日志</el-menu-item>
+          <el-menu-item index="1-3" @click="this.$router.push('/log/error')">异常日志</el-menu-item>
+        </el-sub-menu>
+      </el-menu>
+      <el-menu default-active="3-1" class="menu">
         <el-sub-menu index="1">
           <template #title>
             <el-icon>
