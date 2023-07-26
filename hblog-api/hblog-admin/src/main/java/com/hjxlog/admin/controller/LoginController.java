@@ -21,7 +21,6 @@ public class LoginController {
     @Resource
     private LoginService loginService;
 
-    @AppLogger
     @PostMapping("/login")
     public Result login(@RequestBody User user) {
         return loginService.login(user);

@@ -37,7 +37,6 @@ public class UserController {
         return Result.success(userVo);
     }
 
-    @AppLogger
     @PostMapping("/updatePassword")
     public Result updatePassword(@Valid @RequestBody UserUpdatePasswordDto dto) {
         UserVo userVo = adminUserService.updatePassword(dto);

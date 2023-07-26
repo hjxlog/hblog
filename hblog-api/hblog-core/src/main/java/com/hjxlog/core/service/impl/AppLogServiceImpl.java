@@ -37,6 +37,7 @@ public class AppLogServiceImpl extends ServiceImpl<AppLogMapper, AppLog> impleme
         }
         queryWrapper.ge(Objects.nonNull(dto.getStartTime()), AppLog::getStartTime, dto.getStartTime());
         queryWrapper.le(Objects.nonNull(dto.getEndTime()), AppLog::getEndTime, dto.getEndTime());
+        queryWrapper.orderByDesc(AppLog::getStartTime);
         Page<AppLog> appLogPage = page(page, queryWrapper);
         return appLogPage;
     }
