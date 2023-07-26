@@ -22,6 +22,11 @@ public class RequestConstants {
     public static final String TYPE_ADMIN = "admin";
 
     /**
+     * error
+     */
+    public static final String TYPE_ERROR = "error";
+
+    /**
      * 博客模块
      */
     public static final String MODULE_BLOG = "blog";
