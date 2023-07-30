@@ -1,0 +1,35 @@
+{
+  "name": "hblog-view",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "serve:dev": "vue-cli-service serve --mode dev",
+    "build:dev": "vue-cli-service build --mode dev",
+    "serve:prod": "vue-cli-service serve --mode prod",
+    "build:prod": "vue-cli-service build --mode prod"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
+    "@kangc/v-md-editor": "^2.3.16",
+    "axios": "^1.4.0",
+    "element-plus": "^2.3.7",
+    "vue": "^3.2.13",
+    "vue-router": "^4.0.3",
+    "vuex": "^4.0.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-plugin-typescript": "~5.0.0",
+    "@vue/cli-plugin-vuex": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "typescript": "~4.5.5"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}
