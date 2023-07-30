@@ -92,14 +92,9 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
     public List<Tag> selectPublishedTag() {
         // 已发布的博客ids
         List<Integer> publishedBlogIds = blogService.selectColumnsByPublished(Blog::getId)
-                .stream()
-                .map(Blog::getId)
-                .collect(Collectors.toList());
+                .stream().map(Blog::getId).collect(Collectors.toList());
         List<Integer> publishedTagIds = blogTagService.selectByBlogIds(publishedBlogIds)
-                .stream()
-                .map(BlogTag::getTagId)
-                .distinct()
-                .collect(Collectors.toList());
+                .stream().map(BlogTag::getTagId).distinct().collect(Collectors.toList());
         List<Tag> tags = listByIds(publishedTagIds);
         return tags;
     }

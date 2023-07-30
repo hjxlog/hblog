@@ -1,12 +1,13 @@
 package com.hjxlog.core.util;
 
 import org.lionsoul.ip2region.xdb.Searcher;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ResourceUtils;
+import org.springframework.util.FileCopyUtils;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author: Huang JX
@@ -19,8 +20,8 @@ public class IpAddressUtils {
 
     @PostConstruct
     private void initSearcher() throws IOException {
-        File file = ResourceUtils.getFile("classpath:ip2region.xdb");
-        byte[] cBuff = Searcher.loadContentFromFile(file.getAbsolutePath());
+        InputStream inputStream = new ClassPathResource("ip2region.xdb").getInputStream();
+        byte[] cBuff = FileCopyUtils.copyToByteArray(inputStream);
         searcher = Searcher.newWithBuffer(cBuff);
     }
 
