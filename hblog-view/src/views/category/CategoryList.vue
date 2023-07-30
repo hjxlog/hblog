@@ -5,7 +5,7 @@
     </el-col>
   </el-row>
   <el-link
-      @click="goToCategoryDetail(category)"
+      @click="router.push('/category/'+category.id)"
       :underline="false"
       v-for="category in categoryList"
       :key="category.id"
@@ -21,7 +21,9 @@
 <script lang="ts" setup>
 import {onMounted, ref} from "vue";
 import {getCategoryData} from "@/api/category";
-import router from "@/router";
+import {useRouter} from "vue-router";
+
+const router = useRouter();
 
 // 分类数据
 const categoryList = ref<CategoryVo[]>([])
@@ -30,10 +32,6 @@ const getCategoryList = async () => {
   const res: any = await getCategoryData()
   console.log(res)
   categoryList.value = res.body
-}
-
-const goToCategoryDetail = (category: CategoryVo) => {
-  router.push({name: 'categoryDetail', params: {id: category.id}})
 }
 
 onMounted(() => {

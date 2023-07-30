@@ -1,5 +1,5 @@
 <template>
-  <el-container style="height: 100vh">
+  <el-container>
     <el-header class="header">
       <HeaderBar/>
     </el-header>

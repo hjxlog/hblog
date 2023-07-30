@@ -1,7 +1,7 @@
 <template>
   <!--  博客卡片-->
   <el-card shadow="hover" v-for="blog in blogList" :key="blog.id" class="card">
-    <el-link class="title" @click="this.$router.push('/blog/'+blog.id)">{{ blog.title }}</el-link>
+    <el-link class="title" @click="router.push('/blog/'+blog.id)">{{ blog.title }}</el-link>
     <div class="info">
       <el-icon style=" margin-right: 5px">
         <Calendar/>
@@ -10,7 +10,7 @@
       <el-icon style=" margin-right: 5px">
         <FolderOpened/>
       </el-icon>
-      <el-link :underline="false" @click="this.$router.push('/category/'+blog.category.id)">{{ blog.category.name }}</el-link>
+      <el-link :underline="false" @click="router.push('/category/'+blog.category.id)">{{ blog.category.name }}</el-link>
     </div>
     <div class="summary">
       <el-text style=" margin-right: 8px">{{ blog.summary }}</el-text>
@@ -20,7 +20,7 @@
              v-for="tag in blog.tags"
              :key="tag.id"
              :style="'margin-right:8px;'"
-             @click="this.$router.push('/tag/'+tag.id)">
+             @click="router.push('/tag/'+tag.id)">
       # {{ tag.name }}
     </el-link>
   </el-card>
@@ -38,11 +38,14 @@
 <script lang="ts" setup>
 import {onMounted, ref} from "vue";
 import {getBlogData} from "@/api/blog";
+import {useRouter} from "vue-router";
+
+const router = useRouter();
 
 // 查询表单
 const queryForm = ref<Page>({
   pageNum: 1,
-  pageSize: 2
+  pageSize: 10
 })
 
 // 博客数据

@@ -9,7 +9,7 @@
       <el-icon style=" margin-right: 5px">
         <FolderOpened/>
       </el-icon>
-      <el-link :underline="false" @click="this.$router.push('/category/'+blog.category.id)">{{ Object.assign({}, blog.category).name }}</el-link>
+      <el-link :underline="false" @click="router.push('/category/'+blog.category.id)">{{ Object.assign({}, blog.category).name }}</el-link>
     </div>
     <div class="content">
       <v-md-preview :text="blog.content"></v-md-preview>
@@ -19,7 +19,7 @@
              v-for="tag in blog.tags"
              :key="tag.id"
              :style="'margin-right:8px;'"
-             @click="this.$router.push('/tag/'+tag.id)">
+             @click="router.push('/tag/'+tag.id)">
       # {{ tag.name }}
     </el-link>
   </el-card>

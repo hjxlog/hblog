@@ -11,7 +11,7 @@
         :key="index"
         :timestamp="blog.createTime"
     >
-      <el-link @click="this.$router.push('/blog/'+blog.id)">{{ blog.title }}</el-link>
+      <el-link @click="router.push('/blog/'+blog.id)">{{ blog.title }}</el-link>
     </el-timeline-item>
   </el-timeline>
   <!--  分页区域-->

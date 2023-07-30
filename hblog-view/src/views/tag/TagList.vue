@@ -5,7 +5,7 @@
     </el-col>
   </el-row>
   <el-link
-      @click="goToTagDetail(tag)"
+      @click="router.push('/tag/'+tag.id)"
       :underline="false"
       v-for="tag in tagList"
       :key="tag.id"
@@ -21,7 +21,9 @@
 <script lang="ts" setup>
 import {onMounted, ref} from "vue";
 import {getTagData} from "@/api/tag";
-import router from "@/router";
+import {useRouter} from "vue-router";
+
+const router = useRouter();
 
 // 标签数据
 const tagList = ref<TagVo[]>([])
@@ -29,10 +31,6 @@ const tagList = ref<TagVo[]>([])
 const getTagList = async () => {
   const res: any = await getTagData()
   tagList.value = res.body
-}
-
-const goToTagDetail = (tag: TagVo) => {
-  router.push({name: 'tagDetail', params: {id: tag.id}})
 }
 
 onMounted(() => {

@@ -6,7 +6,7 @@ axios.defaults.headers['Content-Type'] = "application/json;charset=utf-8"
 axios.defaults.timeout = 1000000
 
 const service = axios.create({
-    baseURL: "http://localhost:8889/"
+    baseURL: process.env.VUE_APP_BASE_URL
 })
 
 // 请求拦截，在请求发送之前做一些处理，例如添加token等
