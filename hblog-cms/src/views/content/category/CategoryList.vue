@@ -69,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import {reactive, ref, onMounted, toRefs, computed} from "vue";
+import {reactive, ref, onMounted, computed} from "vue";
 import {getCategoryList, deleteCategory, addCategory, updateCategory} from "@/api/category";
 import {Delete, Edit} from '@element-plus/icons-vue'
 import {FormInstance, FormRules, ElMessage} from 'element-plus'
@@ -121,7 +121,7 @@ const form = reactive<CategoryDto>({
   status: ''
 })
 const dialogTitle = computed(() => form.id === undefined ? '新增分类' : '编辑分类');
-const formRef = toRefs(form)
+const formRef = ref()
 const showDialog = (row: CategoryDto) => {
   form.id = row?.id
   form.name = row?.name || ''

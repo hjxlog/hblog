@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import {reactive, toRefs} from 'vue'
+import {reactive, ref} from 'vue'
 import {login} from "@/api/login";
 import {setToken, setUser} from '../../utils/storage'
 import router from "@/router";
@@ -43,7 +43,7 @@ const form = reactive<User>({
   password: "",
 });
 
-const formRef = toRefs(form)
+const formRef = ref()
 
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;

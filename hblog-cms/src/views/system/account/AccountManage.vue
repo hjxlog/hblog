@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts" setup>
-import {onMounted, reactive, ref, toRefs} from 'vue';
+import {onMounted, reactive, ref} from 'vue';
 import {getCurUser, setUser} from "@/utils/storage";
 import {ElMessage, FormInstance, FormRules} from "element-plus";
 import {updatePassword, updateUserInfo} from "@/api/user";
@@ -85,7 +85,7 @@ const saveUserInfo = async () => {
 // 编辑密码
 const editPasswordDialogVisible = ref(false)
 const passwordForm = reactive<UserUpdatePasswordDto>({})
-const passwordFormRef = toRefs(passwordForm)
+const passwordFormRef = ref()
 const showEditPassword = () => {
   editPasswordDialogVisible.value = true;
 }

@@ -61,7 +61,7 @@
 </template>
 
 <script setup lang="ts">
-import {reactive, ref, onMounted, toRefs, computed} from "vue";
+import {reactive, ref, onMounted, computed} from "vue";
 import {getTagList, deleteTag, addTag, updateTag} from "@/api/tag";
 import {Delete, Edit} from '@element-plus/icons-vue'
 import {FormInstance, FormRules, ElMessage} from 'element-plus'
@@ -111,7 +111,7 @@ const form = reactive<TagDto>({
   name: ''
 })
 const dialogTitle = computed(() => form.id === undefined ? '新增标签' : '编辑标签');
-const formRef = toRefs(form)
+const formRef = ref()
 const showDialog = (row: TagDto) => {
   form.id = row?.id
   form.name = row?.name || ''
