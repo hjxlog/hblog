@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
  * @date: 2023/7/1
  */
 @Data
-public class CategoryDto extends Page {
+public class CategoryDto extends PageDto {
     /**
      * 主键
      */

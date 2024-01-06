@@ -1,4 +1,4 @@
-package com.hjxlog.api.vo;
+package com.hjxlog.api.vo.view;
 
 import com.hjxlog.domain.Category;
 import com.hjxlog.domain.Tag;
@@ -8,11 +8,13 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * 博客概要内容Vo
+ *
  * @author: Huang JX
- * @date: 2023/7/1
+ * @date: 2023/12/31
  */
 @Data
-public class BlogVo {
+public class BlogBriefVo {
 
     /**
      * 主键
@@ -35,26 +37,6 @@ public class BlogVo {
     private String summary;
 
     /**
-     * 内容
-     */
-    private String content;
-
-    /**
-     * markdown内容
-     */
-    private String mdContent;
-
-    /**
-     * 状态
-     */
-    private String status;
-
-    /**
-     * 是否推荐
-     */
-    private Boolean isRecommend;
-
-    /**
      * 浏览量
      */
     private Integer views;
@@ -63,11 +45,6 @@ public class BlogVo {
      * 创建时间
      */
     private Date createTime;
-
-    /**
-     * 修改时间
-     */
-    private Date updateTime;
 
     /**
      * 分类

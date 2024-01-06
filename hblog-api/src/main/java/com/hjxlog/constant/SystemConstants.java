@@ -14,4 +14,6 @@ public class SystemConstants {
 
     public static final String APP_LOG_LIST_KEY = "appLogList";
 
+    public static final String OVERVIEW_VO = "OverviewVo";
+
 }

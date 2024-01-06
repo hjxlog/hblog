@@ -9,7 +9,7 @@ import java.util.Date;
  * @date: 2023/7/25
  */
 @Data
-public class AppLogQueryDto extends Page {
+public class AppLogQueryDto extends PageDto {
 
     /**
      * 主键

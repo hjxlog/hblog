@@ -11,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
  * @date: 2023/7/1
  */
 @Data
-public class TagDto extends Page {
+public class TagDto extends PageDto {
     /**
      * 主键
      */

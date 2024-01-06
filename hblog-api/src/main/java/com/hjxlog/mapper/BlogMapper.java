@@ -1,10 +1,11 @@
 package com.hjxlog.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hjxlog.api.dto.BlogQueryDto;
 import com.hjxlog.api.vo.BlogVo;
+import com.hjxlog.api.vo.view.ArchiveVo;
 import com.hjxlog.domain.Blog;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * @author hjx
@@ -17,6 +18,8 @@ public interface BlogMapper extends BaseMapper<Blog> {
     Page<BlogVo> getList(Page<BlogVo> page, BlogQueryDto dto);
 
     BlogVo getDetail(Integer id);
+
+    Page<ArchiveVo> getArchiveList(Page<ArchiveVo> page);
 }
 
 

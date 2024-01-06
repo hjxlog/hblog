@@ -7,7 +7,7 @@ import lombok.Data;
  * @date: 2023/7/8
  */
 @Data
-public class BlogQueryServeDto extends Page {
+public class BlogQueryServeDto extends PageDto {
 
     /**
      * 主键

@@ -7,7 +7,7 @@ import lombok.Data;
  * @date: 2023/7/1
  */
 @Data
-public class Page {
+public class PageDto {
 
     private Integer pageNum = 1;
 
