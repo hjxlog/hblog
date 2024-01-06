@@ -113,12 +113,12 @@ const saveBlog = async () => {
     ElMessage.success(res.msg);
   } catch (error) {
   }
-  await router.push('/content/blog')
+  await router.push('/dashboard/content/blog')
 }
 
 // 处理取消
 const handleCancel = () => {
-  router.push('/content/blog')
+  router.push('/dashboard/content/blog')
 }
 
 onMounted(async () => {

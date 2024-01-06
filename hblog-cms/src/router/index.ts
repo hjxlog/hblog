@@ -50,8 +50,11 @@ const routes: Array<RouteRecordRaw> = [
     },
     //backend
     {
-        path: '/dashboard',
-        name: 'adminHome',
+        path: "/dashboard",
+        name: "dashboard",
+        meta: {
+            title: "后台管理"
+        },
         redirect: '/dashboard/index',
         component: () => import("../layout/admin/Layout.vue"),
         children: [
@@ -63,108 +66,99 @@ const routes: Array<RouteRecordRaw> = [
                     title: '首页',
                     icon: 'index'
                 }
-            }
-        ]
-    },
-    {
-        path: "/content",
-        name: "content",
-        meta: {
-            title: "内容管理"
-        },
-        component: () => import("../layout/admin/Layout.vue"),
-        children: [
-            {
-                path: "category",
-                name: "adminCategory",
-                meta: {
-                    title: "分类管理"
-                },
-                component: () => import("../views/backend/content/category/CategoryList.vue"),
             },
             {
-                path: "tag",
-                name: "adminTag",
-                meta: {
-                    title: "标签管理"
-                },
-                component: () => import("../views/backend/content/tag/TagList.vue"),
+                path: "content",
+                name: "content",
+                redirect: '/dashboard/content/blog',
+                children: [
+                    {
+                        path: "blog",
+                        name: "adminBlog",
+                        meta: {
+                            title: "博客管理"
+                        },
+                        component: () => import("../views/backend/content/blog/BlogList.vue"),
+                    },
+                    {
+                        path: "category",
+                        name: "adminCategory",
+                        meta: {
+                            title: "分类管理"
+                        },
+                        component: () => import("../views/backend/content/category/CategoryList.vue"),
+                    },
+                    {
+                        path: "tag",
+                        name: "adminTag",
+                        meta: {
+                            title: "标签管理"
+                        },
+                        component: () => import("../views/backend/content/tag/TagList.vue"),
+                    },
+                    {
+                        path: "blog/editor",
+                        name: "",
+                        meta: {
+                            title: "写博客"
+                        },
+                        component: () => import("../views/backend/content/blog/WriteBlog.vue"),
+                    },
+                    {
+                        path: "blog/editor/:id",
+                        name: 'adminEditBlog',
+                        component: () => import("../views/backend/content/blog/WriteBlog.vue"),
+                        meta: {
+                            title: '写博客'
+                        }
+                    },
+                ]
             },
             {
-                path: "blog",
-                name: "adminBlog",
-                meta: {
-                    title: "博客管理"
-                },
-                component: () => import("../views/backend/content/blog/BlogList.vue"),
+                path: "log",
+                name: 'log',
+                redirect: '/dashboard/log/operate',
+                children: [
+                    {
+                        path: "operate",
+                        name: "operate",
+                        meta: {
+                            title: "操作日志"
+                        },
+                        component: () => import("../views/backend/log/AdminLog.vue"),
+                    },
+                    {
+                        path: "visit",
+                        name: "visit",
+                        meta: {
+                            title: "访问日志"
+                        },
+                        component: () => import("../views/backend/log/ServeLog.vue"),
+                    },
+                    {
+                        path: "error",
+                        name: "error",
+                        meta: {
+                            title: "异常日志"
+                        },
+                        component: () => import("../views/backend/log/ErrorLog.vue"),
+                    },
+                ]
             },
             {
-                path: "blog/editor",
-                name: "",
-                meta: {
-                    title: "写博客"
-                },
-                component: () => import("../views/backend/content/blog/WriteBlog.vue"),
-            },
-            {
-                path: "blog/editor/:id",
-                name: 'adminEditBlog',
-                component: () => import("../views/backend/content/blog/WriteBlog.vue"),
-                meta: {
-                    title: '写博客'
-                }
-            },
-        ]
-    },
-    {
-        path: "/system",
-        name: "adminSystem",
-        meta: {
-            title: "系统管理"
-        },
-        component: () => import("../layout/admin/Layout.vue"),
-        children: [
-            {
-                path: "account",
-                name: "adminCount",
-                meta: {
-                    title: "账号管理"
-                },
-                component: () => import("../views/backend/system/account/AccountManage.vue"),
-            },
-        ]
-    },
-    {
-        path: "/log",
-        name: "adminLog",
-        meta: {
-            title: "日志管理"
-        },
-        component: () => import("../layout/admin/Layout.vue"),
-        children: [
-            {
-                path: "operate",
-                name: "operate",
-                meta: {
-                    title: "操作日志"
-                },
-                component: () => import("../views/backend/log/AdminLog.vue"),
-            },
-            {
-                path: "visit",
-                name: "visit",
-                meta: {
-                    title: "访问日志"
-                },
-                component: () => import("../views/backend/log/ServeLog.vue"),
-            },
-            {
-                path: "error",
-                name: "error",
-                meta: {
-                    title: "异常日志"
-                },
-                component: () => import("../views/backend/log/ErrorLog.vue"),
+                path: "system",
+                name: "system",
+                redirect: '/dashboard/system/account',
+                children: [
+                    {
+                        path: "account",
+                        name: "adminCount",
+                        meta: {
+                            title: "账号管理"
+                        },
+                        component: () => import("../views/backend/system/account/AccountManage.vue"),
+                    },
+                ]
             },
         ]
     },

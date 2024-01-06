@@ -132,7 +132,7 @@ onMounted(() => {
 
 // 跳转写博客页面
 const goEditBlogPage = (id: any) => {
-  const path = id === undefined ? "/content/blog/editor" : `/content/blog/editor/${id}`
+  const path = id === undefined ? "/dashboard/content/blog/editor" : `/dashboard/content/blog/editor/${id}`
   router.push(path);
 }
 

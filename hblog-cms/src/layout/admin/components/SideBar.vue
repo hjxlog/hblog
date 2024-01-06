@@ -10,9 +10,9 @@
             </el-icon>
             <span>内容管理</span>
           </template>
-          <el-menu-item index="1-1" @click="this.$router.push('/content/blog')">博客管理</el-menu-item>
-          <el-menu-item index="1-2" @click="this.$router.push('/content/category')">分类管理</el-menu-item>
-          <el-menu-item index="1-3" @click="this.$router.push('/content/tag')">标签管理</el-menu-item>
+          <el-menu-item index="1-1" @click="this.$router.push('/dashboard/content/blog')">博客管理</el-menu-item>
+          <el-menu-item index="1-2" @click="this.$router.push('/dashboard/content/category')">分类管理</el-menu-item>
+          <el-menu-item index="1-3" @click="this.$router.push('/dashboard/content/tag')">标签管理</el-menu-item>
         </el-sub-menu>
       </el-menu>
       <el-menu default-active="2-1" class="menu">
@@ -23,9 +23,9 @@
             </el-icon>
             <span>日志管理</span>
           </template>
-          <el-menu-item index="1-1" @click="this.$router.push('/log/operate')">操作日志</el-menu-item>
-          <el-menu-item index="1-2" @click="this.$router.push('/log/visit')">访问日志</el-menu-item>
-          <el-menu-item index="1-3" @click="this.$router.push('/log/error')">异常日志</el-menu-item>
+          <el-menu-item index="1-1" @click="this.$router.push('/dashboard/log/operate')">操作日志</el-menu-item>
+          <el-menu-item index="1-2" @click="this.$router.push('/dashboard/log/visit')">访问日志</el-menu-item>
+          <el-menu-item index="1-3" @click="this.$router.push('/dashboard/log/error')">异常日志</el-menu-item>
         </el-sub-menu>
       </el-menu>
       <el-menu default-active="3-1" class="menu">
@@ -36,7 +36,7 @@
             </el-icon>
             <span>系统管理</span>
           </template>
-          <el-menu-item index="1-1" @click="this.$router.push('/system/account')">账号管理</el-menu-item>
+          <el-menu-item index="1-1" @click="this.$router.push('/dashboard/system/account')">账号管理</el-menu-item>
         </el-sub-menu>
       </el-menu>
     </el-col>
