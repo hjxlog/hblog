@@ -54,7 +54,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     setToken(res.body.token);
     setUser(JSON.stringify(res.body.user));
     ElMessage.success(res.msg);
-    await router.push("/");
+    await router.push("/dashboard");
   } catch (error) {
   }
 }

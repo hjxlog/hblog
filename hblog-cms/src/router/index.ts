@@ -16,7 +16,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/test',
         name: 'test',
-        component: () => import("@/components/CatalogCard.vue"),
+        component: () => import("@/components/Test.vue"),
     },
     {
         path: '/category',
@@ -50,9 +50,9 @@ const routes: Array<RouteRecordRaw> = [
     },
     //backend
     {
-        path: '/backend',
+        path: '/dashboard',
         name: 'adminHome',
-        redirect: '/backend/index',
+        redirect: '/dashboard/index',
         component: () => import("../layout/admin/Layout.vue"),
         children: [
             {
@@ -75,7 +75,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("../layout/admin/Layout.vue"),
         children: [
             {
-                path: "adminCategory",
+                path: "category",
                 name: "adminCategory",
                 meta: {
                     title: "分类管理"
@@ -83,7 +83,7 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import("../views/backend/content/category/CategoryList.vue"),
             },
             {
-                path: "adminTag",
+                path: "tag",
                 name: "adminTag",
                 meta: {
                     title: "标签管理"
@@ -91,7 +91,7 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import("../views/backend/content/tag/TagList.vue"),
             },
             {
-                path: "adminBlog",
+                path: "blog",
                 name: "adminBlog",
                 meta: {
                     title: "博客管理"
@@ -99,7 +99,7 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import("../views/backend/content/blog/BlogList.vue"),
             },
             {
-                path: "adminBlog/editor",
+                path: "blog/editor",
                 name: "",
                 meta: {
                     title: "写博客"
@@ -107,7 +107,7 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import("../views/backend/content/blog/WriteBlog.vue"),
             },
             {
-                path: "adminBlog/editor/:id",
+                path: "blog/editor/:id",
                 name: 'adminEditBlog',
                 component: () => import("../views/backend/content/blog/WriteBlog.vue"),
                 meta: {
@@ -117,7 +117,7 @@ const routes: Array<RouteRecordRaw> = [
         ]
     },
     {
-        path: "/adminSystem",
+        path: "/system",
         name: "adminSystem",
         meta: {
             title: "系统管理"
@@ -125,7 +125,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("../layout/admin/Layout.vue"),
         children: [
             {
-                path: "adminCount",
+                path: "account",
                 name: "adminCount",
                 meta: {
                     title: "账号管理"
@@ -135,7 +135,7 @@ const routes: Array<RouteRecordRaw> = [
         ]
     },
     {
-        path: "/adminLog",
+        path: "/log",
         name: "adminLog",
         meta: {
             title: "日志管理"
