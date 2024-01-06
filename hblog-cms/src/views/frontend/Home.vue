@@ -5,7 +5,7 @@
   </div>
   <div class="content">
     <el-row>
-      <el-col :span="7">
+      <el-col :span="7" :xs="0">
         <div class="sidebar">
           <OverviewCard/>
           <RecommendBlogCard/>
@@ -13,7 +13,7 @@
           <TagCard/>
         </div>
       </el-col>
-      <el-col :span="17">
+      <el-col :span="17" :xs="24">
         <BlogList/>
       </el-col>
     </el-row>
@@ -47,5 +47,15 @@ import Footer from "@/views/frontend/layout/Footer.vue"
   margin-right: 12px;
   margin-bottom: 20px;
   box-shadow: var(--card-shadow);
+}
+
+@media screen and (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+
+  .content {
+    padding: 0;
+  }
 }
 </style>

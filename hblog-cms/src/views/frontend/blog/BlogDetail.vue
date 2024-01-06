@@ -1,42 +1,44 @@
 <template>
-  <PageCover>
-    {{ blog.title }}
-  </PageCover>
-
-  <div class="content">
-    <el-row>
-      <el-col :span="7">
-        <div class="sidebar">
-          <OverviewCard/>
-          <div class="affixContainer">
-            <el-affix target=".affixContainer" :offset-top="0">
-              <el-card>
-                <div class="card-title">目录</div>
-                <div
-                    v-for="anchor in titles"
-                    :style="{ 'padding-left': `${anchor.indent * 20}px` }"
-                    :class="[
+  <div style="min-height: 100vh;">
+    <PageCover>
+      {{ blog.title }}
+    </PageCover>
+    <div class="content">
+      <el-row style="width:100%">
+        <el-col :span="7" :xs="0">
+          <div class="sidebar">
+            <div class="sidebar-item">
+              <OverviewCard/>
+            </div>
+            <div class="affixContainer">
+              <el-affix target=".affixContainer" :offset-top="0">
+                <el-card :class="{ 'hide-toc': hasToc }" style="margin-bottom: 14px;">
+                  <div class="card-title">目录</div>
+                  <div
+                      v-for="anchor in titles"
+                      :style="{ 'padding-left': `${anchor.indent * 20}px` }"
+                      :class="[
                     'catalog-item',
                     anchor.lineIndex === currentLineIndex ? 'active' : 'not-active',
                 ]"
-                    @click="handleAnchorClick(anchor)"
-                >
-                  <a style="cursor: pointer">{{ anchor.title }}</a>
-                </div>
-              </el-card>
-              <RecommendBlogCard/>
-            </el-affix>
+                      @click="handleAnchorClick(anchor)"
+                  >
+                    <a style="cursor: pointer">{{ anchor.title }}</a>
+                  </div>
+                </el-card>
+                <RecommendBlogCard/>
+              </el-affix>
+            </div>
           </div>
-        </div>
-      </el-col>
-      <el-col :span="17">
-        <el-card id="blogContentCard" ref="blogContentCardRef">
-          <v-md-preview :text="blog.content" ref="previewRef"></v-md-preview>
-        </el-card>
-      </el-col>
-    </el-row>
+        </el-col>
+        <el-col :span="17" :xs="24">
+          <el-card id="blogContentCard" ref="blogContentCardRef">
+            <v-md-preview :text="blog.content" ref="previewRef"></v-md-preview>
+          </el-card>
+        </el-col>
+      </el-row>
+    </div>
   </div>
-
 
   <Footer/>
 </template>
@@ -66,13 +68,15 @@ const getBlogDetailData = async () => {
 
 let currentLineIndex = ref(null);
 
-
+const hasToc = ref(false);
 const loadToc = () => {
   const preview = previewRef.value;
   const anchors = preview.$el.querySelectorAll('h1,h2,h3,h4,h5,h6');
   const titlesArray = Array.from(anchors).filter((title) => !!title.innerText.trim());
+  console.log("titlesArray", titlesArray)
   if (!titlesArray.length) {
     titles.value = [];
+    hasToc.value = true;
     return;
   }
   const hTags = Array.from(new Set(titlesArray.map((title) => title.tagName))).sort();
@@ -113,7 +117,8 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .content {
-  padding: 2% 6%;
+  padding: 2% 2%;
+  height: 100%;
   max-width: 1300px;
   margin: 0 auto;
   display: flex;
@@ -123,7 +128,6 @@ onMounted(() => {
 .affixContainer {
   flex: 1;
   border-radius: 4px;
-  background: var(--el-color-primary-light-9);
 }
 
 .catalog-card {
@@ -174,6 +178,15 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   height: 100%;
+  margin-right: 10px;
+}
+
+.sidebar-item {
+  margin-bottom: 14px;
+}
+
+.hide-toc {
+  display: none;
 }
 
 </style>

@@ -27,9 +27,10 @@ const initChart = () => {
       trigger: 'item'
     },
     legend: {
+      show: window.innerWidth >= 768,
       top: 'middle',
-      right:'10%',
-      orient:'vertical'
+      right: '10%',
+      orient: 'vertical'
     },
     label: {
       show: true,

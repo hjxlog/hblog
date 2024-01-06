@@ -5,10 +5,10 @@
     </PageCover>
     <div class="content">
       <el-row>
-        <el-col :span="7">
+        <el-col :span="7" :xs="0">
           <ViewSideBar/>
         </el-col>
-        <el-col :span="17">
+        <el-col :span="17" :xs="24">
           <div class="archive-container">
             <el-timeline class="timeline">
               <el-timeline-item center :timestamp="`归档文章 - ${total}篇`" placement="top" class="root-item">
@@ -217,8 +217,8 @@ onMounted(() => {
 }
 
 @media screen and (max-width: 900px) {
-  .archive-body {
-    width: 100%;
+  .archive-container {
+    margin-left: -50px;
   }
 }
 </style>

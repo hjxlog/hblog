@@ -6,15 +6,27 @@
     <el-row justify="center">
       <el-col :span="8">
         <p>文章</p>
-        <p>{{ overviewVo.blogNum }}</p>
+        <p>
+          <router-link to="/archive">
+            {{ overviewVo.blogNum }}
+          </router-link>
+        </p>
       </el-col>
       <el-col :span="8">
         <p>分类</p>
-        <p>{{ overviewVo.categoryNum }}</p>
+        <p>
+          <router-link to="/category">
+            {{ overviewVo.categoryNum }}
+          </router-link>
+        </p>
       </el-col>
       <el-col :span="8">
         <p>标签</p>
-        <p>{{ overviewVo.tagNum }}</p>
+        <p>
+          <router-link to="/tag">
+            {{ overviewVo.tagNum }}
+          </router-link>
+        </p>
       </el-col>
     </el-row>
     <el-button type="primary" round class="follow-btn" @click="goToGithub">Follow Me</el-button>
@@ -45,6 +57,12 @@ onMounted(() => {
 <style scoped>
 .card {
   text-align: center;
+}
+
+a {
+  color: #262e3d;
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
 .follow-btn {
