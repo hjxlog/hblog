@@ -38,7 +38,7 @@
       </el-col>
     </el-row>
     <el-form-item prop="mdContent" style="height: 100%">
-      <v-md-editor :disabled-menus="[]" v-model="form.mdContent" height="100%"></v-md-editor>
+      <v-md-editor @upload-image="handleUploadImage" :disabled-menus="[]" v-model="form.mdContent" height="100%"></v-md-editor>
     </el-form-item>
   </el-form>
 </template>
@@ -47,6 +47,7 @@
 import {ref, reactive, onMounted, onBeforeUnmount} from "vue";
 import {getCategoryList} from "@/api/admin/category";
 import {getTagList} from "@/api/admin/tag";
+import {uploadImage} from "@/api/admin/file";
 import {addBlog, getBlogDetail, updateBlog} from "@/api/admin/blog";
 import {ElMessage} from "element-plus";
 import {useRouter} from 'vue-router';
@@ -103,6 +104,13 @@ const loadTagList = async () => {
     tagList.value = res.body.data
   } catch (error) {
   }
+}
+
+const handleUploadImage = async (event, insertImage, files) => {
+  const res: any = await uploadImage(files[0])
+  insertImage({
+    url: res.body
+  })
 }
 
 // 保存文章
