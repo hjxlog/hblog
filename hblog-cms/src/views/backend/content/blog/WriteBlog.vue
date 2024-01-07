@@ -14,6 +14,9 @@
             <el-option v-for="item in categoryList" :key="item.id" :value="item.id" :label="item.name"/>
           </el-select>
         </el-form-item>
+        <el-form-item label="是否推荐：" prop="isRecommend">
+          <el-switch v-model="form.isRecommend"/>
+        </el-form-item>
       </el-col>
       <el-col :span="7">
         <el-form-item label="标签：" prop="tagIds">
@@ -21,16 +24,28 @@
             <el-option v-for="item in tagList" :key="item.id" :value="item.id" :label="item.name"/>
           </el-select>
         </el-form-item>
-      </el-col>
-      <el-col :span="3">
-        <el-form-item label="是否推荐：" prop="isRecommend">
-          <el-switch v-model="form.isRecommend"/>
-        </el-form-item>
-      </el-col>
-      <el-col :span="3">
         <el-form-item label="是否发布：" prop="status">
           <el-switch active-value="1" inactive-value="0" v-model="form.status"/>
         </el-form-item>
+      </el-col>
+      <el-col :span="6">
+        <div style="float:left;">
+          <el-text>缩略图：</el-text>
+        </div>
+        <el-upload
+            class="avatar-uploader"
+            action="#"
+            :show-file-list="false"
+            :http-request="handleUploadThumbnail"
+            :on-success="handleUploadThumbnailSuccess"
+            :before-upload="beforeThumbnailUpload"
+            name="file"
+        >
+          <img v-if="thumbnailUrl" :src="thumbnailUrl" class="avatar"/>
+          <el-icon v-else class="avatar-uploader-icon">
+            <Plus/>
+          </el-icon>
+        </el-upload>
       </el-col>
       <el-col :span="6" :offset="0">
         <el-button type="primary" :style="'float:right'" @click="saveBlog">保存文章</el-button>
@@ -49,7 +64,7 @@ import {getCategoryList} from "@/api/admin/category";
 import {getTagList} from "@/api/admin/tag";
 import {uploadImage} from "@/api/admin/file";
 import {addBlog, getBlogDetail, updateBlog} from "@/api/admin/blog";
-import {ElMessage} from "element-plus";
+import {ElMessage, UploadProps} from "element-plus";
 import {useRouter} from 'vue-router';
 import VueMarkdownEditor, {xss} from '@kangc/v-md-editor';
 
@@ -57,6 +72,7 @@ import VueMarkdownEditor, {xss} from '@kangc/v-md-editor';
 const form = reactive<BlogDto>({
   id: undefined,
   title: '',
+  thumbnail: '',
   summary: '',
   content: '',
   mdContent: '',
@@ -65,6 +81,9 @@ const form = reactive<BlogDto>({
   categoryId: null,
   tagIds: []
 })
+
+// 缩略图
+const thumbnailUrl = ref('')
 
 // 加载博客数据
 const router = useRouter();
@@ -76,6 +95,8 @@ const getEditBlogData = async () => {
     const data = res.body;
     form.id = data.id
     form.title = data.title
+    form.thumbnail = data.thumbnail
+    thumbnailUrl.value = data.thumbnail
     form.summary = data.summary
     form.mdContent = data.mdContent
     form.status = data.status
@@ -113,6 +134,28 @@ const handleUploadImage = async (event, insertImage, files) => {
   })
 }
 
+// 缩略图上传
+const beforeThumbnailUpload: UploadProps['beforeUpload'] = (rawFile) => {
+  if (rawFile.type !== 'image/jpeg') {
+    ElMessage.error('Avatar picture must be JPG format!')
+    return false
+  } else if (rawFile.size / 1024 / 1024 > 2) {
+    ElMessage.error('Avatar picture size can not exceed 2MB!')
+    return false
+  }
+  return true
+}
+
+const handleUploadThumbnail = async (param) => {
+  const res: any = await uploadImage(param.file)
+  form.thumbnail = res.body
+}
+
+const handleUploadThumbnailSuccess: UploadProps['onSuccess'] = (response, uploadFile) => {
+  thumbnailUrl.value = URL.createObjectURL(uploadFile.raw!)
+  ElMessage.success('上传成功。')
+}
+
 // 保存文章
 const saveBlog = async () => {
   try {
@@ -141,5 +184,40 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+.avatar-uploader {
+  margin-left: 12px;
+  margin-bottom: 10px;
+  float: left;
+}
+
+.avatar-uploader .avatar {
+  width: 100px;
+  height: 100px;
+  display: block;
+}
+</style>
+
+<style>
+.avatar-uploader .el-upload {
+  border: 1px dashed var(--el-border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--el-transition-duration-fast);
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: var(--el-color-primary);
+}
+
+.el-icon.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 100px;
+  height: 100px;
+  text-align: center;
 }
 </style>

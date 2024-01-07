@@ -2,6 +2,7 @@ declare global {
     interface BlogDto extends PageDto {
         id?: number;
         title: string;
+        thumbnail: string;
         summary: string;
         content: string;
         mdContent: string;
