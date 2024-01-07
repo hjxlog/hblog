@@ -16,4 +16,6 @@ public class SystemConstants {
 
     public static final String OVERVIEW_VO = "OverviewVo";
 
+    public static final String ALIYUN_OSS_FOLDER = "blog/images/";
+
 }

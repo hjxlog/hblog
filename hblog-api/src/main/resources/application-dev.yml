@@ -15,3 +15,4 @@ aliyun:
   oss:
     endpoint: https://oss-cn-hangzhou.aliyuncs.com # Endpoint以华东1（杭州）为例，其它Region请按实际情况填写。
     bucketName: yourBucketName # Bucket名称
+    custom-domain: https://yourCustomDomain.com # 自定义域名
