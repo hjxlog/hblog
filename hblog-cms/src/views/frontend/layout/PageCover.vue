@@ -19,7 +19,7 @@ import HeaderBar from "@/views/frontend/layout/HeaderBar.vue"
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url(https://i.niupic.com/images/2022/03/14/9Ws2.png);
+  background-image: url('../../../assets/images/bg.png');
   height: 240px;
   width: 100%;
   animation: fadeUpInCover 1s;
