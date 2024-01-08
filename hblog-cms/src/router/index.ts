@@ -171,7 +171,7 @@ const router = createRouter({
 
 // 路由守卫
 router.beforeEach((to, from, next) => {
-    if (to.path !== '/login') {
+    if (to.path !== '/login' && to.path.startsWith('/dashboard')) {
         const token = localStorage.getItem('token')
         if (!token) {
             ElMessage.info("请先登录。")
