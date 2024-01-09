@@ -1,9 +1,9 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: your_password
-    url: jdbc:mysql://your_ip:3306/hblog?serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://your_ip:3306/hblog?serverTimezone=Asia/Shanghai&useSSL=false
   redis:
     host: your_ip
     password: your_password
