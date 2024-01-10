@@ -43,7 +43,6 @@ const scrollToContent = () => {
     window.scrollTo({top: homeCoverElement, behavior: "smooth"})
     return
   }
-  console.log("来到这里")
 }
 
 onMounted(() => {

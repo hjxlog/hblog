@@ -73,7 +73,6 @@ const loadToc = () => {
   const preview = previewRef.value;
   const anchors = preview.$el.querySelectorAll('h1,h2,h3,h4,h5,h6');
   const titlesArray = Array.from(anchors).filter((title) => !!title.innerText.trim());
-  console.log("titlesArray", titlesArray)
   if (!titlesArray.length) {
     titles.value = [];
     hasToc.value = true;
@@ -88,13 +87,10 @@ const loadToc = () => {
 }
 
 const handleAnchorClick = (anchor) => {
-  console.log("anchor", anchor)
   const preview = previewRef.value;
   const {lineIndex} = anchor;
   const heading = preview.$el.querySelector(`[data-v-md-line="${lineIndex}"]`);
-  console.log("lineIndex", lineIndex)
   currentLineIndex.value = anchor.lineIndex
-  console.log("currentLineIndex", currentLineIndex.value)
 
   if (heading) {
     preview.scrollToTarget({

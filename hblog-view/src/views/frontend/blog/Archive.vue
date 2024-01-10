@@ -70,7 +70,6 @@ const getArchiveData = async () => {
   const res: any = await getArchiveList(queryForm.value)
   archiveList.value = res.body.data
   total.value = res.body.total
-  console.log("archiveList", res.body.data)
 }
 
 onMounted(() => {
