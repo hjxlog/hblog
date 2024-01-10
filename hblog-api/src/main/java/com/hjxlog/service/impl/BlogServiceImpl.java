@@ -8,13 +8,15 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hjxlog.api.dto.BlogQueryDto;
 import com.hjxlog.api.dto.BlogQueryServeDto;
 import com.hjxlog.api.dto.BlogSaveDto;
+import com.hjxlog.api.dto.PageDto;
 import com.hjxlog.api.vo.BlogVo;
-import com.hjxlog.exception.SystemException;
+import com.hjxlog.api.vo.view.ArchiveVo;
 import com.hjxlog.domain.Blog;
 import com.hjxlog.domain.BlogTag;
 import com.hjxlog.domain.Category;
 import com.hjxlog.domain.Tag;
 import com.hjxlog.enums.BlogStatusEnum;
+import com.hjxlog.exception.SystemException;
 import com.hjxlog.mapper.BlogMapper;
 import com.hjxlog.service.BlogService;
 import com.hjxlog.service.BlogTagService;
@@ -112,22 +114,48 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
 
     @Override
     public Page<BlogVo> getPublishedBlogs(BlogQueryServeDto dto) {
-        // 校验
-        Integer categoryId = dto.getCategoryId();
-        List<Integer> categoryIds = categoryService.selectPublishedCategory()
-                .stream().map(Category::getId).collect(Collectors.toList());
-        if (categoryId != null && !categoryIds.contains(categoryId)) {
-            throw new SystemException("该分类不存在，请检查。");
-        }
-        Integer tagId = dto.getTagId();
-        List<Integer> tagIds = tagService.selectPublishedTag()
-                .stream().map(Tag::getId).collect(Collectors.toList());
-        if (tagId != null && !tagIds.contains(tagId)) {
-            throw new SystemException("该标签不存在，请检查。");
-        }
+//        // 校验
+//        Integer categoryId = dto.getCategoryId();
+//        List<Integer> categoryIds = categoryService.selectPublishedCategory()
+//                .stream().map(Category::getId).collect(Collectors.toList());
+//        if (categoryId != null && !categoryIds.contains(categoryId)) {
+//            throw new SystemException("该分类不存在，请检查。");
+//        }
+//        Integer tagId = dto.getTagId();
+//        List<Integer> tagIds = tagService.selectPublishedTag()
+//                .stream().map(Tag::getId).collect(Collectors.toList());
+//        if (tagId != null && !tagIds.contains(tagId)) {
+//            throw new SystemException("该标签不存在，请检查。");
+//        }
         BlogQueryDto blogQueryDto = BeanUtil.copyProperties(dto, BlogQueryDto.class);
+        blogQueryDto.setStatus(BlogStatusEnum.PUBLISHED.getCode());
         Page<BlogVo> list = getList(blogQueryDto);
         return list;
+    }
+
+    @Override
+    public List<BlogVo> getRecommendBlogList() {
+        BlogQueryDto blogQueryDto = new BlogQueryDto();
+        blogQueryDto.setStatus(BlogStatusEnum.PUBLISHED.getCode());
+        blogQueryDto.setIsRecommend(Boolean.TRUE);
+        blogQueryDto.setPageSize(7);
+        List<BlogVo> records = getList(blogQueryDto).getRecords();
+        return records;
+    }
+
+    @Override
+    public long getPublishedBlogNum() {
+        LambdaQueryWrapper<Blog> queryWrapper = new LambdaQueryWrapper();
+        queryWrapper.eq(Blog::getStatus, BlogStatusEnum.PUBLISHED.getCode());
+        long count = this.count(queryWrapper);
+        return count;
+    }
+
+    @Override
+    public Page<ArchiveVo> getArchiveList(PageDto dto) {
+        Page<ArchiveVo> page = new Page<>(dto.getPageNum(), dto.getPageSize());
+        blogMapper.getArchiveList(page);
+        return page;
     }
 
     /**

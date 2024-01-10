@@ -2,15 +2,18 @@ package com.hjxlog.controller.view;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hjxlog.api.dto.BlogQueryServeDto;
+import com.hjxlog.api.dto.PageDto;
 import com.hjxlog.api.vo.BlogServeListVo;
 import com.hjxlog.api.vo.BlogServeVo;
 import com.hjxlog.api.vo.BlogVo;
+import com.hjxlog.api.vo.view.ArchiveVo;
 import com.hjxlog.protocol.PageResult;
 import com.hjxlog.protocol.Result;
 import com.hjxlog.service.BlogService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author: Huang JX
@@ -49,6 +52,18 @@ public class BlogController {
         dto.setTagId(tagId);
         Page<BlogVo> blogVos = blogService.getPublishedBlogs(dto);
         return Result.success(new PageResult<>(blogVos, BlogServeListVo.class));
+    }
+
+    @GetMapping("/getRecommendBlogList")
+    public Result getRecommendBlogList() {
+        List<BlogVo> recommendBlogList = blogService.getRecommendBlogList();
+        return Result.success(recommendBlogList);
+    }
+
+    @RequestMapping("/getArchiveList")
+    public Result getArchiveList(@RequestBody PageDto dto) {
+        Page<ArchiveVo> archiveVoList = blogService.getArchiveList(dto);
+        return Result.success(new PageResult<>(archiveVoList));
     }
 
 }

@@ -51,4 +51,12 @@ public interface TagService extends IService<Tag> {
      * @return
      */
     List<Tag> selectPublishedTag();
+
+    /**
+     * 查询标签详情
+     *
+     * @param id
+     * @return
+     */
+    Tag getDetail(Integer id);
 }

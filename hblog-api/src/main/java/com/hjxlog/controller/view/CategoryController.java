@@ -1,6 +1,7 @@
 package com.hjxlog.controller.view;
 
 import com.hjxlog.api.vo.CategoryServeVo;
+import com.hjxlog.api.vo.view.CategoryInfoVo;
 import com.hjxlog.domain.Category;
 import com.hjxlog.protocol.Result;
 import com.hjxlog.service.CategoryService;
@@ -25,17 +26,19 @@ public class CategoryController {
 
     @GetMapping("/list")
     public Result getList() {
-        List<Category> list = categoryService.selectPublishedCategory();
+        List<Category> list = categoryService.getAllList();
         return Result.success(list, CategoryServeVo.class);
+    }
+
+    @GetMapping("/getCategoryInfo")
+    public Result getCategoryInfo() {
+        List<CategoryInfoVo> categoryInfoVos = categoryService.getCategoryInfo();
+        return Result.success(categoryInfoVos);
     }
 
     @GetMapping("/getDetail/{id}")
     public Result getDetail(@PathVariable Integer id) {
-        List<Category> list = categoryService.selectPublishedCategory();
-        Category category = list.stream()
-                .filter(p -> p.getId().equals(id))
-                .findFirst()
-                .get();
+        Category category = categoryService.getDetail(id);
         return Result.success(category, CategoryServeVo.class);
     }
 

@@ -24,6 +24,11 @@ public class Blog implements Serializable {
     private String title;
 
     /**
+     * 缩略图
+     */
+    private String thumbnail;
+
+    /**
      * 文章概要
      */
     private String summary;

@@ -98,6 +98,12 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
         List<Tag> tags = listByIds(publishedTagIds);
         return tags;
     }
+
+    @Override
+    public Tag getDetail(Integer id) {
+        Tag tag = getById(id);
+        return tag;
+    }
 }
 
 

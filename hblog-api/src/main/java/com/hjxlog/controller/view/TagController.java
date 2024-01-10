@@ -31,11 +31,7 @@ public class TagController {
 
     @GetMapping("/getDetail/{id}")
     public Result getDetail(@PathVariable Integer id) {
-        List<Tag> list = tagService.selectPublishedTag();
-        Tag tag = list.stream()
-                .filter(p -> p.getId().equals(id))
-                .findFirst()
-                .get();
+        Tag tag = tagService.getDetail(id);
         return Result.success(tag, TagServeVo.class);
     }
 

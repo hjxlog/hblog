@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.hjxlog.api.dto.BlogQueryDto;
 import com.hjxlog.api.dto.BlogQueryServeDto;
 import com.hjxlog.api.dto.BlogSaveDto;
+import com.hjxlog.api.dto.PageDto;
 import com.hjxlog.api.vo.BlogVo;
+import com.hjxlog.api.vo.view.ArchiveVo;
 import com.hjxlog.domain.Blog;
 
 import java.util.List;
@@ -74,5 +76,26 @@ public interface BlogService extends IService<Blog> {
      * @return
      */
     Page<BlogVo> getPublishedBlogs(BlogQueryServeDto dto);
+
+    /**
+     * 获取推荐博客
+     *
+     * @return
+     */
+    List<BlogVo> getRecommendBlogList();
+
+    /**
+     * 获取已发布的博客数量
+     *
+     * @return
+     */
+    long getPublishedBlogNum();
+
+    /**
+     * 归档数据
+     *
+     * @return
+     */
+    Page<ArchiveVo> getArchiveList(PageDto dto);
 
 }

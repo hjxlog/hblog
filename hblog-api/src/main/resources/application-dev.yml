@@ -1,6 +1,6 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
     url: jdbc:mysql://localhost:3306/hblog?serverTimezone=Asia/Shanghai
@@ -10,3 +10,9 @@ spring:
     port: 6379
     database: 0
     timeout: 10000ms
+
+aliyun:
+  oss:
+    endpoint: https://oss-cn-hangzhou.aliyuncs.com # Endpoint以华东1（杭州）为例，其它Region请按实际情况填写。
+    bucketName: yourBucketName # Bucket名称
+    custom-domain: https://yourCustomDomain.com # 自定义域名

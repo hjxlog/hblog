@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hjxlog.api.dto.CategoryDto;
+import com.hjxlog.api.vo.view.CategoryInfoVo;
 import com.hjxlog.domain.Category;
 
 import java.util.List;
@@ -63,4 +64,25 @@ public interface CategoryService extends IService<Category> {
      */
     List<Category> selectPublishedCategory();
 
+    /**
+     * 获取分类信息，统计博客数量
+     *
+     * @return
+     */
+    List<CategoryInfoVo> getCategoryInfo();
+
+    /**
+     * 查询所有分类列表
+     *
+     * @return
+     */
+    List<Category> getAllList();
+
+    /**
+     * 查询详情
+     *
+     * @param id
+     * @return
+     */
+    Category getDetail(Integer id);
 }

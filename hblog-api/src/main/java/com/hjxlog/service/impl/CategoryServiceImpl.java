@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hjxlog.api.dto.CategoryDto;
+import com.hjxlog.api.vo.view.CategoryInfoVo;
 import com.hjxlog.domain.Blog;
 import com.hjxlog.domain.Category;
 import com.hjxlog.enums.CategoryStatusEnum;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -106,20 +108,39 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     @Override
     public List<Category> selectPublishedCategory() {
         List<Category> result = new ArrayList<>();
-        // 查询已发布的博客数据
-        List<Integer> publishedCategoryIds = blogService.selectColumnsByPublished(Blog::getCategoryId)
-                .stream()
-                .map(Blog::getCategoryId)
-                .distinct()
-                .collect(Collectors.toList());
-        if (CollectionUtil.isEmpty(publishedCategoryIds)) {
-            return result;
-        }
-        // 根据id查找分类集合
-        LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper();
-        queryWrapper.in(Category::getId, publishedCategoryIds);
-        result = categoryMapper.selectList(queryWrapper);
+        List<Category> list = list();
+        // 查询已经发布的博客，把他们根据分类进行分类，然后统计返回
+        List<Blog> blogs = blogService.selectColumnsByPublished(Blog::getCategoryId);
+        Map<Integer, Long> collect = blogs.stream().collect(Collectors.groupingBy(Blog::getCategoryId, Collectors.counting()));
+
         return result;
+    }
+
+    @Override
+    public List<CategoryInfoVo> getCategoryInfo() {
+        List<Blog> blogs = blogService.selectColumnsByPublished(Blog::getCategoryId);
+        Map<Integer, Long> categoryMap = blogs.stream().collect(Collectors.groupingBy(Blog::getCategoryId, Collectors.counting()));
+        List<Category> categoryList = listByIds(categoryMap.keySet());
+        List<CategoryInfoVo> result = new ArrayList<>();
+        categoryList.forEach(category -> {
+            CategoryInfoVo categoryInfoVo = new CategoryInfoVo();
+            categoryInfoVo.setId(category.getId());
+            categoryInfoVo.setName(category.getName());
+            categoryInfoVo.setBlogNum(categoryMap.get(category.getId()).intValue());
+            result.add(categoryInfoVo);
+        });
+        return result;
+    }
+
+    @Override
+    public List<Category> getAllList() {
+        return list();
+    }
+
+    @Override
+    public Category getDetail(Integer id) {
+        Category category = getById(id);
+        return category;
     }
 
 }

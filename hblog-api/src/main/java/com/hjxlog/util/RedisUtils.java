@@ -33,4 +33,13 @@ public class RedisUtils<T> {
         stringRedisTemplate.delete(key);
     }
 
+    public void save(String key, T obj) {
+        stringRedisTemplate.opsForValue().set(key, JSONUtil.toJsonStr(obj));
+    }
+
+    public <T> T getValue(String key, Class<T> clazz) {
+        String jsonStr = stringRedisTemplate.opsForValue().get(key);
+        return jsonStr != null ? JSONUtil.toBean(jsonStr, clazz) : null;
+    }
+
 }
