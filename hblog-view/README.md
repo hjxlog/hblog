@@ -1,4 +1,4 @@
-# hblog-cms
+# hblog-view
 
 ## Project setup
 ```
