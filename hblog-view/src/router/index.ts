@@ -1,4 +1,4 @@
-import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router'
+import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
 import {ElMessage} from "element-plus";
 
 const routes: Array<RouteRecordRaw> = [
@@ -160,7 +160,7 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-    history: createWebHashHistory(process.env.BASE_URL),
+    history: createWebHistory(process.env.BASE_URL),
     routes
 })
 
