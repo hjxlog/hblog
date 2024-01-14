@@ -52,4 +52,13 @@ import HeaderBar from "@/views/frontend/layout/HeaderBar.vue"
     opacity: 100%;
   }
 }
+
+@media screen and (max-width: 900px) {
+  .page-info {
+    padding: 7px;
+    font-size: 30px;
+    text-align: center;
+  }
+}
+
 </style>

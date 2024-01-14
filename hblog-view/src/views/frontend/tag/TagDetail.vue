@@ -3,11 +3,10 @@
     {{ tagName }}
   </PageCover>
   <el-row justify="center">
-    <el-col :span="20" class="list-container">
+    <el-col :span="20" :xs="24" class="list-container">
       <BlogList :queryParam="queryBlogDto"/>
     </el-col>
   </el-row>
-
   <Footer/>
 </template>
 
@@ -40,7 +39,14 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.list-container{
+.list-container {
   margin-top: 20px;
 }
+
+@media screen and (max-width: 900px) {
+  .list-container {
+    padding: 7px;
+  }
+}
+
 </style>
