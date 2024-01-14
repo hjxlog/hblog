@@ -24,7 +24,6 @@
                     </router-link>
                     <div class="article-meta-data">
                       <span>发表于{{ blog.createTime }}</span>
-                      <span>{{ blog.views }}次围观</span>
                     </div>
                   </div>
                 </div>
@@ -65,11 +64,20 @@ const queryForm = ref<PageDto>({
 const handleCurrentChange = (pageNum: number) => {
   queryForm.value.pageNum = pageNum
   getArchiveData()
+  scrollToContent()
 }
 const getArchiveData = async () => {
   const res: any = await getArchiveList(queryForm.value)
   archiveList.value = res.body.data
   total.value = res.body.total
+}
+
+const scrollToContent = () => {
+  const homeCoverElement = (document.getElementById("page-cover") as HTMLElement)?.scrollHeight
+  if (homeCoverElement) {
+    window.scrollTo({top: homeCoverElement, behavior: "smooth"})
+    return
+  }
 }
 
 onMounted(() => {

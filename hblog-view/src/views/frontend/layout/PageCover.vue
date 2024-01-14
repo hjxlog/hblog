@@ -1,6 +1,6 @@
 <template>
   <HeaderBar/>
-  <div class="page-cover">
+  <div id="page-cover">
     <div class="page-info">
       <slot></slot>
     </div>
@@ -12,7 +12,7 @@ import HeaderBar from "@/views/frontend/layout/HeaderBar.vue"
 </script>
 
 <style scoped>
-.page-cover {
+#page-cover {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,7 +25,7 @@ import HeaderBar from "@/views/frontend/layout/HeaderBar.vue"
   animation: fadeUpInCover 1s;
 }
 
-.page-cover::before {
+#page-cover::before {
   width: 100%;
   height: 240px;
   background-color: rgba(0, 0, 0, 0.3);

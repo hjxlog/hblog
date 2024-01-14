@@ -185,4 +185,10 @@ onMounted(() => {
   display: none;
 }
 
+@media screen and (max-width: 900px) {
+  .el-card ::v-deep .el-card__body {
+    padding: 0px;
+  }
+}
+
 </style>

@@ -8,7 +8,7 @@
         </router-link>
       </div>
       <div class="header-menu-drawer" @click="table = !table">
-        <el-icon>
+        <el-icon size="27">
           <Operation/>
         </el-icon>
       </div>
@@ -120,7 +120,7 @@ const routes = [
   }
 
   .header-menu-drawer {
-    display: inline-block;
+    display: flex;
   }
 }
 </style>

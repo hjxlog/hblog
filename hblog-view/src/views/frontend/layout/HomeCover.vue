@@ -3,9 +3,11 @@
     <div class="content">
       <h1 class="slogan">花有重开日</h1>
       <p class="sub-slogan">人无再少年</p>
-      <el-icon size="50px" class="arrow-down" @click="scrollToContent">
-        <ArrowDown/>
-      </el-icon>
+      <div class="below">
+        <el-icon size="50px" class="arrow-down" @click="scrollToContent">
+          <ArrowDown/>
+        </el-icon>
+      </div>
     </div>
   </div>
 </template>
@@ -47,6 +49,11 @@ const scrollToContent = () => {
   font-size: 24px;
   text-shadow: var(--text-shadow);
   animation: fadeUpInSlow 1.5s;
+}
+
+.below {
+  display: flex;
+  justify-content: center;
 }
 
 .arrow-down {

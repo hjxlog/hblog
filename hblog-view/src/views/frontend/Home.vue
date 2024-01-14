@@ -13,7 +13,7 @@
           <TagCard/>
         </div>
       </el-col>
-      <el-col :span="17" :xs="24">
+      <el-col :span="17" :xs="24" class="right">
         <BlogList/>
       </el-col>
     </el-row>
@@ -57,5 +57,10 @@ import Footer from "@/views/frontend/layout/Footer.vue"
   .content {
     padding: 0;
   }
+
+  .right {
+    padding: 7px;
+  }
+
 }
 </style>

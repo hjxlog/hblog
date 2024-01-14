@@ -109,10 +109,19 @@ if (props.reverse) {
   display: flex;
   align-items: center;
   margin-right: 14px;
+  /* 防止文本换行 */
+  white-space: nowrap;
 }
 
 .info-item i {
   margin-right: 5px;
+}
+
+.article-summary {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
 }
 
 </style>

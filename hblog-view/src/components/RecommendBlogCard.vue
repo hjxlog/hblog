@@ -14,10 +14,6 @@
             <Calendar/>
           </el-icon>
           <span>{{ blog.createTime }}</span>
-          <el-icon>
-            <View/>
-          </el-icon>
-          <span>{{ blog.views }}</span>
         </div>
       </div>
     </div>
@@ -79,6 +75,10 @@ onMounted(() => {
 .card-info {
   display: flex;
   font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
 }
 
 .card-info i {
