@@ -1,7 +1,14 @@
 <template>
   <el-row>
     <el-col :span="24">
-      <el-menu mode="horizontal" :ellipsis="false">
+      <el-menu mode="horizontal" :ellipsis="false" class="menu">
+        <div class="switch-btn">
+          <el-button @click="updateSwitchStatus">
+            <el-icon :size="18">
+              <Fold/>
+            </el-icon>
+          </el-button>
+        </div>
         <BreadCrumb class="breadcrumb"/>
         <div class="flex-grow"/>
         <el-sub-menu index="1">
@@ -20,6 +27,7 @@ import {ElMessage} from "element-plus";
 import {logout} from "@/api/admin/login";
 import {onMounted, ref} from "vue";
 import {getCurUser} from "@/utils/storage";
+import {menuItem} from "@/store/store"
 
 // 设置信息
 const nickname = ref('');
@@ -43,18 +51,41 @@ const handleLogout = async () => {
   }
 }
 
+const isCollapse = ref(true)
+const updateSwitchStatus = () => {
+  menuItem.isCollapse = !menuItem.isCollapse
+}
+
 onMounted(() => {
   getUserInfo()
 });
 </script>
 
 <style scoped>
+.menu {
+  align-items: center;
+}
+
 .flex-grow {
   flex-grow: 1;
 }
 
 .breadcrumb {
   line-height: 60px;
-  padding-left: 20px;
+}
+
+.switch-btn {
+  line-height: 60px;
+}
+
+.switch-btn button {
+  border: none;
+  outline: none;
+}
+
+.switch-btn button:hover,
+.switch-btn button:active,
+.switch-btn button:focus {
+  background-color: transparent;
 }
 </style>
