@@ -106,4 +106,18 @@ CREATE TABLE `user`  (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
+-- ----------------------------
+-- Table structure for diary
+-- ----------------------------
+DROP TABLE IF EXISTS `diary`;
+CREATE TABLE `diary` (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `content` longtext NOT NULL COMMENT '内容',
+  `md_content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT 'markdown内容',
+  `status` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '1' COMMENT '状态',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 SET FOREIGN_KEY_CHECKS = 1;
