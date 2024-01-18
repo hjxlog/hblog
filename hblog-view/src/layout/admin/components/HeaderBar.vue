@@ -75,6 +75,7 @@ onMounted(() => {
 }
 
 .switch-btn {
+  display: flex;
   line-height: 60px;
 }
 

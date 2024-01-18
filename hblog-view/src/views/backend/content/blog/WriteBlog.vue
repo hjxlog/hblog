@@ -53,7 +53,7 @@
       </el-col>
     </el-row>
     <el-form-item prop="mdContent" style="height: 100%">
-      <v-md-editor @upload-image="handleUploadImage" :disabled-menus="[]" v-model="form.mdContent" height="100%"></v-md-editor>
+      <v-md-editor @upload-image="handleUploadImage" :disabled-menus="[]" v-model="form.mdContent"></v-md-editor>
     </el-form-item>
   </el-form>
 </template>

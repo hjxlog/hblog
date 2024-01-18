@@ -1,75 +1,47 @@
 <template>
-  <div class="container">
-    <div class="left" ref="leftContainer">
-      <SideBar/>
-    </div>
-    <div class="right" :style="{ width: rightContainerWidth + 'px','padding-left':paddingLeftWidth + 'px'}">
-      <div class="header" :style="{ width: rightContainerWidth + 'px'}">
+  <el-container class="container">
+    <el-aside class="aside" :style="{ width: asideWidth + 'px'}">
+      <el-scrollbar>
+        <SideBar/>
+      </el-scrollbar>
+    </el-aside>
+    <el-container class="container">
+      <el-header class="header">
         <HeaderBar/>
-      </div>
-      <div class="main">
-        <Main/>
-      </div>
-    </div>
-  </div>
+      </el-header>
+      <el-main class="main">
+        <el-scrollbar>
+          <Main/>
+        </el-scrollbar>
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
 <script lang="ts" setup>
 import SideBar from "./components/AdminSideBar.vue"
 import HeaderBar from "./components/HeaderBar.vue"
 import Main from "./components/Main.vue"
-import {ref, onMounted, onBeforeUnmount} from 'vue';
+import {computed} from 'vue';
+import {menuItem} from "@/store/store";
 
-const leftContainer = ref(null);
-const rightContainerWidth = ref(0);
-let paddingLeftWidth = ref(0);
-
-const resizeObserver = new ResizeObserver(() => {
-  if (leftContainer.value) {
-    rightContainerWidth.value = window.innerWidth - leftContainer.value.offsetWidth - 5;
-    paddingLeftWidth.value = leftContainer.value.offsetWidth
-  }
-});
-
-onMounted(() => {
-  if (leftContainer.value) {
-    resizeObserver.observe(leftContainer.value);
-  }
-});
-
-onBeforeUnmount(() => {
-  resizeObserver.disconnect();
+const asideWidth = computed(() => {
+  return menuItem.isCollapse ? '64' : '200'
 });
 
 </script>
 
 <style scoped>
 .container {
-  display: flex;
-}
-
-.left {
-  position: fixed;
-  top: 0;
-  left: 0;
   height: 100%;
-  background-color: white;
 }
 
-.right {
-  height: 100vh;
-  overflow-y: auto;
-  transition: margin-left 0.3s;
+.aside {
+  transition: width 0.3s ease-in-out;
 }
 
 .header {
-  position: fixed;
-  top: 0;
-  z-index: 1000;
-}
-
-.main {
-  padding: 70px 14px 0 14px;
+  padding: 0px;
 }
 
 </style>
