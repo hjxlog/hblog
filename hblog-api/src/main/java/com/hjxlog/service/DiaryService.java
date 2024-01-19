@@ -1,6 +1,10 @@
 package com.hjxlog.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hjxlog.api.dto.DiarySaveDto;
+import com.hjxlog.api.dto.PageDto;
+import com.hjxlog.api.vo.view.DiaryArchiveVo;
 import com.hjxlog.domain.Diary;
 
 /**
@@ -10,4 +14,15 @@ import com.hjxlog.domain.Diary;
  */
 public interface DiaryService extends IService<Diary> {
 
+    Page<Diary> getList(PageDto dto);
+
+    Diary getDetail(Integer id);
+
+    Diary addDiary(DiarySaveDto dto);
+
+    Diary updateDiary(DiarySaveDto dto);
+
+    void deleteDiary(Integer id);
+
+    Page<DiaryArchiveVo> getArchiveList(PageDto dto);
 }

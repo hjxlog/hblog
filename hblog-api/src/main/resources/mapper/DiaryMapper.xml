@@ -17,4 +17,19 @@
         id,content,md_content,
         status,create_time,update_time
     </sql>
+
+    <resultMap id="ArchiveVoResultMap" type="com.hjxlog.api.vo.view.DiaryArchiveVo">
+        <id column="time_line" property="timeLine"/>
+        <collection property="viewDiaryVos" ofType="com.hjxlog.api.vo.view.ViewDiaryVo">
+            <id column="id" property="id"/>
+            <result column="content" property="content"/>
+            <result column="create_time" property="createTime"/>
+        </collection>
+    </resultMap>
+
+    <select id="getArchiveList" resultMap="ArchiveVoResultMap">
+        SELECT DATE_FORMAT(create_time, '%Y年 %m月') AS time_line, id, content, create_time
+        FROM diary
+        ORDER BY create_time DESC
+    </select>
 </mapper>

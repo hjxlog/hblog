@@ -1,6 +1,8 @@
 package com.hjxlog.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hjxlog.api.vo.view.DiaryArchiveVo;
 import com.hjxlog.domain.Diary;
 
 /**
@@ -10,5 +12,7 @@ import com.hjxlog.domain.Diary;
  * @Entity com.hjxlog.domain.Diary
  */
 public interface DiaryMapper extends BaseMapper<Diary> {
+
+    Page<DiaryArchiveVo> getArchiveList(Page<DiaryArchiveVo> page);
 
 }
