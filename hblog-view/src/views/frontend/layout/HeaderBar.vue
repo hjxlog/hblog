@@ -45,7 +45,8 @@ const routes = [
   {path: '/', label: '首页'},
   {path: '/category', label: '分类'},
   {path: '/tag', label: '标签'},
-  {path: '/archive', label: '归档'}
+  {path: '/archive', label: '归档'},
+  {path: '/diary', label: '日记'}
 ];
 </script>
 
