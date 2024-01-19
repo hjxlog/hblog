@@ -1,8 +1,9 @@
 <template>
   <el-menu
-      default-active="2"
+      :default-active="activeMenu"
       class="el-menu-vertical"
       :collapse="isCollapse"
+      @select="handleMenuSelect"
   >
     <el-menu-item style="pointer-events: none;">
       <el-icon>
@@ -29,9 +30,9 @@
         </el-icon>
         <span>日志管理</span>
       </template>
-      <el-menu-item index="1-1" @click="this.$router.push('/dashboard/log/operate')">操作日志</el-menu-item>
-      <el-menu-item index="1-2" @click="this.$router.push('/dashboard/log/visit')">访问日志</el-menu-item>
-      <el-menu-item index="1-3" @click="this.$router.push('/dashboard/log/error')">异常日志</el-menu-item>
+      <el-menu-item index="2-1" @click="this.$router.push('/dashboard/log/operate')">操作日志</el-menu-item>
+      <el-menu-item index="2-2" @click="this.$router.push('/dashboard/log/visit')">访问日志</el-menu-item>
+      <el-menu-item index="2-3" @click="this.$router.push('/dashboard/log/error')">异常日志</el-menu-item>
     </el-sub-menu>
     <el-sub-menu index="3">
       <template #title>
@@ -40,16 +41,35 @@
         </el-icon>
         <span>系统管理</span>
       </template>
-      <el-menu-item index="1-1" @click="this.$router.push('/dashboard/system/account')">账号管理</el-menu-item>
+      <el-menu-item index="3-1" @click="this.$router.push('/dashboard/system/account')">账号管理</el-menu-item>
     </el-sub-menu>
   </el-menu>
 </template>
 
 <script lang="ts" setup>
-import {computed} from 'vue'
+import {ref, watch, onMounted, computed} from 'vue'
 import {menuItem} from "@/store/store"
 
 const isCollapse = computed(() => menuItem.isCollapse);
+
+const activeMenu = ref('');
+
+const handleMenuSelect = (selectedMenu: string) => {
+  activeMenu.value = selectedMenu;
+  localStorage.setItem('selectedMenu', selectedMenu);
+};
+
+onMounted(() => {
+  const storedMenu = localStorage.getItem('selectedMenu');
+  if (storedMenu) {
+    activeMenu.value = storedMenu;
+  }
+});
+
+watch(activeMenu, (newValue) => {
+  localStorage.setItem('selectedMenu', newValue);
+});
+
 </script>
 
 <style>
