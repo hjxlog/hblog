@@ -3,11 +3,9 @@
     <router-link class="logo" to="/">HJXLOG</router-link>
     <div class="menu">
       <div class="header-menu">
-        <router-link v-for="route in routes" :key="route.path" :to="route.path">
-          {{ route.label }}
-        </router-link>
+        <router-link v-for="route in routes" :key="route.path" :to="route.path">{{ route.label }}</router-link>
       </div>
-      <div class="header-menu-drawer" @click="table = !table">
+      <div class="sidebar-drawer" @click="showDrawer = !showDrawer">
         <el-icon size="27">
           <Operation/>
         </el-icon>
@@ -15,50 +13,39 @@
     </div>
   </div>
 
-
   <el-drawer
-      v-model="table"
+      v-model="showDrawer"
       :with-header="false"
       direction="ltr"
-      size="70%"
+      size="75%"
   >
-    <div class="sidebar">
-      <OverviewCard/>
-      <RecommendBlogCard/>
-      <CategoryCard/>
-      <TagCard/>
-    </div>
+    <SideBar/>
   </el-drawer>
-
 </template>
 
 <script lang="ts" setup>
 import {ref} from "vue";
-import OverviewCard from "@/components/OverviewCard.vue"
-import RecommendBlogCard from "@/components/RecommendBlogCard.vue"
-import CategoryCard from "@/components/CategoryCard.vue"
-import TagCard from "@/components/TagCard.vue"
+import SideBar from "@/components/frontend/SideBar.vue"
 
-const table = ref(false)
-
+const showDrawer = ref(false)
 const routes = [
   {path: '/', label: '首页'},
   {path: '/category', label: '分类'},
   {path: '/tag', label: '标签'},
+  {path: '/diary', label: '日记'},
   {path: '/archive', label: '归档'},
-  {path: '/diary', label: '日记'}
 ];
 </script>
 
 <style scoped>
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: absolute;
   height: 60px;
   width: 100%;
   z-index: 99;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 0 3%;
   box-sizing: border-box;
   animation: fadeIn 1s;
@@ -74,7 +61,7 @@ const routes = [
   color: var(--text-color);
   text-decoration: none;
   font-size: 14px;
-  margin-left: 25px;
+  margin-left: 22px;
   position: relative;
   padding-bottom: 5px;
   transition: color 0.5s ease-in-out;
@@ -102,17 +89,8 @@ const routes = [
   width: 100%;
 }
 
-.header-menu-drawer {
+.sidebar-drawer {
   display: none;
-  color: var(--text-color);
-  cursor: pointer;
-  position: relative;
-  font-size: 20px;
-  margin: 0;
-}
-
-.sidebar div {
-  margin: 10px 0px;
 }
 
 @media screen and (max-width: 900px) {
@@ -120,8 +98,9 @@ const routes = [
     display: none;
   }
 
-  .header-menu-drawer {
+  .sidebar-drawer {
     display: flex;
+    color: var(--text-color);
   }
 }
 </style>

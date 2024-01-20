@@ -3,33 +3,23 @@
     <HeaderBar/>
     <HomeCover/>
   </div>
-  <div class="content">
-    <el-row>
-      <el-col :span="7" :xs="0">
-        <div class="sidebar">
-          <OverviewCard/>
-          <RecommendBlogCard/>
-          <CategoryCard/>
-          <TagCard/>
-        </div>
-      </el-col>
-      <el-col :span="17" :xs="24" class="right">
-        <BlogList/>
-      </el-col>
-    </el-row>
-  </div>
+  <el-row class="main">
+    <el-col :span="7" :xs="0">
+      <SideBar/>
+    </el-col>
+    <el-col :span="17" :xs="24">
+      <BlogList/>
+    </el-col>
+  </el-row>
   <Footer/>
 </template>
 
 <script lang="ts" setup>
-import HeaderBar from "@/views/frontend/layout/HeaderBar.vue"
-import HomeCover from "@/views/frontend/layout/HomeCover.vue"
-import OverviewCard from "@/components/OverviewCard.vue"
-import RecommendBlogCard from "@/components/RecommendBlogCard.vue"
-import CategoryCard from "@/components/CategoryCard.vue"
-import TagCard from "@/components/TagCard.vue"
+import HeaderBar from "@/components/frontend/HeaderBar.vue"
+import HomeCover from "@/components/frontend/HomeCover.vue"
+import SideBar from "@/components/frontend/SideBar.vue"
 import BlogList from "@/views/frontend/blog/BlogList.vue"
-import Footer from "@/views/frontend/layout/Footer.vue"
+import Footer from "@/components/frontend/Footer.vue"
 </script>
 
 <style scoped>
@@ -38,29 +28,14 @@ import Footer from "@/views/frontend/layout/Footer.vue"
   width: 100%;
 }
 
-.content {
-  padding: 2% 6%;
+.main {
+  padding: 2% 10%;
   animation: fadeInUp 1s;
 }
 
-.sidebar div {
-  margin-right: 12px;
-  margin-bottom: 20px;
-  box-shadow: var(--card-shadow);
-}
-
 @media screen and (max-width: 900px) {
-  .sidebar {
-    display: none;
-  }
-
-  .content {
-    padding: 0;
-  }
-
-  .right {
+  .main {
     padding: 7px;
   }
-
 }
 </style>
