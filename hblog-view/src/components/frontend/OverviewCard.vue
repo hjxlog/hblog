@@ -1,6 +1,8 @@
 <template>
   <el-card class="card">
-    <el-avatar :size="120" :src="avatarImg"/>
+    <router-link to="/diary">
+      <el-avatar :size="120" :src="avatarImg"/>
+    </router-link>
     <h3>HJX</h3>
     <p>to be better</p>
     <el-row>

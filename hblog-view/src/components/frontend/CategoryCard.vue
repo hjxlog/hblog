@@ -1,5 +1,5 @@
 <template>
-  <el-card shadow="hover">
+  <el-card>
     <div class="card-title">分类</div>
     <router-link :to="`/category/${categoryInfo.id}`" class="item"
                  v-for="categoryInfo in categoryInfoList" :key="categoryInfo.id">
