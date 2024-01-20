@@ -13,9 +13,9 @@
 </template>
 
 <script lang="ts" setup>
-import HeaderBar from "@/views/frontend/layout/HeaderBar.vue"
-import Main from "@/layout/view/components/Main.vue"
-import Footer from "@/views/frontend/layout/Footer.vue"
+import HeaderBar from "@/components/frontend/HeaderBar.vue"
+import Main from "@/layout/frontend/components/Main.vue"
+import Footer from "@/components/frontend/Footer.vue"
 
 </script>
 

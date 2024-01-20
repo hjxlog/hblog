@@ -12,9 +12,9 @@
 
 
 <script lang="ts" setup>
-import PageCover from "@/views/frontend/layout/PageCover.vue"
+import PageCover from "@/components/frontend/PageCover.vue"
 import BlogList from "@/views/frontend/blog/BlogList.vue"
-import Footer from "@/views/frontend/layout/Footer.vue"
+import Footer from "@/components/frontend/Footer.vue"
 import {getTagDetail} from "@/api/view/tag";
 
 import {onMounted, ref} from "vue";

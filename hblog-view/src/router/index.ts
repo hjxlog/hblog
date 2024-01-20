@@ -2,11 +2,6 @@ import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
 import {ElMessage} from "element-plus";
 
 const routes: Array<RouteRecordRaw> = [
-    {
-        path: '/login',
-        name: 'login',
-        component: () => import("@/views/backend/login/Login.vue"),
-    },
     // frontend
     {
         path: '/',
@@ -50,13 +45,18 @@ const routes: Array<RouteRecordRaw> = [
     },
     //backend
     {
+        path: '/login',
+        name: 'login',
+        component: () => import("@/views/backend/login/Login.vue"),
+    },
+    {
         path: "/dashboard",
         name: "dashboard",
         meta: {
             title: "后台管理"
         },
         redirect: '/dashboard/index',
-        component: () => import("../layout/admin/Layout.vue"),
+        component: () => import("../layout/backend/Layout.vue"),
         children: [
             {
                 path: 'index',

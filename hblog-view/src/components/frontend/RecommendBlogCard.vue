@@ -1,7 +1,7 @@
 <template>
-  <el-card shadow="hover">
+  <el-card>
     <div class="card-title">推荐文章</div>
-    <div class="card-container" v-for="blog in recommendBlogList" :key="blog.id">
+    <div class="card-container" v-for="blog in blogList" :key="blog.id">
       <router-link :to="`/blog/${blog.id}`">
         <el-image class="cover-img" :src="blog.thumbnail" fit="cover"/>
       </router-link>
@@ -13,7 +13,7 @@
           <el-icon>
             <Calendar/>
           </el-icon>
-          <span>{{ blog.createTime }}</span>
+          {{ blog.createTime }}
         </div>
       </div>
     </div>
@@ -24,10 +24,11 @@
 import {getRecommendBlogList} from "@/api/view/blog";
 import {onMounted, ref} from "vue";
 
-const recommendBlogList = ref<BlogVo[]>([])
+const blogList = ref<BlogVo[]>([])
+
 const getBlogList = async () => {
   const res: any = await getRecommendBlogList()
-  recommendBlogList.value = res.body
+  blogList.value = res.body
 }
 
 onMounted(() => {

@@ -4,7 +4,7 @@
     <HomeCover/>
   </div>
   <el-row class="main">
-    <el-col :span="7" :xs="0">
+    <el-col class="left" :span="7" :xs="0">
       <SideBar/>
     </el-col>
     <el-col :span="17" :xs="24">
@@ -31,6 +31,10 @@ import Footer from "@/components/frontend/Footer.vue"
 .main {
   padding: 2% 10%;
   animation: fadeInUp 1s;
+}
+
+.left {
+  padding-right: 12px;
 }
 
 @media screen and (max-width: 900px) {

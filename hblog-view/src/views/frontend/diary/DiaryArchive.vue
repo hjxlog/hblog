@@ -41,9 +41,9 @@
 </template>
 
 <script lang="ts" setup>
-import PageCover from "@/views/frontend/layout/PageCover.vue"
-import Footer from "@/views/frontend/layout/Footer.vue"
-import ViewSideBar from "@/layout/view/ViewSideBar.vue"
+import PageCover from "@/components/frontend/PageCover.vue"
+import Footer from "@/components/frontend/Footer.vue"
+import ViewSideBar from "@/layout/frontend/ViewSideBar.vue"
 
 import {getArchiveList} from "@/api/view/diary";
 import {onMounted, ref} from "vue";
@@ -64,7 +64,6 @@ const getArchiveData = async () => {
   const res: any = await getArchiveList(queryForm.value)
   archiveList.value = res.body.data
   total.value = res.body.total
-  console.log("archiveList.value", archiveList.value)
 }
 
 const scrollToContent = () => {
@@ -83,7 +82,7 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .content {
-  padding: 2% 6%;
+  padding: 2% 10%;
   animation: fadeInUp 1s;
 }
 

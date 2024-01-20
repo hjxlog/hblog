@@ -47,9 +47,9 @@
 </template>
 
 <script lang="ts" setup>
-import PageCover from "@/views/frontend/layout/PageCover.vue"
-import Footer from "@/views/frontend/layout/Footer.vue"
-import ViewSideBar from "@/layout/view/ViewSideBar.vue"
+import PageCover from "@/components/frontend/PageCover.vue"
+import Footer from "@/components/frontend/Footer.vue"
+import ViewSideBar from "@/layout/frontend/ViewSideBar.vue"
 
 import {getArchiveList} from "@/api/view/blog";
 import {onMounted, ref} from "vue";

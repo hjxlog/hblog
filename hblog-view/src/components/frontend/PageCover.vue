@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts" setup>
-import HeaderBar from "@/views/frontend/layout/HeaderBar.vue"
+import HeaderBar from "@/components/frontend/HeaderBar.vue"
 </script>
 
 <style scoped>
@@ -19,7 +19,7 @@ import HeaderBar from "@/views/frontend/layout/HeaderBar.vue"
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url('../../../assets/images/bg.png');
+  background-image: url('../../assets/images/bg.png');
   height: 240px;
   width: 100%;
   animation: fadeUpInCover 1s;

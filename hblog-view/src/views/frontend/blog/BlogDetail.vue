@@ -7,9 +7,6 @@
       <el-row style="width:100%">
         <el-col :span="7" :xs="0">
           <div class="sidebar">
-            <div class="sidebar-item">
-              <OverviewCard/>
-            </div>
             <div class="affixContainer">
               <el-affix target=".affixContainer" :offset-top="0">
                 <Catalog v-if="isLoaded" :titlesData="previewRef"/>
@@ -31,11 +28,11 @@
 </template>
 
 <script lang="ts" setup>
-import PageCover from "@/views/frontend/layout/PageCover.vue"
-import OverviewCard from "@/components/OverviewCard.vue"
+import PageCover from "@/components/frontend/PageCover.vue"
+import OverviewCard from "@/components/frontend/OverviewCard.vue"
 import Catalog from "@/components/frontend/Catalog.vue"
-import RecommendBlogCard from "@/components/RecommendBlogCard.vue"
-import Footer from "@/views/frontend/layout/Footer.vue"
+import RecommendBlogCard from "@/components/frontend/RecommendBlogCard.vue"
+import Footer from "@/components/frontend/Footer.vue"
 // 博客数据
 import {onMounted, ref, nextTick, onBeforeMount, reactive, watchEffect} from "vue";
 import {getBlogDetail} from "@/api/view/blog";
@@ -102,10 +99,6 @@ onMounted(() => {
   flex-direction: column;
   height: 100%;
   margin-right: 10px;
-}
-
-.sidebar-item {
-  margin-bottom: 14px;
 }
 
 @media screen and (max-width: 900px) {

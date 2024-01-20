@@ -20,13 +20,16 @@
 import {onMounted, ref} from "vue";
 
 const props = defineProps(['titlesData'])
-
 let currentLineIndex = ref(null);
 const hasToc = ref(false);
 const titles = ref([]);
 const titlesData = props.titlesData
 
 const loadToc = () => {
+  if (!titlesData) {
+    hasToc.value = true;
+    return;
+  }
   const anchors = titlesData.$el.querySelectorAll('h1,h2,h3,h4,h5,h6');
   const titlesArray = Array.from(anchors).filter((title) => !!title.innerText.trim());
   if (!titlesArray.length) {

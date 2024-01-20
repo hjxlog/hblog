@@ -65,7 +65,6 @@ const getTableData = async () => {
   const res: any = await getDiaryData(queryForm.value)
   tableData.value = res.body.data
   total.value = res.body.total
-  console.log("tableData.value", tableData.value)
 }
 const indexMethod = (index: number) => {
   return (queryForm.value.pageNum! - 1) * queryForm.value.pageSize! + index + 1;

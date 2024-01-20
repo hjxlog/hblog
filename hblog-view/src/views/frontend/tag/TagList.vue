@@ -22,8 +22,8 @@
 import {onMounted, ref} from "vue";
 import {getTagData} from "@/api/view/tag";
 import {useRouter} from "vue-router";
-import PageCover from "@/views/frontend/layout/PageCover.vue"
-import Footer from "@/views/frontend/layout/Footer.vue"
+import PageCover from "@/components/frontend/PageCover.vue"
+import Footer from "@/components/frontend/Footer.vue"
 
 const router = useRouter();
 

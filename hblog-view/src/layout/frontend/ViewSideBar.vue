@@ -8,10 +8,10 @@
 </template>
 
 <script lang="ts" setup>
-import OverviewCard from "@/components/OverviewCard.vue"
-import RecommendBlogCard from "@/components/RecommendBlogCard.vue"
-import CategoryCard from "@/components/CategoryCard.vue"
-import TagCard from "@/components/TagCard.vue"
+import OverviewCard from "@/components/frontend/OverviewCard.vue"
+import RecommendBlogCard from "@/components/frontend/RecommendBlogCard.vue"
+import CategoryCard from "@/components/frontend/CategoryCard.vue"
+import TagCard from "@/components/frontend/TagCard.vue"
 </script>
 
 <style scoped>

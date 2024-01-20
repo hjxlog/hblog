@@ -6,5 +6,5 @@ export const uploadImage = (file) => {
     const headers = {
         'Content-Type': 'multipart/form-data',
     };
-    return service.post('/admin/file/uploadImage', formData, {headers})
+    return service.post('/backend/file/uploadImage', formData, {headers})
 }

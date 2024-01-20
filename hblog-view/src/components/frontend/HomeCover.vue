@@ -27,7 +27,7 @@ const scrollToContent = () => {
   justify-content: center;
   align-items: center;
   animation: fadeUpInCover 1s;
-  background-image: url('../../../assets/images/bg.png');
+  background-image: url('../../assets/images/bg.png');
   background-size: cover;
 }
 
