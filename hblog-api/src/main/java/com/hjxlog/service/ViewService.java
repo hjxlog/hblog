@@ -1,6 +1,7 @@
 package com.hjxlog.service;
 
-import com.hjxlog.api.vo.view.OverviewVo;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Huang JX
@@ -8,5 +9,6 @@ import com.hjxlog.api.vo.view.OverviewVo;
  */
 public interface ViewService {
 
-    OverviewVo getOverview();
+    List<Map<String, Object>> getOverview();
+
 }

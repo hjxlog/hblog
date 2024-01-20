@@ -1,6 +1,5 @@
 package com.hjxlog.controller.view;
 
-import com.hjxlog.api.vo.view.OverviewVo;
 import com.hjxlog.protocol.Result;
 import com.hjxlog.service.ViewService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Huang JX
@@ -22,8 +23,8 @@ public class ViewController {
 
     @GetMapping("/getOverview")
     public Result getOverview() {
-        OverviewVo overview = viewService.getOverview();
-        return Result.success(overview);
+        List<Map<String, Object>> list = viewService.getOverview();
+        return Result.success(list);
     }
 
 }

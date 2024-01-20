@@ -1,16 +1,16 @@
 package com.hjxlog.service.impl;
 
-import cn.hutool.core.util.ObjectUtil;
-import com.hjxlog.api.vo.view.OverviewVo;
-import com.hjxlog.constant.SystemConstants;
 import com.hjxlog.service.BlogService;
 import com.hjxlog.service.CategoryService;
 import com.hjxlog.service.TagService;
 import com.hjxlog.service.ViewService;
-import com.hjxlog.util.RedisUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Huang JX
@@ -18,9 +18,6 @@ import javax.annotation.Resource;
  */
 @Service
 public class ViewServiceImpl implements ViewService {
-
-    @Resource
-    private RedisUtils redisUtils;
 
     @Resource
     private BlogService blogService;
@@ -32,16 +29,20 @@ public class ViewServiceImpl implements ViewService {
     private CategoryService categoryService;
 
     @Override
-    public OverviewVo getOverview() {
-        OverviewVo vo = (OverviewVo) redisUtils.getValue(SystemConstants.OVERVIEW_VO, OverviewVo.class);
-        if (ObjectUtil.isNotEmpty(vo)) {
-            return vo;
-        }
-        long blogNum = blogService.getPublishedBlogNum();
-        long categoryNum = categoryService.count();
-        long tagNum = tagService.count();
-        OverviewVo overviewVo = new OverviewVo(blogNum, categoryNum, tagNum);
-        redisUtils.save(SystemConstants.OVERVIEW_VO, overviewVo);
-        return overviewVo;
+    public List<Map<String, Object>> getOverview() {
+        List<Map<String, Object>> resultList = new ArrayList<>();
+        resultList.add(createOverviewMap("blog", "文章", blogService.getPublishedBlogNum()));
+        resultList.add(createOverviewMap("category", "分类", categoryService.count()));
+        resultList.add(createOverviewMap("tag", "标签", tagService.count()));
+        return resultList;
     }
+
+    private static Map<String, Object> createOverviewMap(String key, String name, Long num) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("key", key);
+        map.put("name", name);
+        map.put("num", num);
+        return map;
+    }
+
 }
