@@ -2,18 +2,18 @@
   <el-form :model="form" class="container">
     <!--    按钮区域-->
     <el-row :gutter="20">
-      <el-col :span="7">
+      <el-col :span="18" :xs="6">
         <el-form-item label="是否发布：" prop="status">
           <el-switch active-value="1" inactive-value="0" v-model="form.status"/>
         </el-form-item>
       </el-col>
-      <el-col :span="6" :offset="0">
+      <el-col :span="6" :offset="0" :xs="18">
         <el-button type="primary" :style="'float:right'" @click="saveDiary">保存日记</el-button>
         <el-button type="info" :style="'float:right;margin-right:5px;'" @click="handleCancel">取消</el-button>
       </el-col>
     </el-row>
-    <el-form-item prop="mdContent" style="height: 100%">
-      <v-md-editor @upload-image="handleUploadImage" :disabled-menus="[]" v-model="form.mdContent"></v-md-editor>
+    <el-form-item prop="mdContent">
+      <v-md-editor @upload-image="handleUploadImage" :disabled-menus="[]" v-model="form.mdContent" height="600px"></v-md-editor>
     </el-form-item>
   </el-form>
 </template>

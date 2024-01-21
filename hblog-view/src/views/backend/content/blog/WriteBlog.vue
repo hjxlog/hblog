@@ -8,7 +8,7 @@
     </el-form-item>
     <!--    分类、标签、按钮区域-->
     <el-row :gutter="20">
-      <el-col :span="5">
+      <el-col :span="5" :xs="24">
         <el-form-item label="分类：" prop="categoryId">
           <el-select v-model="form.categoryId" clearable placeholder="请选择分类">
             <el-option v-for="item in categoryList" :key="item.id" :value="item.id" :label="item.name"/>
@@ -18,7 +18,7 @@
           <el-switch v-model="form.isRecommend"/>
         </el-form-item>
       </el-col>
-      <el-col :span="7">
+      <el-col :span="7" :xs="24">
         <el-form-item label="标签：" prop="tagIds">
           <el-select v-model="form.tagIds" multiple clearable placeholder="请选择标签" style="width:100%">
             <el-option v-for="item in tagList" :key="item.id" :value="item.id" :label="item.name"/>
@@ -28,7 +28,7 @@
           <el-switch active-value="1" inactive-value="0" v-model="form.status"/>
         </el-form-item>
       </el-col>
-      <el-col :span="6">
+      <el-col :span="6" :xs="24">
         <div style="float:left;">
           <el-text>缩略图：</el-text>
         </div>
@@ -47,13 +47,13 @@
           </el-icon>
         </el-upload>
       </el-col>
-      <el-col :span="6" :offset="0">
+      <el-col :span="6" :xs="24" :offset="0">
         <el-button type="primary" :style="'float:right'" @click="saveBlog">保存文章</el-button>
         <el-button type="info" :style="'float:right;margin-right:5px;'" @click="handleCancel">取消</el-button>
       </el-col>
     </el-row>
-    <el-form-item prop="mdContent" style="height: 100%">
-      <v-md-editor @upload-image="handleUploadImage" :disabled-menus="[]" v-model="form.mdContent"></v-md-editor>
+    <el-form-item prop="mdContent" class="editor-container">
+      <v-md-editor @upload-image="handleUploadImage" :disabled-menus="[]" v-model="form.mdContent" height="600px"></v-md-editor>
     </el-form-item>
   </el-form>
 </template>
@@ -219,5 +219,9 @@ onMounted(async () => {
   width: 100px;
   height: 100px;
   text-align: center;
+}
+
+.editor-container {
+  margin-top: 7px;
 }
 </style>
