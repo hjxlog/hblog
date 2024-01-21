@@ -31,7 +31,7 @@ public class ViewServiceImpl implements ViewService {
     @Override
     public List<Map<String, Object>> getOverview() {
         List<Map<String, Object>> resultList = new ArrayList<>();
-        resultList.add(createOverviewMap("blog", "文章", blogService.getPublishedBlogNum()));
+        resultList.add(createOverviewMap("archive", "文章", blogService.getPublishedBlogNum()));
         resultList.add(createOverviewMap("category", "分类", categoryService.count()));
         resultList.add(createOverviewMap("tag", "标签", tagService.count()));
         return resultList;

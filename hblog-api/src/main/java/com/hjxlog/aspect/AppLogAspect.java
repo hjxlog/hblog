@@ -5,7 +5,6 @@ import cn.hutool.http.useragent.UserAgentUtil;
 import cn.hutool.json.JSONUtil;
 import com.hjxlog.constant.RequestConstants;
 import com.hjxlog.constant.SystemConstants;
-import com.hjxlog.enums.RequestInfoEnum;
 import com.hjxlog.domain.AppLog;
 import com.hjxlog.util.IpAddressUtils;
 import com.hjxlog.util.RedisUtils;
@@ -20,7 +19,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -74,14 +72,15 @@ public class AppLogAspect {
         appLog.setUserAgent(userAgentStr);
         appLog.setOs(userAgent.getOs().getName());
         appLog.setBrowser(userAgent.getBrowser().getName() + "," + userAgent.getVersion());
-        RequestInfoEnum requestInfoEnum = Arrays.stream(RequestInfoEnum.values())
-                .filter(p -> appLog.getUri().startsWith(p.getUri()))
-                .findFirst().orElse(null);
-        if (requestInfoEnum != null) {
-            appLog.setLogType(requestInfoEnum.getLogType());
-            appLog.setModule(requestInfoEnum.getModule());
-            appLog.setUri(requestInfoEnum.getUri());
-            appLog.setBehavior(requestInfoEnum.getBehavior());
+        String logUri = appLog.getUri();
+        // 访问后台
+        String[] uriSplit = logUri.split("/");
+        if (logUri.startsWith("/api/admin/")) {
+            appLog.setLogType(RequestConstants.TYPE_ADMIN);
+            appLog.setModule(uriSplit[3]);
+        } else {
+            appLog.setLogType(RequestConstants.TYPE_SERVE);
+            appLog.setModule(uriSplit[2]);
         }
         return appLog;
     }
