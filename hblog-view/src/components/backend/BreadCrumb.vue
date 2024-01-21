@@ -1,5 +1,5 @@
 <template>
-  <el-breadcrumb :separator-icon="ArrowRight">
+  <el-breadcrumb class="breadcrumb" :separator-icon="ArrowRight">
     <el-breadcrumb-item v-for="(item,index) in breadcrumb" :key="index">
       {{ item.meta.title }}
     </el-breadcrumb-item>
@@ -22,3 +22,11 @@ const breadcrumb = computed(() => {
 })
 
 </script>
+
+<style scoped>
+.breadcrumb {
+  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+}
+</style>

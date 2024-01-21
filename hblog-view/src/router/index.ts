@@ -56,7 +56,7 @@ const routes: Array<RouteRecordRaw> = [
             title: "后台管理"
         },
         redirect: '/dashboard/index',
-        component: () => import("../layout/backend/Layout.vue"),
+        component: () => import("../components/backend/Layout.vue"),
         children: [
             {
                 path: 'index',

@@ -1,5 +1,8 @@
-import {reactive} from 'vue'
+import {reactive, ref} from 'vue'
+
+const isMobile = ref(window.innerWidth <= 768);
 
 export const menuItem = reactive({
-    isCollapse: false
+    isCollapse: isMobile.value,
+    isMobile: isMobile.value
 })

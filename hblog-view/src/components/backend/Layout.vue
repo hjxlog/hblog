@@ -1,32 +1,28 @@
 <template>
   <el-container class="container">
     <el-aside class="aside" :style="{ width: asideWidth + 'px'}">
-      <el-scrollbar>
-        <SideBar/>
-      </el-scrollbar>
+      <SideBar/>
     </el-aside>
     <el-container class="container">
       <el-header class="header">
         <HeaderBar/>
       </el-header>
       <el-main class="main">
-        <el-scrollbar>
-          <Main/>
-        </el-scrollbar>
+        <Main/>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script lang="ts" setup>
-import SideBar from "./components/AdminSideBar.vue"
-import HeaderBar from "./components/HeaderBar.vue"
-import Main from "./components/Main.vue"
-import {computed} from 'vue';
+import SideBar from "./AdminSideBar.vue"
+import HeaderBar from "./HeaderBar.vue"
+import Main from "./Main.vue"
+import {computed, onMounted, ref} from 'vue';
 import {menuItem} from "@/store/store";
 
 const asideWidth = computed(() => {
-  return menuItem.isCollapse ? '64' : '200'
+  return menuItem.isCollapse ? (menuItem.isMobile ? '0' : '64') : '200'
 });
 
 </script>

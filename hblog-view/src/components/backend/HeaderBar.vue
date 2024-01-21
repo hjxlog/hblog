@@ -58,6 +58,8 @@ const updateSwitchStatus = () => {
 
 onMounted(() => {
   getUserInfo()
+  const isMobile = window.innerWidth <= 768;
+  menuItem.isMobile = isMobile
 });
 </script>
 
