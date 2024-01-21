@@ -22,7 +22,7 @@ import {computed, onMounted, ref} from 'vue';
 import {menuItem} from "@/store/store";
 
 const asideWidth = computed(() => {
-  return menuItem.isCollapse ? (menuItem.isMobile ? '0' : '64') : '200'
+  return menuItem.isCollapse ? (menuItem.isMobile ? '0' : '65') : '201'
 });
 
 </script>
@@ -33,7 +33,12 @@ const asideWidth = computed(() => {
 }
 
 .aside {
+  border-right: solid 1px var(--el-menu-border-color);
   transition: width 0.3s ease-in-out;
+}
+
+.aside ul {
+  border-right: none;
 }
 
 .header {
