@@ -30,7 +30,7 @@
           v-model:current-page="queryForm.pageNum"
           v-model:page-size="queryForm.pageSize"
           :page-sizes="[5, 10, 50]"
-          layout="total, sizes, prev, pager, next, jumper"
+          :layout="paginationLayout"
           :total="total"
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
@@ -43,6 +43,7 @@
 
 import {onMounted, ref} from "vue";
 import {getLogData} from "@/api/admin/appLog";
+import {menuItem} from "@/store/store";
 
 // 查询表单
 const queryForm = ref<AppLogQueryDto>({
@@ -65,6 +66,8 @@ const indexMethod = (index: number) => {
   return (queryForm.value.pageNum! - 1) * queryForm.value.pageSize! + index + 1;
 }
 // 处理分页操作
+const layout = "total, prev, pager, next";
+const paginationLayout = menuItem.isMobile ? layout : layout + ', sizes, jumper'
 const handleSizeChange = (pageSize: number) => {
   queryForm.value.pageNum = 1
   queryForm.value.pageSize = pageSize

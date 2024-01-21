@@ -17,7 +17,7 @@
           </template>
         </el-table-column>
         <el-table-column prop="updateTime" label="修改时间" width="170"/>
-        <el-table-column fixed="right" label="操作" width="200">
+        <el-table-column label="操作" width="130">
           <template v-slot="scope">
             <el-button type="primary" :icon="Edit" @click="goEditDiaryPage(scope.row.id)"/>
             <el-popconfirm title="确认删除？" @confirm="handleDeleteDiary(scope.row.id)">
@@ -37,7 +37,7 @@
           v-model:current-page="queryForm.pageNum"
           v-model:page-size="queryForm.pageSize"
           :page-sizes="[5, 10, 50]"
-          layout="total, sizes, prev, pager, next, jumper"
+          :layout="paginationLayout"
           :total="total"
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
@@ -52,6 +52,7 @@ import {getDiaryData, deleteDiary} from "@/api/admin/diary";
 import {Delete, Edit} from '@element-plus/icons-vue'
 import router from "@/router";
 import {ElMessage} from "element-plus";
+import {menuItem} from "@/store/store";
 
 const queryForm = ref<PageDto>({
   pageNum: 1,
@@ -70,6 +71,8 @@ const indexMethod = (index: number) => {
   return (queryForm.value.pageNum! - 1) * queryForm.value.pageSize! + index + 1;
 }
 // 处理分页操作
+const layout = "total, prev, pager, next";
+const paginationLayout = menuItem.isMobile ? layout : layout + ', sizes, jumper'
 const handleSizeChange = (pageSize: number) => {
   queryForm.value.pageNum = 1
   queryForm.value.pageSize = pageSize

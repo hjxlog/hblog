@@ -1,7 +1,7 @@
 <template>
   <el-text class="title">基本信息</el-text>
   <el-row style="margin-top: 20px;">
-    <el-col :span="8">
+    <el-col :span="8" :xs="18">
       <el-form :model="userForm" ref="userFormRef" label-width="50px">
         <el-form-item label="账号">
           <el-input disabled v-model="curUser.username"></el-input>
