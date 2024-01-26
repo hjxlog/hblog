@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjxlog.mapper.CommentMapper">
+
+    <resultMap id="BaseResultMap" type="com.hjxlog.domain.Comment">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="website" column="website" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="ip" column="ip" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="isAdmin" column="is_admin" jdbcType="BIT"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="pageType" column="page_type" jdbcType="VARCHAR"/>
+        <result property="pageId" column="page_id" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,nickname,email,
+        website,content,avatar,
+        ip,status,is_admin,
+        parent_id,page_type,page_id,
+        create_time
+    </sql>
+</mapper>
