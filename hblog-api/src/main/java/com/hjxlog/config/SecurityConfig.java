@@ -52,8 +52,8 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 // 对于登录接口 允许匿名访问，已登录的不能访问
-                .antMatchers("/login").anonymous()
-                .antMatchers("/logout").authenticated()
+                .antMatchers("/admin/auth/login").anonymous()
+                .antMatchers("/admin/auth/logout").authenticated()
                 .antMatchers("/admin/**").authenticated()
                 .and()
                 .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)

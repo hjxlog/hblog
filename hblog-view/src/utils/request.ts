@@ -26,6 +26,9 @@ service.interceptors.response.use(response => {
     if (code === '200') {
         return response.data;
     }
+    if (code === '401' || code === '403') {
+        localStorage.removeItem('token')
+    }
     let msg = response.data.msg || '发生错误。'
     ElMessage.error(msg)
     return Promise.reject(new Error(msg))

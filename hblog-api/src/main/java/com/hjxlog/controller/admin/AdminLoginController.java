@@ -16,6 +16,7 @@ import javax.annotation.Resource;
  * @date: 2023/7/5
  */
 @RestController
+@RequestMapping("/admin/auth")
 public class AdminLoginController {
 
     @Resource

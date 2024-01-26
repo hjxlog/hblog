@@ -2,8 +2,8 @@ package com.hjxlog.util;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
-import com.aliyun.oss.common.auth.CredentialsProviderFactory;
-import com.aliyun.oss.common.auth.EnvironmentVariableCredentialsProvider;
+import com.aliyun.oss.common.auth.CredentialsProvider;
+import com.aliyun.oss.common.auth.DefaultCredentialProvider;
 import com.hjxlog.constant.SystemConstants;
 import com.hjxlog.exception.SystemException;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +30,12 @@ public class FileUtils {
     @Value("${aliyun.oss.custom-domain}")
     private String customDomain;
 
+    @Value("${aliyun.oss.access-key-id}")
+    private String accessKeyId;
+
+    @Value("${aliyun.oss.access-key-secret}")
+    private String accessKeySecret;
+
     public String uploadImage(MultipartFile file) {
         if (file.isEmpty()) {
             throw new SystemException("上传文件为空");
@@ -39,10 +45,8 @@ public class FileUtils {
         String imageName = SystemConstants.ALIYUN_OSS_FOLDER + curTime + "_" + originalFilename;
         OSS ossClient = null;
         try {
-            // 从环境变量中获取访问凭证
-            // 请确保已设置环境变量OSS_ACCESS_KEY_ID和OSS_ACCESS_KEY_SECRET。
-            EnvironmentVariableCredentialsProvider credentialsProvider;
-            credentialsProvider = CredentialsProviderFactory.newEnvironmentVariableCredentialsProvider();
+            // 使用代码嵌入的RAM用户的访问密钥配置访问凭证。
+            CredentialsProvider credentialsProvider = new DefaultCredentialProvider(accessKeyId, accessKeySecret);
             ossClient = new OSSClientBuilder().build(ossEndpoint, credentialsProvider);
             ossClient.putObject(bucketName, imageName, new ByteArrayInputStream(file.getBytes()));
         } catch (Exception e) {

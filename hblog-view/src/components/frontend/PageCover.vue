@@ -1,6 +1,6 @@
 <template>
   <HeaderBar/>
-  <div class="page-cover">
+  <div id="page-cover">
     <div class="page-info">
       <slot></slot>
     </div>
@@ -8,24 +8,24 @@
 </template>
 
 <script lang="ts" setup>
-import HeaderBar from "@/views/frontend/layout/HeaderBar.vue"
+import HeaderBar from "@/components/frontend/HeaderBar.vue"
 </script>
 
 <style scoped>
-.page-cover {
+#page-cover {
   display: flex;
   align-items: center;
   justify-content: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url('../../../assets/images/bg.png');
+  background-image: url('../../assets/images/bg.png');
   height: 240px;
   width: 100%;
   animation: fadeUpInCover 1s;
 }
 
-.page-cover::before {
+#page-cover::before {
   width: 100%;
   height: 240px;
   background-color: rgba(0, 0, 0, 0.3);
@@ -52,4 +52,13 @@ import HeaderBar from "@/views/frontend/layout/HeaderBar.vue"
     opacity: 100%;
   }
 }
+
+@media screen and (max-width: 900px) {
+  .page-info {
+    padding: 7px;
+    font-size: 30px;
+    text-align: center;
+  }
+}
+
 </style>

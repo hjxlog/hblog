@@ -1,7 +1,7 @@
 <template>
   <!--  搜索框按钮区域-->
   <el-row :gutter="2">
-    <el-col :span="7">
+    <el-col :span="7" :xs="12">
       <el-input placeholder="请输入分类" v-model="queryForm.name" clearable @clear="getTableData"/>
     </el-col>
     <el-col :span="12">
@@ -22,7 +22,7 @@
         </el-table-column>
         <el-table-column prop="createTime" label="创建时间" width="320"/>
         <el-table-column prop="updateTime" label="修改时间" width="320"/>
-        <el-table-column fixed="right" label="操作" width="200">
+        <el-table-column label="操作" width="130">
           <template v-slot="scope">
             <el-button type="primary" :icon="Edit" @click="showDialog(scope.row)"/>
             <el-popconfirm title="确认删除？" @confirm="handleDeleteEntity(scope.row.id)">
@@ -42,7 +42,7 @@
           v-model:current-page="queryForm.pageNum"
           v-model:page-size="queryForm.pageSize"
           :page-sizes="[5, 10, 50]"
-          layout="total, sizes, prev, pager, next, jumper"
+          :layout="paginationLayout"
           :total="total"
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
@@ -50,7 +50,7 @@
     </el-col>
   </el-row>
   <!-- 新增/编辑分类对话框 -->
-  <el-dialog :model-value="dialogVisible" :title="dialogTitle" width="30%" @close="dialogVisible = false">
+  <el-dialog :model-value="dialogVisible" :title="dialogTitle" :width="dialogWidth" @close="dialogVisible = false">
     <el-form :model="form" :rules="rules" ref="formRef" label-width="93px">
       <el-form-item label="分类名称：" prop="name">
         <el-input v-model="form.name"/>
@@ -73,6 +73,7 @@ import {reactive, ref, onMounted, computed} from "vue";
 import {getCategoryList, deleteCategory, addCategory, updateCategory} from "@/api/admin/category";
 import {Delete, Edit} from '@element-plus/icons-vue'
 import {FormInstance, FormRules, ElMessage} from 'element-plus'
+import {menuItem} from "@/store/store";
 
 // 规则
 const rules = reactive<FormRules>({
@@ -104,6 +105,8 @@ const indexMethod = (index: number) => {
   return (queryForm.value.pageNum! - 1) * queryForm.value.pageSize! + index + 1;
 }
 // 处理分页操作
+const layout = "total, prev, pager, next";
+const paginationLayout = menuItem.isMobile ? layout : layout + ', sizes, jumper'
 const handleSizeChange = (pageSize: number) => {
   queryForm.value.pageNum = 1
   queryForm.value.pageSize = pageSize
@@ -115,6 +118,7 @@ const handleCurrentChange = (pageNum: number) => {
 }
 
 // 新增/编辑分类
+const dialogWidth = menuItem.isMobile ? '90%' : '30%'
 const dialogVisible = ref(false)
 const form = reactive<CategoryDto>({
   name: '',

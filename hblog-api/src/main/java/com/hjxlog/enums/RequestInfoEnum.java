@@ -20,24 +20,24 @@ public enum RequestInfoEnum {
     SERVE_TAG_LIST(RequestConstants.TYPE_SERVE, RequestConstants.MODULE_TAG, "/tag/list", RequestConstants.BEHAVIOR_QUERY_LIST),
     SERVE_TAG_GET_DETAIL(RequestConstants.TYPE_SERVE, RequestConstants.MODULE_TAG, "/tag/getDetail/", RequestConstants.BEHAVIOR_QUERY_ONE),
     // admin blog module
-    ADMIN_BLOG_ADD(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_BLOG, "/admin/blog/add", RequestConstants.BEHAVIOR_ADD),
-    ADMIN_BLOG_UPDATE(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_BLOG, "/admin/blog/update", RequestConstants.BEHAVIOR_UPDATE),
-    ADMIN_BLOG_DELETE(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_BLOG, "/admin/blog/delete/", RequestConstants.BEHAVIOR_DELETE),
+    ADMIN_BLOG_ADD(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_BLOG, "/api/admin/blog/add", RequestConstants.BEHAVIOR_ADD),
+    ADMIN_BLOG_UPDATE(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_BLOG, "/api/admin/blog/update", RequestConstants.BEHAVIOR_UPDATE),
+    ADMIN_BLOG_DELETE(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_BLOG, "/api/admin/blog/delete/", RequestConstants.BEHAVIOR_DELETE),
     // admin category module
-    ADMIN_CATEGORY_ADD(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_CATEGORY, "/admin/category/add", RequestConstants.BEHAVIOR_ADD),
-    ADMIN_CATEGORY_UPDATE(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_CATEGORY, "/admin/category/update", RequestConstants.BEHAVIOR_UPDATE),
-    ADMIN_CATEGORY_DELETE(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_CATEGORY, "/admin/category/delete/", RequestConstants.BEHAVIOR_DELETE),
+    ADMIN_CATEGORY_ADD(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_CATEGORY, "/api/admin/category/add", RequestConstants.BEHAVIOR_ADD),
+    ADMIN_CATEGORY_UPDATE(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_CATEGORY, "/api/admin/category/update", RequestConstants.BEHAVIOR_UPDATE),
+    ADMIN_CATEGORY_DELETE(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_CATEGORY, "/api/admin/category/delete/", RequestConstants.BEHAVIOR_DELETE),
     // admin tag module
-    ADMIN_TAG_ADD(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_TAG, "/admin/tag/add", RequestConstants.BEHAVIOR_ADD),
-    ADMIN_TAG_UPDATE(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_TAG, "/admin/tag/update", RequestConstants.BEHAVIOR_UPDATE),
-    ADMIN_TAG_DELETE(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_TAG, "/admin/tag/delete/", RequestConstants.BEHAVIOR_DELETE),
+    ADMIN_TAG_ADD(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_TAG, "/api/admin/tag/add", RequestConstants.BEHAVIOR_ADD),
+    ADMIN_TAG_UPDATE(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_TAG, "/api/admin/tag/update", RequestConstants.BEHAVIOR_UPDATE),
+    ADMIN_TAG_DELETE(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_TAG, "/api/admin/tag/delete/", RequestConstants.BEHAVIOR_DELETE),
     // admin login module
-    ADMIN_LOGIN(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_LOGIN, "/login", RequestConstants.BEHAVIOR_LOGIN),
-    ADMIN_LOGOUT(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_LOGIN, "/logout", RequestConstants.BEHAVIOR_LOGOUT),
+    ADMIN_LOGIN(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_LOGIN, "/api/login", RequestConstants.BEHAVIOR_LOGIN),
+    ADMIN_LOGOUT(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_LOGIN, "/api/logout", RequestConstants.BEHAVIOR_LOGOUT),
     // admin user module
-    ADMIN_USER_GET_INFO(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_USER, "/admin/user/getInfo", RequestConstants.BEHAVIOR_QUERY_ONE),
-    ADMIN_USER_UPDATE_INFO(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_USER, "/admin/user/updateInfo", RequestConstants.BEHAVIOR_UPDATE),
-    ADMIN_USER_UPDATE_PASSWORD(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_USER, "/admin/user/updatePassword", RequestConstants.BEHAVIOR_UPDATE),
+    ADMIN_USER_GET_INFO(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_USER, "/api/admin/user/getInfo", RequestConstants.BEHAVIOR_QUERY_ONE),
+    ADMIN_USER_UPDATE_INFO(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_USER, "/api/admin/user/updateInfo", RequestConstants.BEHAVIOR_UPDATE),
+    ADMIN_USER_UPDATE_PASSWORD(RequestConstants.TYPE_ADMIN, RequestConstants.MODULE_USER, "/api/admin/user/updatePassword", RequestConstants.BEHAVIOR_UPDATE),
     ;
 
     /**

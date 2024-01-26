@@ -1,7 +1,7 @@
 <template>
   <el-text class="title">基本信息</el-text>
   <el-row style="margin-top: 20px;">
-    <el-col :span="8">
+    <el-col :span="8" :xs="18">
       <el-form :model="userForm" ref="userFormRef" label-width="50px">
         <el-form-item label="账号">
           <el-input disabled v-model="curUser.username"></el-input>
@@ -19,7 +19,7 @@
     </el-col>
   </el-row>
   <!-- 更改密码弹窗 -->
-  <el-dialog :model-value="editPasswordDialogVisible" title="更改密码" width="30%" @close="handleClosePasswordEdit(passwordFormRef)">
+  <el-dialog :model-value="editPasswordDialogVisible" title="更改密码" :width="dialogWidth" @close="handleClosePasswordEdit(passwordFormRef)">
     <el-form :model="passwordForm" ref="passwordFormRef" :rules="passwordRules" label-width="93px">
       <el-form-item label="输入旧密码" prop="oldPassword">
         <el-input v-model="passwordForm.oldPassword" type="password"/>
@@ -47,6 +47,7 @@ import {ElMessage, FormInstance, FormRules} from "element-plus";
 import {updatePassword, updateUserInfo} from "@/api/admin/user";
 import {logout} from "@/api/admin/login";
 import router from "@/router";
+import {menuItem} from "@/store/store";
 
 // 当前用户
 let curUser = reactive<User>({});
@@ -62,6 +63,8 @@ const getUserInfo = () => {
   userForm.nickname = curUser.nickname || ''
   passwordForm.id = curUser.id || 0
 }
+
+const dialogWidth = menuItem.isMobile ? '90%' : '30%'
 
 // 昵称编辑
 const canEditNickname = ref(true)

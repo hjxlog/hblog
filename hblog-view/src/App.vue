@@ -1,7 +1,17 @@
 <template>
-  <router-view></router-view>
+  <router-view :key="key"></router-view>
   <el-backtop :right="25" :bottom="50"/>
 </template>
+
+<script lang="ts" setup>
+import {computed} from "vue";
+import {useRoute} from "vue-router";
+
+const route = useRoute()
+const key = computed(() => {
+  return route.path
+})
+</script>
 
 <style>
 :root {

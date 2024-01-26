@@ -4,7 +4,6 @@
       <template #default="props" style="margin-right: 100px">
         <div m="4" style="margin-left: 40px;">
           <p m="t-0 b-2">操作模块：{{ props.row.module }}</p>
-          <p m="t-0 b-2">操作行为：{{ props.row.behavior }}</p>
           <p m="t-0 b-2">请求接口：{{ props.row.uri }}</p>
           <p m="t-0 b-2">请求参数：{{ props.row.param }}</p>
           <p m="t-0 b-2">ip：{{ props.row.ip }}</p>
@@ -19,30 +18,27 @@
     </el-table-column>
     <el-table-column type="index" :index="indexMethod" label="#" width="50"/>
     <el-table-column label="访问模块" prop="module"/>
-    <el-table-column label="访问行为" prop="behavior"/>
     <el-table-column label="开始时间" prop="startTime"/>
     <el-table-column label="结束时间" prop="endTime"/>
   </el-table>
   <!--  分页区域-->
-  <el-row style="margin-top: 10px;">
-    <el-col :span="24">
-      <el-pagination
-          v-model:current-page="queryForm.pageNum"
-          v-model:page-size="queryForm.pageSize"
-          :page-sizes="[5, 10, 50]"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="total"
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-      />
-    </el-col>
-  </el-row>
+  <el-pagination
+      class="pagination"
+      v-model:current-page="queryForm.pageNum"
+      v-model:page-size="queryForm.pageSize"
+      :page-sizes="[5, 10, 50]"
+      :layout="paginationLayout"
+      :total="total"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+  />
 </template>
 
 <script setup lang="ts">
 
 import {onMounted, ref} from "vue";
 import {getLogData} from "@/api/admin/appLog";
+import {menuItem} from "@/store/store";
 
 // 查询表单
 const queryForm = ref<AppLogQueryDto>({
@@ -65,6 +61,8 @@ const indexMethod = (index: number) => {
   return (queryForm.value.pageNum! - 1) * queryForm.value.pageSize! + index + 1;
 }
 // 处理分页操作
+const layout = "total, prev, pager, next";
+const paginationLayout = menuItem.isMobile ? layout : layout + ', sizes, jumper'
 const handleSizeChange = (pageSize: number) => {
   queryForm.value.pageNum = 1
   queryForm.value.pageSize = pageSize
@@ -82,5 +80,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
+.pagination {
+  flex-wrap: wrap;
+}
 </style>

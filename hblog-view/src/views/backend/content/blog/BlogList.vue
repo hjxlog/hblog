@@ -1,7 +1,7 @@
 <template>
   <!--  搜索按钮区域-->
   <el-row :gutter="2">
-    <el-col :span="8">
+    <el-col :span="8" :xs="24">
       <el-input v-model="queryForm.title" placeholder="请输入标题" clearable @clear="getTableData">
         <template #prepend>
           <el-select v-model="queryForm.categoryId" placeholder="请选择分类" clearable @clear="getTableData" style="width: 140px">
@@ -10,7 +10,7 @@
         </template>
       </el-input>
     </el-col>
-    <el-col :span="12">
+    <el-col :span="12" :xs="24" class="operator-btn">
       <el-button type="primary" @click="getTableData">搜索</el-button>
       <el-button type="primary" @click="goEditBlogPage(undefined)" style="margin-left: 2px;">新增</el-button>
     </el-col>
@@ -20,7 +20,7 @@
     <el-col :span="24">
       <el-table :data="tableData">
         <el-table-column fixed type="index" :index="indexMethod" label="#" width="50"/>
-        <el-table-column prop="title" label="标题" show-overflow-tooltip width="260"/>
+        <el-table-column prop="title" label="标题" show-overflow-tooltip width="250"/>
         <el-table-column prop="status" label="状态" width="100">
           <template #default="scope">
             {{ scope.row.status === '1' ? '已发布' : '未发布' }}
@@ -43,7 +43,7 @@
           </template>
         </el-table-column>
         <el-table-column prop="updateTime" label="修改时间" width="170"/>
-        <el-table-column fixed="right" label="操作" width="200">
+        <el-table-column label="操作" width="130">
           <template v-slot="scope">
             <el-button type="primary" :icon="Edit" @click="goEditBlogPage(scope.row.id)"/>
             <el-popconfirm title="确认删除？" @confirm="handleDeleteBlog(scope.row.id)">
@@ -57,19 +57,16 @@
     </el-col>
   </el-row>
   <!--  分页区域-->
-  <el-row style="margin-top: 10px;">
-    <el-col :span="24">
-      <el-pagination
-          v-model:current-page="queryForm.pageNum"
-          v-model:page-size="queryForm.pageSize"
-          :page-sizes="[5, 10, 50]"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="total"
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-      />
-    </el-col>
-  </el-row>
+  <el-pagination
+      class="pagination"
+      v-model:current-page="queryForm.pageNum"
+      v-model:page-size="queryForm.pageSize"
+      :page-sizes="[5, 10, 50]"
+      :layout="paginationLayout"
+      :total="total"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+  />
 </template>
 
 <script setup lang="ts">
@@ -79,6 +76,7 @@ import {getBlogData, deleteBlog} from "@/api/admin/blog";
 import {Delete, Edit} from '@element-plus/icons-vue'
 import router from "@/router";
 import {ElMessage} from "element-plus";
+import {menuItem} from "@/store/store";
 
 // 查询表单
 const queryForm = ref<BlogDto>({
@@ -114,6 +112,8 @@ const indexMethod = (index: number) => {
   return (queryForm.value.pageNum! - 1) * queryForm.value.pageSize! + index + 1;
 }
 // 处理分页操作
+const layout = "total, prev, pager, next";
+const paginationLayout = menuItem.isMobile ? layout : layout + ', sizes, jumper'
 const handleSizeChange = (pageSize: number) => {
   queryForm.value.pageNum = 1
   queryForm.value.pageSize = pageSize
@@ -148,4 +148,14 @@ const handleDeleteBlog = async (id: number) => {
 </script>
 
 <style scoped>
+.pagination {
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 900px) {
+  .operator-btn {
+    margin-top: 5px;
+  }
+}
 </style>

@@ -24,7 +24,6 @@
                     </router-link>
                     <div class="article-meta-data">
                       <span>发表于{{ blog.createTime }}</span>
-                      <span>{{ blog.views }}次围观</span>
                     </div>
                   </div>
                 </div>
@@ -48,9 +47,9 @@
 </template>
 
 <script lang="ts" setup>
-import PageCover from "@/views/frontend/layout/PageCover.vue"
-import Footer from "@/views/frontend/layout/Footer.vue"
-import ViewSideBar from "@/layout/view/ViewSideBar.vue"
+import PageCover from "@/components/frontend/PageCover.vue"
+import Footer from "@/components/frontend/Footer.vue"
+import ViewSideBar from "@/layout/frontend/ViewSideBar.vue"
 
 import {getArchiveList} from "@/api/view/blog";
 import {onMounted, ref} from "vue";
@@ -65,12 +64,20 @@ const queryForm = ref<PageDto>({
 const handleCurrentChange = (pageNum: number) => {
   queryForm.value.pageNum = pageNum
   getArchiveData()
+  scrollToContent()
 }
 const getArchiveData = async () => {
   const res: any = await getArchiveList(queryForm.value)
   archiveList.value = res.body.data
   total.value = res.body.total
-  console.log("archiveList", res.body.data)
+}
+
+const scrollToContent = () => {
+  const homeCoverElement = (document.getElementById("page-cover") as HTMLElement)?.scrollHeight
+  if (homeCoverElement) {
+    window.scrollTo({top: homeCoverElement, behavior: "smooth"})
+    return
+  }
 }
 
 onMounted(() => {

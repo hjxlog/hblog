@@ -1,6 +1,6 @@
 <template>
   <el-row justify="center" class="container">
-    <el-col :span="6">
+    <el-col :span="6" :xs="22">
       <el-card>
         <template #header>
           <div class="card-header">Welcome</div>

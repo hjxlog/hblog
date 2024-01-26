@@ -2,7 +2,7 @@ import service from "@/utils/request";
 
 const login = (user: User) => {
     return service({
-        url: "/login",
+        url: "/admin/auth/login",
         method: "post",
         data: user
     })
@@ -10,7 +10,7 @@ const login = (user: User) => {
 
 const logout = () => {
     return service({
-        url: "/logout",
+        url: "/admin/auth/logout",
         method: "post"
     })
 }

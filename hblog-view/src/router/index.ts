@@ -2,11 +2,6 @@ import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
 import {ElMessage} from "element-plus";
 
 const routes: Array<RouteRecordRaw> = [
-    {
-        path: '/login',
-        name: 'login',
-        component: () => import("@/views/backend/login/Login.vue"),
-    },
     // frontend
     {
         path: '/',
@@ -43,7 +38,17 @@ const routes: Array<RouteRecordRaw> = [
         name: 'archive',
         component: () => import("@/views/frontend/blog/Archive.vue")
     },
+    {
+        path: "/diary",
+        name: 'diary',
+        component: () => import("@/views/frontend/diary/DiaryArchive.vue")
+    },
     //backend
+    {
+        path: '/login',
+        name: 'login',
+        component: () => import("@/views/backend/login/Login.vue"),
+    },
     {
         path: "/dashboard",
         name: "dashboard",
@@ -51,7 +56,7 @@ const routes: Array<RouteRecordRaw> = [
             title: "后台管理"
         },
         redirect: '/dashboard/index',
-        component: () => import("../layout/admin/Layout.vue"),
+        component: () => import("../components/backend/Layout.vue"),
         children: [
             {
                 path: 'index',
@@ -105,6 +110,30 @@ const routes: Array<RouteRecordRaw> = [
                         component: () => import("../views/backend/content/blog/WriteBlog.vue"),
                         meta: {
                             title: '写博客'
+                        }
+                    },
+                    {
+                        path: "diary",
+                        name: "adminDiary",
+                        meta: {
+                            title: "日记管理"
+                        },
+                        component: () => import("../views/backend/content/diary/DiaryList.vue"),
+                    },
+                    {
+                        path: "diary/editor",
+                        name: "",
+                        meta: {
+                            title: "写日记"
+                        },
+                        component: () => import("../views/backend/content/diary/WriteDiary.vue"),
+                    },
+                    {
+                        path: "diary/editor/:id",
+                        name: 'adminDiaryBlog',
+                        component: () => import("../views/backend/content/diary/WriteDiary.vue"),
+                        meta: {
+                            title: '写日记'
                         }
                     },
                 ]

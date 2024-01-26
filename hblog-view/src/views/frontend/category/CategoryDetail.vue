@@ -3,19 +3,18 @@
     {{ categoryName }}
   </PageCover>
   <el-row justify="center">
-    <el-col :span="20" class="list-container">
+    <el-col :span="20" :xs="24" class="list-container">
       <BlogList :queryParam="queryBlogDto"/>
     </el-col>
   </el-row>
-
   <Footer/>
 </template>
 
 
 <script lang="ts" setup>
-import PageCover from "@/views/frontend/layout/PageCover.vue"
+import PageCover from "@/components/frontend/PageCover.vue"
 import BlogList from "@/views/frontend/blog/BlogList.vue"
-import Footer from "@/views/frontend/layout/Footer.vue"
+import Footer from "@/components/frontend/Footer.vue"
 import {getCategoryDetail} from "@/api/view/category";
 
 import {onMounted, ref} from "vue";
@@ -46,4 +45,11 @@ onMounted(() => {
 .list-container {
   margin-top: 20px;
 }
+
+@media screen and (max-width: 900px) {
+  .list-container {
+    padding: 7px;
+  }
+}
+
 </style>
