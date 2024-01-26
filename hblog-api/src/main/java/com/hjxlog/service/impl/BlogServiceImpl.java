@@ -114,19 +114,6 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
 
     @Override
     public Page<BlogVo> getPublishedBlogs(BlogQueryServeDto dto) {
-//        // 校验
-//        Integer categoryId = dto.getCategoryId();
-//        List<Integer> categoryIds = categoryService.selectPublishedCategory()
-//                .stream().map(Category::getId).collect(Collectors.toList());
-//        if (categoryId != null && !categoryIds.contains(categoryId)) {
-//            throw new SystemException("该分类不存在，请检查。");
-//        }
-//        Integer tagId = dto.getTagId();
-//        List<Integer> tagIds = tagService.selectPublishedTag()
-//                .stream().map(Tag::getId).collect(Collectors.toList());
-//        if (tagId != null && !tagIds.contains(tagId)) {
-//            throw new SystemException("该标签不存在，请检查。");
-//        }
         BlogQueryDto blogQueryDto = BeanUtil.copyProperties(dto, BlogQueryDto.class);
         blogQueryDto.setStatus(BlogStatusEnum.PUBLISHED.getCode());
         Page<BlogVo> list = getList(blogQueryDto);
