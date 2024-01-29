@@ -1,6 +1,7 @@
 package com.hjxlog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hjxlog.api.dto.CommentDto;
 import com.hjxlog.domain.Comment;
 
 /**
@@ -9,5 +10,7 @@ import com.hjxlog.domain.Comment;
  * @createDate 2024-01-26 23:53:40
  */
 public interface CommentService extends IService<Comment> {
+
+    Comment add(CommentDto dto);
 
 }

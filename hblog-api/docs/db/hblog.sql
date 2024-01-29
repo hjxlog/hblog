@@ -120,4 +120,26 @@ CREATE TABLE `diary` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- ----------------------------
+-- Table structure for comment
+-- ----------------------------
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `nickname` VARCHAR(50) NOT NULL COMMENT '昵称',
+  `email` VARCHAR(255) NOT NULL COMMENT '邮箱',
+  `website` VARCHAR(255) DEFAULT NULL COMMENT '网站',
+  `content` VARCHAR(255) NOT NULL COMMENT '评论内容',
+  `avatar` VARCHAR(255) DEFAULT NULL COMMENT '头像',
+  `ip` VARCHAR(255) DEFAULT NULL COMMENT 'ip地址',
+  `status` VARCHAR(2) DEFAULT NULL COMMENT '状态',
+  `is_admin` BIT(1) NOT NULL COMMENT '是否为博主',
+  `parent_id` INT NOT NULL COMMENT '父评论id，-1为根评论',
+  `page_type` VARCHAR(10) DEFAULT NULL COMMENT '页面类型',
+  `page_id` INT DEFAULT NULL COMMENT '页面id',
+  `create_time` DATETIME DEFAULT NULL COMMENT '评论时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 SET FOREIGN_KEY_CHECKS = 1;
