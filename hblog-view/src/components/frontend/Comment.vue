@@ -1,12 +1,10 @@
 <template>
   <div class="test">
     <div class="comment-container">
-      <el-form :model="form" :rules="rules">
+      <el-form :model="form">
         <el-row class="user-info">
           <el-col :span="8">
-            <el-form-item prop="name">
-              <el-input placeholder="昵称" v-model="form.nickname"/>
-            </el-form-item>
+            <el-input placeholder="昵称" v-model="form.nickname"/>
           </el-col>
           <el-col :span="8">
             <el-input placeholder="邮箱" v-model="form.email"/>
@@ -27,16 +25,17 @@
           <el-button @click="onSubmit">提交</el-button>
         </div>
       </el-form>
-
     </div>
   </div>
 
 </template>
 
 <script lang="ts" setup>
-import {ref, reactive} from 'vue'
+import {ref, reactive, onMounted} from 'vue'
 import type {FormInstance, FormRules} from 'element-plus'
 import {ElMessage} from "element-plus";
+import {addComment} from "@/api/view/comment";
+import {addCategory, updateCategory} from "@/api/admin/category";
 
 const input = ref('')
 const textarea = ref('')
@@ -45,31 +44,56 @@ const form = reactive({
   nickname: '',
   email: '',
   website: '',
-  content: ''
+  content: '',
+  pageType: '1',
+  isAdmin: false,
+  parentId: -1
 })
 
-const rules = reactive<FormRules<RuleForm>>({})
-
-const onSubmit = () => {
-  console.log('submit!')
-  console.log(form)
-  // 手动判断邮箱格式
-  if (!isValidEmail(form.email)) {
-    // 邮箱格式不符合要求，进行相应的提示或处理
-    console.log('邮箱格式不正确');
-    ElMessage.warning('邮箱格式不正确');
+const onSubmit = async () => {
+  const warningMsg = checkData()
+  if (warningMsg != '') {
+    ElMessage.warning(warningMsg);
     return;
   }
+  const res = await addComment(form)
+  const commentUser = {
+    nickname: form.nickname,
+    email: form.email,
+    website: form.website,
+  }
+  const commentUserJSON = JSON.stringify(commentUser);
+  localStorage.setItem('commentUser', commentUserJSON);
+  form.content = ''
+  ElMessage.success(res.msg)
 }
 
-const isValidEmail = (email) => {
-  if (email.trim() === '') {
-    return '请输入邮箱'
+// 校验内容
+const checkData = () => {
+  let warningMsg = ""
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const email = form.email.trim()
+  if (email !== '' && !emailPattern.test(email)) {
+    warningMsg += '邮箱格式不正确；'
   }
-  // 简单的邮箱格式判断，你可以根据实际需求使用正则表达式等更精确的方式
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailPattern.test(email);
-};
+  if (form.content.trim() === '') {
+    warningMsg += '评论内容为空；'
+  }
+  return warningMsg
+}
+
+
+onMounted(() => {
+  // 从 localStorage 中获取存储的 JSON 字符串
+  const commentUserJSON = localStorage.getItem('commentUser');
+  if (commentUserJSON) {
+    // 将 JSON 字符串转换为 JavaScript 对象
+    const commentUser = JSON.parse(commentUserJSON);
+    form.nickname = commentUser.nickname
+    form.email = commentUser.email
+    form.website = commentUser.website
+  }
+})
 
 </script>
 
@@ -89,10 +113,6 @@ const isValidEmail = (email) => {
   border-bottom: 1px solid var(--el-border-color);
 }
 
-.user-info .el-form-item {
-  margin-bottom: 0px;
-}
-
 :deep(.el-input) {
   .el-input__wrapper {
     border: none;
@@ -109,7 +129,6 @@ const isValidEmail = (email) => {
 
   }
 }
-
 
 .content {
 
