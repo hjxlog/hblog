@@ -1,10 +1,14 @@
 package com.hjxlog.impl.AI;
 
 import com.baidubce.qianfan.Qianfan;
+import com.baidubce.qianfan.core.StreamIterator;
 import com.baidubce.qianfan.model.chat.ChatResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import reactor.core.publisher.Flux;
+
+import java.time.Duration;
 
 /**
  * @author: Huang JX
@@ -32,6 +36,15 @@ public class WenXinTests {
                     String result = chunk.getResult();
                     System.out.print(result);
                 });
+
+        // 流式返回Flux<String>
+        StreamIterator<ChatResponse> chatResponseStreamIterator = qianfan.chatCompletion()
+                .model("ERNIE-Lite-8K")
+                .addMessage("user", "AI的发展历史")
+                // 启用流式返回
+                .executeStream();
+        Flux<String> resultFlux = Flux.fromIterable(() -> chatResponseStreamIterator).map(ChatResponse::getResult);
+        resultFlux.delayElements(Duration.ofMillis(500)); // 每个单词间隔 500 毫秒发送
     }
 
     @Test
