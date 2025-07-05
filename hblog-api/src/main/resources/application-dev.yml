@@ -18,3 +18,8 @@ aliyun:
     custom-domain: https://yourCustomDomain.com # 自定义域名
     access-key-id: yourKey
     access-key-secret: yourSecret
+
+AI:
+  Qianfan: # 百度千帆
+    accessKey: xxxxxxxx # 百度千帆的accessKey
+    secretKey: xxxxxxxx # 百度千帆的secretKey
