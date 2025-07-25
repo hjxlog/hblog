@@ -28,13 +28,11 @@ public class BlogSaveDto {
     /**
      * 缩略图
      */
-    @NotEmpty(message = "缩略图不得为空。")
     private String thumbnail;
 
     /**
      * 文章概要
      */
-    @NotEmpty(message = "摘要不得为空。")
     private String summary;
 
     /**

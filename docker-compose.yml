@@ -1,0 +1,56 @@
+services:
+  frontend:
+    build: ./hblog-view
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./hblog-api
+    ports:
+      - "8889:8889"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/hblog?serverTimezone=Asia/Shanghai
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 12345678
+      SPRING_REDIS_HOST: redis
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - "13306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: hblog  # 修正拼写
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p12345678"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./hblog-api/docs/db/hblog.sql:/docker-entrypoint-initdb.d/hblog.sql
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "16379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mysql_data:
+  redis_data:

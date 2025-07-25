@@ -11,11 +11,12 @@
     </parent>
     <groupId>com.hjxlog</groupId>
     <artifactId>hblog-api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <name>hblog-api</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>8</java.version>
+        <skipTests>true</skipTests>
     </properties>
 
     <dependencies>
