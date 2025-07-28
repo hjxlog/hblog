@@ -1,10 +1,13 @@
 services:
   frontend:
+    volumes:
+      - /etc/ssl/hjxlog.com:/etc/nginx/ssl
     networks:
       - main_network
     build: ./hblog-view
     ports:
       - "80:80"
+      - "443:443"
     depends_on:
       - backend
 
