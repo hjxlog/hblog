@@ -1,7 +1,7 @@
 services:
   frontend:
     networks:
-        - main_network
+      - main_network
     build: ./hblog-view
     ports:
       - "80:80"
