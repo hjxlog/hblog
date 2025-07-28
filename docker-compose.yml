@@ -1,5 +1,7 @@
 services:
   frontend:
+    networks:
+        - main_network
     build: ./hblog-view
     ports:
       - "80:80"
@@ -7,6 +9,8 @@ services:
       - backend
 
   backend:
+    networks:
+      - main_network
     build: ./hblog-api
     ports:
       - "8889:8889"
@@ -22,6 +26,8 @@ services:
         condition: service_healthy
 
   mysql:
+    networks:
+      - main_network
     image: mysql:8.0
     container_name: mysql
     ports:
@@ -39,6 +45,8 @@ services:
       - ./hblog-api/docs/db/hblog.sql:/docker-entrypoint-initdb.d/hblog.sql
 
   redis:
+    networks:
+      - main_network
     image: redis:7
     container_name: redis
     ports:
@@ -54,3 +62,10 @@ services:
 volumes:
   mysql_data:
   redis_data:
+
+networks:
+  main_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16  # 固定子网防止IP冲突
