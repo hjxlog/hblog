@@ -4,8 +4,7 @@ services:
       - main_network
     build: ./hblog-view
     ports:
-      - "80:80"
-      - "443:443"
+      - "3000:80"
     depends_on:
       - backend
 
